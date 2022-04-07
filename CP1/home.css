@@ -1,0 +1,145 @@
+#home-top {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5em;
+  margin-bottom: 3em;
+}
+
+#home-top-right {
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-picture {
+  margin-right: 2em;
+  height: 28.5em;
+}
+
+#home-intro-section {
+  margin-bottom: 1em;
+}
+
+#home-current-side-project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3.5em;
+}
+
+#home-current-side-project > h1 {
+  margin-bottom: 1em;
+}
+
+#home-current-side-project > img {
+  width: 75vw;
+}
+
+#home-current-side-project > p {
+  text-align: center;
+  max-width: none;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 2.5em;
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+section > p {
+  font-size: 1.25em;
+  max-width: 20em;
+}
+
+section > ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 1.25em;
+}
+
+section > ul > li {
+  margin-right: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section > ul > li > p {
+  margin-top: 1em;
+  font-size: 1em;
+}
+
+section > ul > li > img {
+  height: 70px;
+  width: 70px;
+}
+
+#home-current-side-project > p {
+  font-size: 1.5em;
+}
+
+@media (max-width: 964px) {
+  #home-top {
+    flex-direction: column;
+  }
+
+  #profile-picture {
+    margin: 0;
+  }
+
+  #home-top-right {
+    margin-top: 1.5em;
+    margin-left: 0;
+    align-items: center;
+  }
+
+  #home-intro-section {
+    text-align: center;
+  }
+
+  #home-internships-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.fade-in#profile-picture {
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
+
+.fade-in#home-intro-section {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
+
+.fade-in#home-internships-section {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
+
+.fade-in#home-current-side-project {
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
