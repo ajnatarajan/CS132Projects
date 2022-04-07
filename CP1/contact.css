@@ -1,3 +1,12 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the contact.css page for my personal website. It is exclusively used
+  by contact.html to position and style the contact information so as to stand
+  out from the background.
+*/
+
 main {
   display: flex;
   justify-content: center;

@@ -1,3 +1,11 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the styles.css page for my personal website. It is used by both pages
+  of my website for styling the title, navbar, and background. It's in essence 
+  the general theme to connect the website together and give it consistency.
+*/
 body {
   background: linear-gradient(
     180deg,

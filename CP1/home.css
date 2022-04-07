@@ -1,3 +1,12 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the home.css page for my personal website. It is exclusively used by
+  index.html to style different sections of the home page. It offers responsive
+  sizing and styling and some sleek fade in animations.
+*/
+
 #home-top {
   display: flex;
   justify-content: center;
