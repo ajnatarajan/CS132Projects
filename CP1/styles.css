@@ -34,13 +34,16 @@ ul {
   padding: 0;
 }
 
-nav > ul {
+nav > ul,
+nav > ul > li {
   display: flex;
+}
+
+nav > ul {
   justify-content: center;
 }
 
 nav > ul > li {
-  display: flex;
   flex-direction: row;
   margin-left: 0.5em;
   margin-right: 0.5em;
