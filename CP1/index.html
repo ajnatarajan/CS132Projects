@@ -29,8 +29,8 @@
         https://www.figma.com/community/file/931512007012650048
       -->
       <ul>
-        <li>
-          <a href="index.html">
+        <li class="flex-row">
+          <a href="index.html" class="flex-row">
             <img
               src="imgs/navbar-icons/home-icon-selected.svg"
               alt="[Home-Icon]"
@@ -38,17 +38,18 @@
             <p class="nav-selected">Home</p>
           </a>
         </li>
-        <li>
+        <li class="flex-row">
           <a
             href="https://drive.google.com/file/d/1ZQEIRZUiXE2WFaz9T4MuNapYayx9jygq/view?usp=sharing"
             target="_blank"
+            class="flex-row"
           >
             <img src="imgs/navbar-icons/resume-icon.svg" alt="[Resume-Icon]" />
             <p>Resume</p>
           </a>
         </li>
-        <li>
-          <a href="contact.html">
+        <li class="flex-row">
+          <a href="contact.html" class="flex-row">
             <img
               src="imgs/navbar-icons/contact-icon.svg"
               alt="[Contact-Icon]"
@@ -70,7 +71,7 @@
           id="profile-picture"
           class="fade-in"
         />
-        <div id="home-top-right">
+        <div id="home-top-right" class="flex-column">
           <section id="home-intro-section" class="fade-in">
             <h1>A Quick Intro</h1>
             <p>
@@ -84,10 +85,10 @@
               voting.
             </p>
           </section>
-          <section id="home-internships-section" class="fade-in">
+          <section id="home-internships-section" class="fade-in flex-column">
             <h1>Internships</h1>
             <ul>
-              <li>
+              <li class="flex-column flex-align-items-center">
                 <!--
                   Kleiner Perkins logo taken from The Rivalry
                   https://therivalry.co/project/kleiner-perkins-logo
@@ -98,7 +99,7 @@
                 />
                 <p>KPCB</p>
               </li>
-              <li>
+              <li class="flex-column flex-align-items-center">
                 <!--
                   Robinhood logo taken from the Google Play store
                   https://play.google.com/store/apps/dev?id=6660669299832938042&hl=en_US&gl=US
@@ -109,7 +110,7 @@
                 />
                 <p>Robinhood</p>
               </li>
-              <li>
+              <li class="flex-column flex-align-items-center">
                 <!--
                   8VC logo taken from Crunchbase
                   https://www.crunchbase.com/organization/8vc
@@ -117,7 +118,7 @@
                 <img src="imgs/internship-icons/eightvc.svg" alt="[8VC-Icon]" />
                 <p>8VC</p>
               </li>
-              <li>
+              <li class="flex-column flex-align-items-center">
                 <!--
                   Asana logo taken from the Asana blog
                   https://blog.asana.com/2015/10/teamwork-is-beautiful-introducing-asanas-new-look/
@@ -125,7 +126,7 @@
                 <img src="imgs/internship-icons/asana.svg" alt="[Asana-Icon]" />
                 <p>Asana</p>
               </li>
-              <li>
+              <li class="flex-column flex-align-items-center">
                 <!--
                   NASA logo taken from nasa.gov website
                   https://www.nasa.gov/audience/forstudents/5-8/features/symbols-of-nasa.html
@@ -140,7 +141,10 @@
           </section>
         </div>
       </div>
-      <section id="home-current-side-project" class="fade-in">
+      <section
+        id="home-current-side-project"
+        class="fade-in flex-column flex-align-items-center"
+      >
         <h1>Current Side Project</h1>
         <!--
           Image taken from Figma file, designed by Ajay Natarajan and Eugene Shao

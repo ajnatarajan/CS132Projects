@@ -1,0 +1,228 @@
+/*
+ * Author: Ajay Natarajan
+ * CS 132 Spring 2022
+ * Date: 04/09/2022
+ *
+ * TODO: Remove provided comments before submitting.
+ */
+
+/* Provided starter: styles for all flex containers */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Provided starter: styles for flex containers that are in column layout */
+body {
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  background-color: #c9e4ca;
+  font-family: "Ubuntu", Verdana, sans-serif;
+}
+
+p {
+  line-height: 1.4;
+}
+
+header,
+h1,
+h2,
+p#fake-h1,
+main a,
+footer {
+  color: #3b6065;
+}
+
+main > section {
+  background-color: #fdfdfd;
+  padding: 10px;
+}
+
+.hyper-text-style,
+h2 {
+  font-weight: normal;
+}
+
+header > nav,
+#examples,
+aside {
+  background-color: #3b6065;
+}
+
+aside {
+  color: #fdfdfd;
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 200px;
+}
+
+.html-tag {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+main a:visited {
+  color: #c9e4ca;
+}
+
+figcaption {
+  font-style: italic;
+}
+
+header > nav > a {
+  color: #c9e4ca;
+}
+
+nav {
+  padding: 5px;
+  margin: 0;
+}
+
+nav > a {
+  margin-left: 15px;
+}
+
+header > div,
+footer > h1 {
+  height: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+}
+
+footer {
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+header code,
+footer code {
+  font-size: 24pt;
+  font-weight: bold;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+pre {
+  background-color: #d3d3d3;
+  padding: 10px;
+  overflow-x: scroll;
+}
+
+p#fake-h1 {
+  font-size: 18pt;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+#examples img {
+  width: 160px;
+}
+
+#examples {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 10px;
+}
+
+#examples > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 45%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: #fdfdfd;
+}
+
+#examples > div > p {
+  text-align: right;
+}
+
+#xkcd-figure {
+  width: 50%;
+  max-width: 400px;
+}
+
+#w3-figure {
+  width: 120px;
+  margin: 20px;
+  margin-top: 0;
+}
+
+figure {
+  float: right;
+}
+
+#xkcd-figure > img {
+  width: 100%;
+}
+
+#w3-figure > img {
+  width: 100%;
+}
+
+#html-comparison {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+#html-comparison div {
+  padding: 5px;
+}
+
+#html-comparison > div {
+  border: 4px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  height: 300px;
+}
+
+#html-comparison > div div {
+  border: 2px solid black;
+}
+
+.main-structure {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-structure > div {
+  width: 40%;
+}
+
+blockquote {
+  border-bottom: 2px solid black;
+}
+
+blockquote > p {
+  font-style: italic;
+}
+
+#tim-quote {
+  float: right;
+}
+
+#tim-quote > figcaption {
+  text-align: right;
+}

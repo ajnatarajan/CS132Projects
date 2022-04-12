@@ -52,7 +52,6 @@ nav > ul {
 }
 
 nav > ul > li {
-  flex-direction: row;
   margin-left: 0.5em;
   margin-right: 0.5em;
   font-size: 1.25em;
@@ -60,7 +59,7 @@ nav > ul > li {
   margin-bottom: 0;
 }
 
-nav > ul > li > a {
+.flex-row {
   flex-direction: row;
 }
 
@@ -122,4 +121,8 @@ a:active {
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
 }
