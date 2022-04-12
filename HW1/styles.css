@@ -7,20 +7,26 @@
  */
 
 /* Provided starter: styles for all flex containers */
-.flex-container {
+.flex-container,
+body,
+main,
+#examples,
+#examples > div,
+#html-comparison,
+#html-comparison > div,
+.main-structure {
   display: flex;
-  justify-content: space-between;
-}
-
-/* Provided starter: styles for flex containers that are in column layout */
-body {
-  flex-direction: column;
 }
 
 body {
-  margin: 0;
   background-color: #c9e4ca;
   font-family: "Ubuntu", Verdana, sans-serif;
+}
+
+body,
+nav,
+h1 {
+  margin: 0;
 }
 
 p {
@@ -36,9 +42,16 @@ footer {
   color: #3b6065;
 }
 
-main > section {
-  background-color: #fdfdfd;
+main,
+pre,
+main > section,
+#examples {
   padding: 10px;
+}
+
+main > section,
+#examples > div {
+  background-color: #fdfdfd;
 }
 
 .hyper-text-style,
@@ -53,13 +66,20 @@ aside {
 }
 
 aside {
-  color: #fdfdfd;
   margin-left: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
   min-width: 200px;
 }
 
+header > div,
+footer,
+aside {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+header code,
+footer code,
+p#fake-h1,
 .html-tag {
   font-weight: bold;
 }
@@ -68,21 +88,19 @@ a {
   text-decoration: none;
 }
 
-main a:visited {
-  color: #c9e4ca;
-}
-
-figcaption {
-  font-style: italic;
-}
-
+main a:visited,
 header > nav > a {
   color: #c9e4ca;
 }
 
-nav {
-  padding: 5px;
-  margin: 0;
+aside,
+aside a {
+  color: #fdfdfd;
+}
+
+figcaption,
+blockquote > p {
+  font-style: italic;
 }
 
 nav > a {
@@ -92,41 +110,39 @@ nav > a {
 header > div,
 footer > h1 {
   height: 60px;
-  padding-left: 10px;
-  padding-right: 10px;
+}
+
+header > div,
+footer > h1,
+footer {
   align-items: center;
 }
 
 footer {
   padding-bottom: 10px;
-  align-items: center;
-}
-
-h1 {
-  margin: 0;
 }
 
 header code,
 footer code {
   font-size: 24pt;
-  font-weight: bold;
 }
 
-main {
-  display: flex;
+main,
+#examples,
+#examples > div,
+#html-comparison,
+.main-structure,
+.flex-container {
   justify-content: space-between;
-  padding: 5px;
 }
 
 pre {
   background-color: #d3d3d3;
-  padding: 10px;
   overflow-x: scroll;
 }
 
 p#fake-h1 {
   font-size: 18pt;
-  font-weight: bold;
   margin-bottom: 0;
 }
 
@@ -135,24 +151,28 @@ p#fake-h1 {
 }
 
 #examples {
-  display: flex;
   flex-direction: row;
-  justify-content: space-between;
   margin: 5px;
-  padding: 10px;
 }
 
 #examples > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 45%;
   padding-left: 2%;
   padding-right: 2%;
-  background-color: #fdfdfd;
 }
 
-#examples > div > p {
+#examples > div,
+#html-comparison > div {
+  width: 45%;
+}
+
+body,
+#examples > div,
+#html-comparison > div {
+  flex-direction: column;
+}
+
+#examples > div > p,
+#tim-quote > figcaption {
   text-align: right;
 }
 
@@ -171,29 +191,22 @@ figure {
   float: right;
 }
 
-#xkcd-figure > img {
-  width: 100%;
-}
-
+#xkcd-figure > img,
 #w3-figure > img {
   width: 100%;
 }
 
 #html-comparison {
   text-align: center;
-  display: flex;
-  justify-content: space-between;
 }
 
+nav,
 #html-comparison div {
   padding: 5px;
 }
 
 #html-comparison > div {
   border: 4px solid black;
-  display: flex;
-  flex-direction: column;
-  width: 45%;
   height: 300px;
 }
 
@@ -203,8 +216,6 @@ figure {
 
 .main-structure {
   flex-grow: 1;
-  display: flex;
-  justify-content: space-between;
 }
 
 .main-structure > div {
@@ -213,16 +224,4 @@ figure {
 
 blockquote {
   border-bottom: 2px solid black;
-}
-
-blockquote > p {
-  font-style: italic;
-}
-
-#tim-quote {
-  float: right;
-}
-
-#tim-quote > figcaption {
-  text-align: right;
 }
