@@ -20,13 +20,8 @@
   function toggleView() {
     const menuSection = document.querySelector("#menu-view");
     const gameSection = document.querySelector("#game-view");
-    if (gameSection.classList.contains("hidden")) {
-      gameSection.classList.remove("hidden");
-      menuSection.classList.add("hidden");
-    } else {
-      gameSection.classList.add("hidden");
-      menuSection.classList.remove("hidden");
-    }
+    menuSection.classList.toggle("hidden");
+    gameSection.classList.toggle("hidden");
   }
 
   init();
