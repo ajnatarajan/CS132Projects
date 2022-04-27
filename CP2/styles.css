@@ -92,6 +92,10 @@ nav > ul > li {
   flex-direction: row;
 }
 
+.flex-align-items-center {
+  align-items: center;
+}
+
 nav > ul > li > a > img {
   margin-right: 0.25em;
 }

@@ -19,18 +19,29 @@
       href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script defer src="helpers.js"></script>
+    <script defer src="handleToggle.js"></script>
   </head>
-  <body>
+  <body class="light-body">
     <header>Ajay Natarajan</header>
     <!--
       All navbar icons come from the Unicons - Shared Library in Figma: 
       https://www.figma.com/community/file/931512007012650048
     -->
-    <nav>
+    <nav class="nav-light">
+      <!--
+        All navbar icons come from the Unicons - Shared Library in Figma: 
+        https://www.figma.com/community/file/931512007012650048
+      -->
       <ul>
         <li class="flex-row">
-          <a href="index.html" class="flex-row">
+          <a href="index.html" class="flex-row light-text">
             <img src="imgs/navbar-icons/home-icon.svg" alt="[Home-Icon]" />
+            <img
+              src="imgs/navbar-icons/dark-home-icon.svg"
+              alt="[Home-Icon]"
+              class="hidden"
+            />
             <p>Home</p>
           </a>
         </li>
@@ -38,25 +49,63 @@
           <a
             href="https://drive.google.com/file/d/1ZQEIRZUiXE2WFaz9T4MuNapYayx9jygq/view?usp=sharing"
             target="_blank"
-            class="flex-row"
+            class="flex-row light-text"
           >
             <img src="imgs/navbar-icons/resume-icon.svg" alt="[Resume-Icon]" />
+            <img
+              src="imgs/navbar-icons/dark-resume-icon.svg"
+              alt="[Resume-Icon]"
+              class="hidden"
+            />
             <p>Resume</p>
           </a>
         </li>
         <li class="flex-row">
-          <a href="contact.html" class="flex-row">
+          <a href="contact.html" class="flex-row light-text">
             <img
               src="imgs/navbar-icons/contact-icon-selected.svg"
               alt="[Contact-Icon]"
             />
+            <img
+              src="imgs/navbar-icons/dark-contact-icon-selected.svg"
+              alt="[Contact-Icon]"
+              class="hidden"
+            />
             <p class="nav-selected">Contact</p>
           </a>
+        </li>
+        <li class="flex-row flex-align-items-center">
+          <img
+            src="imgs/navbar-icons/toggle/sun.svg"
+            alt="[Light-Mode]"
+            class="color-mode-logo sun-logo"
+          />
+          <img
+            src="imgs/navbar-icons/toggle/dark-sun.svg"
+            alt="[Light-Mode]"
+            class="color-mode-logo sun-logo hidden"
+          />
+          <div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-switch" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <img
+            src="imgs/navbar-icons/toggle/moon.svg"
+            alt="[Dark-Mode]"
+            class="color-mode-logo moon-logo"
+          />
+          <img
+            src="imgs/navbar-icons/toggle/dark-moon.svg"
+            alt="[Dark-Mode]"
+            class="color-mode-logo moon-logo hidden"
+          />
         </li>
       </ul>
     </nav>
     <main>
-      <section id="contact-section" class="fade-in">
+      <section id="contact-section" class="fade-in light-mode">
         <h1>Contact Information</h1>
         <ul>
           <!--
@@ -65,10 +114,20 @@
           -->
           <li>
             <img src="imgs/contact-icons/email-icon.svg" alt="[Email-Icon]" />
+            <img
+              src="imgs/contact-icons/dark-email-icon.svg"
+              alt="[Dark-Email-Icon]"
+              class="hidden"
+            />
             <p>ajnatarajan@gmail.com</p>
           </li>
           <li>
             <img src="imgs/contact-icons/phone-icon.svg" alt="[Phone-Icon]" />
+            <img
+              src="imgs/contact-icons/dark-phone-icon.svg"
+              alt="[Dark-Phone-Icon]"
+              class="hidden"
+            />
             <p>626-353-8000</p>
           </li>
           <li>
@@ -76,12 +135,22 @@
               src="imgs/contact-icons/linkin-icon.svg"
               alt="[LinkedIn-Icon]"
             />
+            <img
+              src="imgs/contact-icons/dark-linkin-icon.svg"
+              alt="[Dark-LinkedIn-Icon]"
+              class="hidden"
+            />
             <p>ajay-natarajan</p>
           </li>
           <li>
             <img
               src="imgs/contact-icons/insta-icon.svg"
               alt="[Instagram-Icon]"
+            />
+            <img
+              src="imgs/contact-icons/dark-insta-icon.svg"
+              alt="[Dark-Instagram-Icon]"
+              class="hidden"
             />
             <p>outofcontacts</p>
           </li>

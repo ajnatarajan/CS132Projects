@@ -16,11 +16,18 @@ section {
   display: flex;
   flex-direction: column;
   margin-top: 5em;
-  background: rgba(0, 0, 0, 0.6);
   border-radius: 2em;
   padding-left: 10em;
   padding-right: 10em;
   padding-bottom: 2em;
+}
+
+.light-mode {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 h1 {
@@ -29,19 +36,19 @@ h1 {
   text-align: center;
 }
 
-ul > li {
+#contact-section > ul > li {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 1.5em;
 }
 
-ul > li > img {
+#contact-section > ul > li > img {
   width: 3em;
   margin-right: 1em;
 }
 
-ul > li > p {
+#contact-section > ul > li > p {
   font-size: 1.75em;
   margin-top: 0;
   margin-bottom: 0;
