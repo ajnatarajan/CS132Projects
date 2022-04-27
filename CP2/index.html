@@ -20,8 +20,10 @@
       href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script defer src="helpers.js"></script>
+    <script defer src="aboutme.js"></script>
   </head>
-  <body class="dark-body">
+  <body class="light-body">
     <header>Ajay Natarajan</header>
     <nav>
       <!--
@@ -30,7 +32,7 @@
       -->
       <ul>
         <li class="flex-row">
-          <a href="index.html" class="flex-row">
+          <a href="index.html" class="flex-row light-text">
             <img
               src="imgs/navbar-icons/home-icon-selected.svg"
               alt="[Home-Icon]"
@@ -42,20 +44,38 @@
           <a
             href="https://drive.google.com/file/d/1ZQEIRZUiXE2WFaz9T4MuNapYayx9jygq/view?usp=sharing"
             target="_blank"
-            class="flex-row"
+            class="flex-row light-text"
           >
             <img src="imgs/navbar-icons/resume-icon.svg" alt="[Resume-Icon]" />
             <p>Resume</p>
           </a>
         </li>
         <li class="flex-row">
-          <a href="contact.html" class="flex-row">
+          <a href="contact.html" class="flex-row light-text">
             <img
               src="imgs/navbar-icons/contact-icon.svg"
               alt="[Contact-Icon]"
             />
             <p>Contact</p>
           </a>
+        </li>
+        <li class="flex-row flex-align-items-center">
+          <img
+            src="imgs/navbar-icons/toggle/sun.svg"
+            alt="[Light-Mode]"
+            class="color-mode-logo sun-logo"
+          />
+          <div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-switch" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <img
+            src="imgs/navbar-icons/toggle/moon.svg"
+            alt="[Dark-Mode]"
+            class="color-mode-logo moon-logo"
+          />
         </li>
       </ul>
     </nav>
