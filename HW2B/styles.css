@@ -45,7 +45,8 @@ h2 {
   color: white;
 }
 
-.hidden {
+.hidden,
+.hide-imgs img {
   display: none;
 }
 
@@ -54,6 +55,7 @@ h2 {
 .card {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
 }
 
@@ -91,6 +93,11 @@ button {
 
 .card > img {
   height: 85%;
+}
+
+.card > p {
+  font-size: 16pt;
+  font-weight: bold;
 }
 
 .card.selected {

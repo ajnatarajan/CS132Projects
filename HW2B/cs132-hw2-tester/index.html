@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>HW2: Set! Tests</title>
+    <!-- Helpers for Tester UI -->
+    <script src="../helpers.js" charset="utf-8"></script>
+    <!-- Code for Tester UI/setup -->
+    <script src="tester.js" charset="utf-8"></script>
+    <!-- Library for UI Testing -->
+    <script src="lolex.js" charset="utf-8"></script>
+    <!-- Testing for HW2 functionality -->
+    <script src="hw2-tests.js" charset="utf-8"></script>
+    <!-- Styles for Set game -->
+    <link href="../styles.css" rel="stylesheet" />
+    <!-- Styles for Tester UI -->
+    <link href="tester.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>HW2: Set! Tests</h1>
+    </header>
+
+    <!-- 
+      Note: This HTML is used to test your set.js; your HTML should _not_ have
+      changed from the provided starter set.html. You won't see it displayed since
+      it just provides the DOM for your uploaded set.js to interact with.
+    -->
+
+    <main class="no-show">
+      <section id="menu-view">
+        <article>
+          <h2>Choose a Timing Option:</h2>
+          <select>
+            <option value="60">1 Minute</option>
+            <option value="180" selected>3 Minutes</option>
+            <option value="300">5 Minutes</option>
+          </select>
+
+          <h2>Choose a Difficulty:</h2>
+          <p>
+            <label><input type="radio" name="diff" value="easy" checked /> Easy</label>
+            <label><input type="radio" name="diff" value="standard" /> Standard</label>
+          </p>
+
+          <button id="start-btn">Start</button>
+        </article>
+
+        <section>
+          <header>
+            <h2>Rules</h2>
+          </header>
+          <p>
+            Originally created by Marsha Jean Falco of Set Enterprises, Inc.,
+            Set is a card game with a board of non-duplicate cards. There are two levels
+            of difficulty for this game.
+            In Standard
+            Difficulty there are 4 different attributes (style, color, shape, and count) -
+            each attribute can have one of three values. For example, shape can have 3
+            values: "diamond", "oval", or "squiggle". In Easy Difficulty, all cards share a
+            "solid" style attribute, so only the other 3 attributes can be different.
+          </p>
+          <p>
+            A Set is a selection of 3 cards such that for each of attributes, all
+            three cards have the same value or none of the cards have the same value.
+            Your goal is to find as many Sets as you can on the board!
+          </p>
+          <p>
+            Selecting an incorrect set will cost 15 seconds (+15 to clock in untimed, -15 to clock
+            in timed)! Sometimes there won't be sets left on the board - you can reshuffle
+            the board with a new collection of random cards.
+          </p>
+          <p>Have fun!</p>
+        </section>
+      </section>
+
+      <section id="game-view" class="hidden">
+        <div id="details-bar">
+          <button id="back-btn">Back to Main</button>
+          <p><strong>Sets Found: </strong><span id="set-count">0</span></p>
+          <p><strong>Time: </strong><span id="time">00:00</span></p>
+          <button id="refresh-btn">Refresh Board</button>
+        </div>
+        <div id="board">
+          <div id="solid-squiggle-red-1" class="card">
+            <img src="imgs/solid-squiggle-red.png" alt="solid-squiggle-red-1">
+          </div>
+          <div id="solid-diamond-green-3" class="card selected">
+            <img src="imgs/solid-diamond-green.png" alt="solid-diamond-green-3">
+            <img src="imgs/solid-diamond-green.png" alt="solid-diamond-green-3">
+            <img src="imgs/solid-diamond-green.png" alt="solid-diamond-green-3">
+          </div>
+          <div id="solid-oval-purple-1" class="card selected">
+            <img src="imgs/solid-oval-purple.png"  alt="solid-oval-purple-1">
+          </div>
+          <div id="solid-diamond-red-2" class="card">
+            <img src="imgs/solid-diamond-red.png" alt="solid-diamond-red-2">
+            <img src="imgs/solid-diamond-red.png" alt="solid-diamond-red-2">
+          </div>
+          <div id="solid-squiggle-green-1" class="card">
+            <img src="imgs/solid-squiggle-green.png" alt="solid-squiggle-green-1">
+          </div>
+          <div id="solid-diamond-purple-1" class="card">
+            <img src="imgs/solid-diamond-purple.png" alt="solid-diamond-purple-1">
+          </div>
+          <div id="solid-squiggle-red-2" class="card selected">
+            <img src="imgs/solid-squiggle-red.png" alt="solid-squiggle-red-2">
+            <img src="imgs/solid-squiggle-red.png" alt="solid-squiggle-red-2">
+          </div>
+          <div id="solid-squiggle-purple-3" class="card">
+            <img src="imgs/solid-squiggle-purple.png" alt="solid-squiggle-purple-3">
+            <img src="imgs/solid-squiggle-purple.png" alt="solid-squiggle-purple-3">
+            <img src="imgs/solid-squiggle-purple.png" alt="solid-squiggle-purple-3">
+          </div>
+          <div id="solid-diamond-green-2" class="card">
+            <img src="imgs/solid-diamond-green.png" alt="solid-diamond-green-2">
+            <img src="imgs/solid-diamond-green.png" alt="solid-diamond-green-2">
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <article id="tester-container">
+      <p><strong>Instructions:</strong> This <code>index.html</code> page should be in a <code>cs132-hw2-tests</code> folder <em>within</em> your hw2 folder:</p>
+      <pre>hw2/
+  set.html
+  <strong>set.js</strong>
+  helpers.js
+  styles.css
+  imgs/
+  cs132-hw2-tester.zip
+  cs132-hw2-tester/
+    hw2-tests.js     (Testing functionality for HW2 Part B Requirements)
+    index.html       (Testing page to run/view test output)       
+    lolex.js         (UI testing library)      
+    tester.css       (CSS for testing page output)      
+    tester.js        (Functionality specific to tester)</pre>
+
+      <p id="disclaimer">
+        <span>Disclaimer:</span> these tests are not exhaustive and are not a guarantee or an
+        indication of your grade on this assignment.
+      </p>
+      <p>
+        To run tests, upload your <code>hw2/set.js</code> file below. These will 
+        also test some of the styling/functionality requirements Part A.
+        <strong>You will need to have an <code>init</code> function in order for these tests to run successfully</strong>.
+      </p>
+      <section id="tester-input" class="no-show">
+        <input type="file" id="my-set-js" accept=".js">
+        <button type="button" id="run-tests">Run Tests</button>
+      </section>
+      <section id="tester-output"></section>
+    </article>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+How to use tester:
+
+Unzip the cs132-hw2-tester.zip file in the same directory as your hw2 code:
+
+hw2/
+  set.html
+  set.js
+  helpers.js
+  styles.css
+  imgs/
+  cs132-hw2-tester.zip
+  cs132-hw2-tester/
+    hw2-tests.js     (Testing functionality for HW2 Part B Requirements)
+    index.html       (Testing page to run/view test output)       
+    lolex.js         (UI testing library)      
+    tester.css       (CSS for testing page output)      
+    tester.js        (Functionality specific to tester) 
+
+Then, open hw2/cs132-hw2-tester/index.html and upload your hw2/set.js file to run
+the tests. These will also test some of the styling/functionality requirements 
+from Part A.
