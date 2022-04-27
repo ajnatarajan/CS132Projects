@@ -135,3 +135,11 @@ section > ul > li > img {
   -moz-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
+
+#home-current-side-project > img {
+  max-width: 790px;
+}
+
+#home-current-side-project > p {
+  max-width: 598px;
+}

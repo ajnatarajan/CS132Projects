@@ -7,11 +7,6 @@
   the general theme to connect the website together and give it consistency.
 */
 body {
-  background: linear-gradient(
-    180deg,
-    rgba(150, 24, 122, 0.63) -13.35%,
-    rgba(175, 14, 14, 0.72) 100%
-  );
   flex-direction: column;
   margin: 0;
 
@@ -19,7 +14,25 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
   font-family: "Play", sans-serif;
+}
+
+.light-body {
+  background: linear-gradient(
+    180deg,
+    rgba(150, 24, 122, 0.63) -13.35%,
+    rgba(175, 14, 14, 0.72) 100%
+  );
   color: #fff;
+}
+
+.dark-body {
+  background: linear-gradient(
+    180deg,
+    rgba(150, 24, 122, 0.91) -13.35%,
+    rgba(175, 14, 14, 0.75) 100%
+  );
+
+  color: #000;
 }
 
 header {
