@@ -10,12 +10,12 @@
 (function () {
   "use strict";
   const NUM_IMAGES = 3;
-  const imgs = [
+  const IMGS = [
     "imgs/home-page-icons/side-project-0.svg",
     "imgs/home-page-icons/side-project-1.svg",
     "imgs/home-page-icons/side-project-2.svg",
   ];
-  const alts = [
+  const ALTS = [
     "[Qup.gg Home Page]",
     "[Qup.gg Game Selection]",
     "[Qup.gg Profile Swiping]",
@@ -61,8 +61,8 @@
    */
   function showImage(imageIndex) {
     let newImg = gen("img");
-    newImg.src = imgs[imageIndex];
-    newImg.alt = alts[imageIndex];
+    newImg.src = IMGS[imageIndex];
+    newImg.alt = ALTS[imageIndex];
     const parentElement = id("home-current-side-project");
     const oldImg = qs("#home-current-side-project > img");
     parentElement.replaceChild(newImg, oldImg);
