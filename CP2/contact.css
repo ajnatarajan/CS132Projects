@@ -1,0 +1,54 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the contact.css page for my personal website. It is exclusively used
+  by contact.html to position and style the contact information so as to stand
+  out from the background.
+*/
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5em;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2em;
+  padding-left: 10em;
+  padding-right: 10em;
+  padding-bottom: 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 400;
+  text-align: center;
+}
+
+ul > li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.5em;
+}
+
+ul > li > img {
+  width: 3em;
+  margin-right: 1em;
+}
+
+ul > li > p {
+  font-size: 1.75em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.fade-in#contact-section {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+}

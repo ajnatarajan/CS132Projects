@@ -1,0 +1,128 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the styles.css page for my personal website. It is used by both pages
+  of my website for styling the title, navbar, and background. It's in essence 
+  the general theme to connect the website together and give it consistency.
+*/
+body {
+  background: linear-gradient(
+    180deg,
+    rgba(150, 24, 122, 0.63) -13.35%,
+    rgba(175, 14, 14, 0.72) 100%
+  );
+  flex-direction: column;
+  margin: 0;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: "Play", sans-serif;
+  color: #fff;
+}
+
+header {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+}
+
+nav {
+  background: linear-gradient(90deg, #010000 0%, rgba(1, 0, 0, 0.42) 100%);
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  padding: 0;
+}
+
+body,
+nav > ul,
+nav > ul > li,
+nav > ul > li > a {
+  display: flex;
+}
+
+nav > ul {
+  justify-content: center;
+}
+
+nav > ul > li {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-size: 1.25em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+nav > ul > li > a > img {
+  margin-right: 0.25em;
+}
+
+nav > ul > li > a > p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-selected {
+  color: #f06a6a;
+}
+
+/* Fade in logic */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0; /* make things invisible upon start */
+  /* call our keyframe named fadeIn, repeats only once */
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+
+  /* after animation finishes we stay at opacity level 1 */
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-duration: 0.75s;
+  -moz-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
