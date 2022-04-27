@@ -98,15 +98,15 @@ section > ul > li > img {
   #home-top-right {
     margin-top: 1.5em;
     margin-left: 0;
-    align-items: center;
   }
 
-  #home-intro-section {
-    text-align: center;
-  }
-
+  #home-top-right,
   #home-internships-section {
     align-items: center;
+  }
+
+  #home-intro-section,
+  #home-internships-section {
     text-align: center;
   }
 }
