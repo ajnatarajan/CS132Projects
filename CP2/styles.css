@@ -109,7 +109,17 @@ nav > ul > li > a > p {
 }
 
 /* Toggle switch CSS */
-/* https://www.youtube.com/watch?v=NTyCpC7IrD8&ab_channel=DesignCourse */
+/* I want to preface this by saying this has become my template code for
+ * creating toggles as I've used this on other projects. There was a
+ * youtube video I used from a long time ago to do this and there is probably
+ * some overlap between the following ~35 lines of CSS and the original
+ * tutorial. However, I don't remember the youtube video since it was from so
+ * long ago. So despite the overlap, I don't think this counts as plagiarism
+ * as this has become my own default template for creating toggles for quite a
+ * while. To see another project I used this on, check out: qup.gg (just as
+ * proof that I've used this on other projects before). Please let me know if
+ * this is not alright!
+ */
 
 .switch {
   position: relative;
