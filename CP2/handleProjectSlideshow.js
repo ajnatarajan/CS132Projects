@@ -22,23 +22,43 @@
   ];
   let currImgIndex = 0;
 
+  /**
+   * Adds event listeners to left and right arrow buttons for the slideshow.
+   * No parameters.
+   * @returns {void}
+   */
   function init() {
     id("left-arrow-button").addEventListener("click", showPrevImage);
     id("right-arrow-button").addEventListener("click", showNextImage);
   }
 
+  /**
+   * Gets previous image index and calls showImage helper function to render it.
+   * No parameters.
+   * @returns {void}
+   */
   function showPrevImage() {
     const prevIndex = (NUM_IMAGES + currImgIndex - 1) % NUM_IMAGES;
     showImage(prevIndex);
     currImgIndex = prevIndex;
   }
 
+  /**
+   * Gets next image index and calls showImage helper function to render it.
+   * No parameters.
+   * @returns {void}
+   */
   function showNextImage() {
     const nextIndex = (currImgIndex + 1) % NUM_IMAGES;
     showImage(nextIndex);
     currImgIndex = nextIndex;
   }
 
+  /**
+   * Replace the old slideshow image with the image at imageIndex.
+   * @param {Number} imageIndex - index of image in img and alt arrays.
+   * @returns {void}
+   */
   function showImage(imageIndex) {
     let newImg = gen("img");
     newImg.src = imgs[imageIndex];

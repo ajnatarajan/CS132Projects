@@ -10,10 +10,20 @@
 (function () {
   "use strict";
 
+  /**
+   * Adds event listener to the toggle switch.
+   * No parameters
+   * @returns {void}
+   */
   function init() {
     id("toggle-switch").addEventListener("click", toggleMode);
   }
 
+  /**
+   * Toggles between light and dark mode.
+   * No parameters.
+   * @returns {void}
+   */
   function toggleMode() {
     /* Handle body background and text */
     qs("body").classList.toggle("light-body");
@@ -42,6 +52,7 @@
       contactIcons[i].classList.toggle("hidden");
     }
 
+    /* Handle contact section background */
     const contactSection = qs("#contact-section");
     if (contactSection) {
       contactSection.classList.toggle("light-mode");
