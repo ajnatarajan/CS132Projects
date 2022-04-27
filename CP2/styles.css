@@ -50,8 +50,16 @@ header {
   margin-bottom: 0.5em;
 }
 
-nav {
+.nav-light {
   background: linear-gradient(90deg, #010000 0%, rgba(1, 0, 0, 0.42) 100%);
+}
+
+.nav-dark {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
 }
 
 ul {
@@ -95,6 +103,10 @@ nav > ul > li > a > p {
 
 .color-mode-logo {
   width: 28px;
+}
+
+.hidden {
+  display: none;
 }
 
 /* Toggle switch CSS */

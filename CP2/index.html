@@ -25,7 +25,7 @@
   </head>
   <body class="light-body">
     <header>Ajay Natarajan</header>
-    <nav>
+    <nav class="nav-light">
       <!--
         All navbar icons come from the Unicons - Shared Library in Figma: 
         https://www.figma.com/community/file/931512007012650048
@@ -37,6 +37,11 @@
               src="imgs/navbar-icons/home-icon-selected.svg"
               alt="[Home-Icon]"
             />
+            <img
+              src="imgs/navbar-icons/dark-home-icon-selected.svg"
+              alt="[Home-Icon]"
+              class="hidden"
+            />
             <p class="nav-selected">Home</p>
           </a>
         </li>
@@ -47,6 +52,11 @@
             class="flex-row light-text"
           >
             <img src="imgs/navbar-icons/resume-icon.svg" alt="[Resume-Icon]" />
+            <img
+              src="imgs/navbar-icons/dark-resume-icon.svg"
+              alt="[Resume-Icon]"
+              class="hidden"
+            />
             <p>Resume</p>
           </a>
         </li>
@@ -56,6 +66,11 @@
               src="imgs/navbar-icons/contact-icon.svg"
               alt="[Contact-Icon]"
             />
+            <img
+              src="imgs/navbar-icons/dark-contact-icon.svg"
+              alt="[Contact-Icon]"
+              class="hidden"
+            />
             <p>Contact</p>
           </a>
         </li>
@@ -64,6 +79,11 @@
             src="imgs/navbar-icons/toggle/sun.svg"
             alt="[Light-Mode]"
             class="color-mode-logo sun-logo"
+          />
+          <img
+            src="imgs/navbar-icons/toggle/dark-sun.svg"
+            alt="[Light-Mode]"
+            class="color-mode-logo sun-logo hidden"
           />
           <div>
             <label class="switch">
@@ -75,6 +95,11 @@
             src="imgs/navbar-icons/toggle/moon.svg"
             alt="[Dark-Mode]"
             class="color-mode-logo moon-logo"
+          />
+          <img
+            src="imgs/navbar-icons/toggle/dark-moon.svg"
+            alt="[Dark-Mode]"
+            class="color-mode-logo moon-logo hidden"
           />
         </li>
       </ul>
