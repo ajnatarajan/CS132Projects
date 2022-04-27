@@ -1,4 +1,10 @@
 /*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 26th, 2022
+  This is the handleToggle.js file for my personal website. This is used for all
+  pages of the site (index.html and contact.html) to toggle the required
+  elements from "light mode" to "dark mode".
  */
 
 (function () {

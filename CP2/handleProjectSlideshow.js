@@ -1,4 +1,10 @@
 /*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 26th, 2022
+  This is the handleProjectSlideshow.js file for my personal website. It is used
+  by index.html to handle user input to the two buttons to go back and forth
+  between images showcasing my most recent side project.
  */
 
 (function () {
