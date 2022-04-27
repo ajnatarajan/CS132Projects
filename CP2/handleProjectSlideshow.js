@@ -11,9 +11,9 @@
   "use strict";
   const NUM_IMAGES = 3;
   const imgs = [
-    "imgs/home-page-icons/sideproject0.svg",
-    "imgs/home-page-icons/sideproject1.svg",
-    "imgs/home-page-icons/sideproject2.svg",
+    "imgs/home-page-icons/side-project-0.svg",
+    "imgs/home-page-icons/side-project-1.svg",
+    "imgs/home-page-icons/side-project-2.svg",
   ];
   const alts = [
     "[Qup.gg Home Page]",
