@@ -22,7 +22,7 @@
 
     startButton.addEventListener("click", handleStart);
     refreshButton.addEventListener("click", populateBoard);
-    backToMainButton.addEventListener("click", toggleView);
+    backToMainButton.addEventListener("click", handleBack);
   }
 
   function handleStart() {
@@ -31,6 +31,11 @@
     enableRefreshButton();
     populateBoard();
     resetSetsFound();
+  }
+
+  function handleBack() {
+    toggleView();
+    resetTimer();
   }
 
   /* Helper functions */
@@ -73,7 +78,11 @@
     id("refresh-btn").disabled = true;
 
     /* Stop and clear timer */
-    clearInterval(timerId);
+    if (timerId) {
+      clearInterval(timerId);
+    }
+
+    timerId = null;
   }
 
   function enableRefreshButton() {
@@ -99,6 +108,13 @@
 
   function resetSetsFound() {
     id("set-count").textContent = "0";
+  }
+
+  function resetTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+    }
+    timerId = null;
   }
   /* End helper functions */
 
@@ -169,7 +185,7 @@
 
   function startTimer() {
     secondsRemaining = parseInt(qs("#menu-view select").value);
-    qs("#time").textContent = secondsToMMSS(Math.max(0, secondsRemaining));
+    qs("#time").textContent = secondsToMMSS(secondsRemaining);
     timerId = setInterval(() => advanceTimer(), 1000);
   }
 
@@ -179,16 +195,16 @@
     if (secondsRemaining <= 0) {
       return;
     }
-    secondsRemaining -= 1;
-    qs("#time").textContent = secondsToMMSS(Math.max(0, secondsRemaining));
+    secondsRemaining = Math.max(0, secondsRemaining - 1);
+    qs("#time").textContent = secondsToMMSS(secondsRemaining);
     if (secondsRemaining <= 0) {
       disableBoard();
     }
   }
 
-  function cardSelected(e) {
+  function cardSelected() {
     /* Set the clicked one to selected */
-    id(e.currentTarget.id).classList.toggle("selected");
+    id(this.id).classList.toggle("selected");
 
     /* Check if we have 3 selected */
     let potentialSet = qsa("#board > .selected");
@@ -212,7 +228,7 @@
         let yesSet = document.createElement("p");
         yesSet.textContent = "SET!";
         potentialSet[i].appendChild(yesSet); // add yes text to card
-        const tempId = setTimeout(() => {
+        setTimeout(() => {
           // swap in new card after 1 second
           let newCard = generateUniqueCard(
             qs('input[name="diff"]:checked').value === "easy" // determine ifEasy
@@ -226,15 +242,15 @@
         let noSet = document.createElement("p");
         noSet.textContent = "Not a Set :(";
         potentialSet[i].appendChild(noSet); // add no text to card
-        const tempId = setTimeout(() => {
+        setTimeout(() => {
           // go back to normal after 1 second
           potentialSet[i].removeChild(noSet);
           potentialSet[i].classList.remove("hide-imgs");
         }, 1000);
       }
 
-      secondsRemaining -= 15;
-      qs("#time").textContent = secondsToMMSS(Math.max(0, secondsRemaining));
+      secondsRemaining = Math.max(0, secondsRemaining - 15);
+      qs("#time").textContent = secondsToMMSS(secondsRemaining);
       if (secondsRemaining <= 0) {
         disableBoard();
       }
