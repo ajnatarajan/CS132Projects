@@ -148,22 +148,27 @@
      * is a decent approach since the probability it fails 5 times in a row
      * is < 1% and it's pretty clean in my opinion.
      */
-    while (true) {
-      let attributes = generateRandomAttributes(isEasy);
-      let newId = attributes.join("-");
+    let isUniqueId = false;
+    let attributes = null;
+    let newId = null;
+    while (!isUniqueId) {
+      attributes = generateRandomAttributes(isEasy);
+      newId = attributes.join("-");
       if (!ids.has(newId)) {
-        newCard.id = newId;
-        // COUNT is attributes[3]
-        for (let i = 0; i < attributes[3]; i++) {
-          let newImg = document.createElement("img");
-          newImg.src = "imgs/" + attributes.slice(0, 3).join("-") + ".png";
-          newImg.alt = newId;
-          newCard.appendChild(newImg);
-        }
-        newCard.addEventListener("click", cardSelected);
-        return newCard;
+        isUniqueId = true;
       }
     }
+
+    newCard.id = newId;
+    // COUNT is attributes[3]
+    for (let i = 0; i < attributes[3]; i++) {
+      let newImg = document.createElement("img");
+      newImg.src = "imgs/" + attributes.slice(0, 3).join("-") + ".png";
+      newImg.alt = newId;
+      newCard.appendChild(newImg);
+    }
+    newCard.addEventListener("click", cardSelected);
+    return newCard;
   }
 
   function isASet(selected) {
