@@ -2,9 +2,11 @@
   NAME: Ajay Natarajan
   DATE: 04/15/2022
 
-  This is the set.js file which handles toggling the display in the
-  milestone.html file between menu view and game view upon one of two buttons
-  being clicked.
+  This is the set.js file which handles all interactivity for the set.html 
+  file. It implements toggling between menu view and game view and all
+  subsequent necessary interactive elements for the Set game including
+  changing UI for selecting cards, determining if a chosen set of three cards
+  comprises a set, refreshing the board, and more.
  */
 (function () {
   "use strict";
@@ -22,6 +24,7 @@
 
     startButton.addEventListener("click", handleStart);
     refreshButton.addEventListener("click", populateBoard);
+    refreshButton.addEventListener("click", penalizeIfValidSetExists); // optional challenge
     backToMainButton.addEventListener("click", handleBack);
   }
 
@@ -174,6 +177,56 @@
       clearInterval(timerId);
     }
     timerId = null;
+  }
+
+  /**
+   * Apply fifteen second penalty by deducting 15 from seconds remaining and
+   * updating the time display.
+   * No parameters
+   * @returns {void}
+   */
+  function fifteenSecondPenalty() {
+    secondsRemaining = Math.max(0, secondsRemaining - 15);
+    qs("#time").textContent = secondsToMMSS(secondsRemaining);
+    if (secondsRemaining <= 0) {
+      disableBoard();
+    }
+  }
+
+  /**
+   * Returns if there is a valid set on the board at the moment.
+   * No parameters
+   * @returns {boolean} - whether a valid set exists
+   */
+  function validSetExists() {
+    let cards = qsa("#board > .card");
+    for (let i = 0; i < cards.length; i++) {
+      for (let j = i + 1; j < cards.length; j++) {
+        for (let k = j + 1; k < cards.length; k++) {
+          if (isASet([cards[i], cards[j], cards[k]])) {
+            console.log(cards[i]);
+            console.log(cards[j]);
+            console.log(cards[k]);
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Apply fifteen second penalty and produce an alert if valid set exists.
+   * This function is called when refresh board is clicked.
+   * No parameters.
+   * @returns {void}
+   */
+  function penalizeIfValidSetExists() {
+    if (validSetExists()) {
+      fifteenSecondPenalty();
+      alert("(15 second penalty) there were Sets left on the board!");
+    }
   }
   /* End helper functions */
 
@@ -345,11 +398,7 @@
         }, 1000);
       }
 
-      secondsRemaining = Math.max(0, secondsRemaining - 15);
-      qs("#time").textContent = secondsToMMSS(secondsRemaining);
-      if (secondsRemaining <= 0) {
-        disableBoard();
-      }
+      fifteenSecondPenalty();
     }
   }
 
