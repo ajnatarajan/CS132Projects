@@ -25,6 +25,11 @@
     backToMainButton.addEventListener("click", handleBack);
   }
 
+  /**
+   * Handle all necessary things to start a game
+   * No parameters.
+   * @returns {void}
+   */
   function handleStart() {
     toggleView();
     startTimer();
@@ -33,12 +38,21 @@
     resetSetsFound();
   }
 
+  /**
+   * Handle all necessary things to end a game
+   * No parameters.
+   * @returns {void}
+   */
   function handleBack() {
     toggleView();
     resetTimer();
   }
 
   /* Helper functions */
+  /**
+   * Toggle view between menu and game.
+   * @returns {void}
+   */
   function toggleView() {
     const menuSection = document.querySelector("#menu-view");
     const gameSection = document.querySelector("#game-view");
@@ -46,26 +60,51 @@
     gameSection.classList.toggle("hidden");
   }
 
+  /**
+   * Get a random element
+   * @param {Array} arr - array of elements
+   * @returns {Element} - random element from the array
+   */
   function randomChoice(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
+  /**
+   * Determine whether all elements in an array are all unique.
+   * @param {Array} arr - array of elements
+   * @returns {boolean} - truth value of "all elements are unique".
+   */
   function allUnique(arr) {
     return new Set(arr).size === arr.length;
   }
 
+  /**
+   * Determine whether all elements in an array are all same.
+   * @param {Array} arr - array of elements
+   * @returns {boolean} - truth value of "all elements are the same".
+   */
   function allEqual(arr) {
     // taken from stack overflow:
     // https://stackoverflow.com/questions/14832603/check-if-all-values-of-array-are-equal
     return arr.every((e) => e === arr[0]);
   }
 
+  /**
+   * Convert seconds to MMSS form.
+   * @param {Number} seconds - number of seconds
+   * @returns {Date} - MM:SS conversion of seconds
+   */
   function secondsToMMSS(seconds) {
     // Conversion to MM:SS taken from stack overflow
     // https://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
     return new Date(parseInt(seconds) * 1000).toISOString().substr(14, 5);
   }
 
+  /**
+   * Handle all necessary operations to disable the board
+   * No parameters
+   * @returns {void}
+   */
   function disableBoard() {
     /* Make all cards unselected and unclickable */
     let cards = qsa("#board > .card");
@@ -85,10 +124,20 @@
     timerId = null;
   }
 
+  /**
+   * Un-disable the refresh button
+   * No parameters
+   * @returns {void}
+   */
   function enableRefreshButton() {
     id("refresh-btn").disabled = false;
   }
 
+  /**
+   * Delete all remaining cards and add new ones in.
+   * No parameters
+   * @returns {void}
+   */
   function populateBoard() {
     /* First remove any existing cards */
     while (id("board").firstChild) {
@@ -106,10 +155,20 @@
     }
   }
 
+  /**
+   * Reset set count
+   * No parameters
+   * @returns {void}
+   */
   function resetSetsFound() {
     id("set-count").textContent = "0";
   }
 
+  /**
+   * Reset timer
+   * No parameters
+   * @returns {void}
+   */
   function resetTimer() {
     if (timerId) {
       clearInterval(timerId);
@@ -118,6 +177,12 @@
   }
   /* End helper functions */
 
+  /**
+   * Generate all random attributes for a card and return as a list. Style
+   * attribute will always be solid if isEasy flag is true.
+   * @param {boolean} isEasy - setting of the board, true for easy and false for standard
+   * @returns {Array} attributes - list of randomly chosen attributes
+   */
   function generateRandomAttributes(isEasy) {
     let attributes = [];
     let options = [STYLES, SHAPES, COLORS, COUNTS];
@@ -132,6 +197,12 @@
     return attributes;
   }
 
+  /**
+   * Generate a unique card that is not already on the board. Will have style of
+   * solid if isEasy flag is true.
+   * @param {boolean} isEasy - setting of the board, true for easy and false for standard
+   * @returns {DOM Element} newCard - unique card
+   */
   function generateUniqueCard(isEasy) {
     let ids = new Set();
     let cards = document.querySelectorAll("#board > div");
@@ -171,6 +242,11 @@
     return newCard;
   }
 
+  /**
+   * Returns whether the three cards passed in comprise a set.
+   * @param {Array} selected - array of cards
+   * @returns {boolean} - whether this array is a set
+   */
   function isASet(selected) {
     let attributesForEachCard = [];
     for (let i = 0; i < selected.length; i++) {
@@ -188,12 +264,22 @@
     return true;
   }
 
+  /**
+   * Start game timer depending on selection made.
+   * No params
+   * @returns {void}
+   */
   function startTimer() {
     secondsRemaining = parseInt(qs("#menu-view select").value);
     qs("#time").textContent = secondsToMMSS(secondsRemaining);
     timerId = setInterval(() => advanceTimer(), 1000);
   }
 
+  /**
+   * Advance timer by decrementing remaining time.
+   * No params
+   * @returns {void}
+   */
   function advanceTimer() {
     // in case the next advanceTimer loop gets called before the prior loop
     // which reduced secondsRemaining to 0 gets finished executing.
@@ -207,6 +293,11 @@
     }
   }
 
+  /**
+   * Handle activity for when a card is clicked.
+   * No params
+   * @returns {void}
+   */
   function cardSelected() {
     /* Set the clicked one to selected */
     id(this.id).classList.toggle("selected");
