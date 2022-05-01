@@ -9,6 +9,11 @@
 (function () {
   "use strict";
 
+  /**
+   * Add all necessary event listeners to handle toggling.
+   * No parameters.
+   * @returns {void}
+   */
   function init() {
     const startButton = document.querySelector("#start-btn");
     const backToMainButton = document.querySelector("#back-btn");
@@ -17,6 +22,11 @@
     backToMainButton.addEventListener("click", toggleView);
   }
 
+  /**
+   * Toggle between menu and game views.
+   * No parameters.
+   * @returns {void}
+   */
   function toggleView() {
     const menuSection = document.querySelector("#menu-view");
     const gameSection = document.querySelector("#game-view");
