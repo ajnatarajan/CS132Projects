@@ -17,6 +17,11 @@
   let timerId = 0;
   let secondsRemaining = 0;
 
+  /**
+   * Initializes game by adding all relevant event listeners.
+   * No parameters.
+   * @returns {void}
+   */
   function init() {
     const startButton = document.querySelector("#start-btn");
     const backToMainButton = document.querySelector("#back-btn");
@@ -204,9 +209,6 @@
       for (let j = i + 1; j < cards.length; j++) {
         for (let k = j + 1; k < cards.length; k++) {
           if (isASet([cards[i], cards[j], cards[k]])) {
-            console.log(cards[i]);
-            console.log(cards[j]);
-            console.log(cards[k]);
             return true;
           }
         }
