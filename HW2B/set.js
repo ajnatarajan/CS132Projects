@@ -99,13 +99,15 @@
 
   /**
    * Convert seconds to MMSS form.
-   * @param {Number} seconds - number of seconds
+   * @param {Number} seconds - number of seconds, nonnegative
    * @returns {Date} - MM:SS conversion of seconds
    */
   function secondsToMMSS(seconds) {
-    // Conversion to MM:SS taken from stack overflow
-    // https://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
-    return new Date(parseInt(seconds) * 1000).toISOString().substr(14, 5);
+    const raw_minutes = Math.floor(seconds / 60);
+    const raw_seconds = seconds % 60;
+    const mm = (raw_minutes < 10 ? "0" : "") + raw_minutes.toString();
+    const ss = (raw_seconds < 10 ? "0" : "") + raw_seconds.toString();
+    return mm + ":" + ss;
   }
 
   /**
