@@ -94,6 +94,7 @@ h2 {
   flex-wrap: wrap;
   margin-top: 50px;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .product-card {
