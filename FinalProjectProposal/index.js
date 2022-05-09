@@ -18,11 +18,11 @@
     "netflix50.jpg",
   ];
 
-  const ALTS = [
-    "League $10 Gift Card",
-    "League $25 Gift Card",
-    "League $50 Gift Card",
-    "League $100 Gift Card",
+  const TITLES = [
+    "League of Legends $10 Gift Card",
+    "League of Legends $25 Gift Card",
+    "League of Legends $50 Gift Card",
+    "League of Legends $100 Gift Card",
     "Valorant $10 Gift Card",
     "Valorant $25 Gift Card",
     "Valorant $50 Gift Card",
@@ -37,21 +37,35 @@
   ];
 
   function init() {
-    id("search-bar").addEventListener("input", () => {
-      console.log("Updating search...");
-    });
-
+    id("search-bar").addEventListener("input", populateProducts);
+    id("dropdown").addEventListener("change", populateProducts);
     populateProducts();
   }
 
   function populateProducts() {
+    // Remove all products
+    const products = id("products");
+    while (products.firstChild) {
+      products.removeChild(products.lastChild);
+    }
+
+    const search_query = id("search-bar").value;
+    const dropdown_query = id("dropdown").value;
+    // Add all products that pass the filter checks
     for (let i = 0; i < IMGS.length; i++) {
+      if (!TITLES[i].includes(search_query)) {
+        continue;
+      }
+
+      if (dropdown_query !== "All" && !TITLES[i].includes(dropdown_query)) {
+        continue;
+      }
       let card = document.createElement("div");
       let image = document.createElement("img");
       image.src = "imgs/" + IMGS[i];
-      image.alt = ALTS[i] + " Image";
+      image.alt = TITLES[i] + " Image";
       let text = document.createElement("p");
-      text.textContent = ALTS[i];
+      text.textContent = TITLES[i];
 
       card.classList.add("product-card");
       image.classList.add("card-img");

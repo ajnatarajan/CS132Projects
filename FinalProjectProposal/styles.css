@@ -84,6 +84,7 @@ h2 {
 
 #filters > select {
   margin-left: 50px;
+  cursor: pointer;
 }
 
 /* Product Cards */
@@ -113,6 +114,7 @@ h2 {
 .product-card:hover {
   transform: scale(1.01);
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .card-img {
