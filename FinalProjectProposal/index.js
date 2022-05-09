@@ -163,7 +163,7 @@
     const dropdown_query = id("dropdown").value;
     // Add all products that pass the filter checks
     for (let i = 0; i < IMGS.length; i++) {
-      if (!TITLES[i].includes(search_query)) {
+      if (!TITLES[i].toLowerCase().includes(search_query.toLowerCase())) {
         continue;
       }
 
