@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Game Anime Shop</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="helpers.js"></script>
+    <script defer src="index.js"></script>
+  </head>
+  <body>
+    <nav>
+      <h1>The Game Anime Shop</h1>
+      <ul>
+        <li>
+          <p>Home</p>
+        </li>
+        <li>
+          <p>Cart</p>
+        </li>
+        <li>
+          <p>Contact</p>
+        </li>
+      </ul>
+    </nav>
+    <h2>Product Selection</h2>
+    <section id="filters">
+      <input
+        type="text"
+        id="search-bar"
+        placeholder="Search..."
+        class="filter"
+      />
+      <select class="filter">
+        <option value="" disabled selected hidden>
+          Filter by game or platform...
+        </option>
+        <option value="All">All</option>
+        <option value="League of Legends">League of Legends</option>
+        <option value="Valorant">Valorant</option>
+        <option value="Crunchyroll">Crunchyroll</option>
+      </select>
+    </section>
+  </body>
+</html>
