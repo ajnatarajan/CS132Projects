@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  // Anywhere IMGS is used, we will replace with an API Call
   const IMGS = [
     "lol10.jpg",
     "lol25.jpg",
@@ -18,6 +19,7 @@
     "netflix50.jpg",
   ];
 
+  // Anywhere TITLES is used, we will replace with an API Call
   const TITLES = [
     "League of Legends $10 Gift Card",
     "League of Legends $25 Gift Card",
@@ -36,6 +38,25 @@
     "Netflix $50 Gift Card",
   ];
 
+  // Anywhere CATEGORIES is used, we will replace with an API Call
+  const CATEGORIES = [
+    "League of Legends",
+    "League of Legends",
+    "League of Legends",
+    "League of Legends",
+    "Valorant",
+    "Valorant",
+    "Valorant",
+    "Valorant",
+    "Crunchyroll",
+    "Hulu",
+    "Hulu",
+    "Hulu",
+    "Netflix",
+    "Netflix",
+    "Netflix",
+  ];
+
   function init() {
     id("search-bar").addEventListener("input", populateProducts);
     id("dropdown").addEventListener("change", populateProducts);
@@ -52,7 +73,7 @@
     }
   }
 
-  function makeModal(title, img_path) {
+  function makeModal(title, img_path, category_name) {
     /* Modal */
     let modal = document.createElement("div");
     modal.classList.add("modal");
@@ -82,11 +103,11 @@
     /* Make text info */
     let text_info = document.createElement("div");
     let stock = document.createElement("p");
-    stock.textContent = "Stock Remaining: 35";
+    stock.textContent = "Stock Remaining: 35"; // Will be replaced with API Call
     let category = document.createElement("p");
-    category.textContent = "Category: League of Legends";
+    category.textContent = "Category: " + category_name;
     let last_sold = document.createElement("p");
-    last_sold.textContent = "Last Sold: May 9, 2022";
+    last_sold.textContent = "Last Sold: May 9, 2022"; // Will be replaced with API Call
     let add_to_cart = document.createElement("button");
     add_to_cart.textContent = "Add to Cart";
     text_info.appendChild(stock);
@@ -111,7 +132,7 @@
     return modal;
   }
 
-  function makeCard(title, img_path) {
+  function makeCard(title, img_path, category) {
     let card = document.createElement("div");
     let image = document.createElement("img");
     image.src = "imgs/" + img_path;
@@ -127,7 +148,7 @@
 
     id("products").appendChild(card);
 
-    const modal = makeModal(title, img_path);
+    const modal = makeModal(title, img_path, category);
     card.addEventListener("click", () => openCardModal(modal));
   }
 
@@ -146,11 +167,15 @@
         continue;
       }
 
-      if (dropdown_query !== "All" && !TITLES[i].includes(dropdown_query)) {
+      if (
+        dropdown_query !== "All" &&
+        !(dropdown_query === CATEGORIES[i]) &&
+        dropdown_query !== "" // If default option, should make card
+      ) {
         continue;
       }
 
-      makeCard(TITLES[i], IMGS[i]);
+      makeCard(TITLES[i], IMGS[i], CATEGORIES[i]);
     }
   }
 
