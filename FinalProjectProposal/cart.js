@@ -18,15 +18,31 @@
     "Netflix $15 Gift Card",
   ];
 
+  /**
+   * Initialize all necessary event listeners and update products in cart.
+   * No parameters.
+   * @returns {void}
+   */
   function init() {
     qs("#checkout > button").addEventListener("click", onCheckout);
     populateCart();
   }
 
+  /**
+   * Handle checkout
+   * No parameters.
+   * @returns {void}
+   */
   function onCheckout() {
     // Will make API Calls to handle checkout
   }
 
+  /**
+   * Create a product card in the cart.
+   * @param {string} title - name of the product
+   * @param {string} img_path - path to the image
+   * @returns {void}
+   */
   function makeCard(title, img_path) {
     let card = gen("div");
     let image = gen("img");
@@ -44,6 +60,11 @@
     id("products").appendChild(card);
   }
 
+  /**
+   * Show the products in the cart
+   * No parameters.
+   * @returns {void}
+   */
   function populateCart() {
     for (let i = 0; i < IMGS.length; i++) {
       makeCard(TITLES[i], IMGS[i]);

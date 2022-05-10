@@ -1,20 +1,92 @@
+/* Groupings since I have to deal with CSS redundancy as per CS 132 rules */
+/* Personally though I would like to say I hate this, it makes the code hard to read */
+#filters > .filter,
+.modal-container > section button {
+  border: 1px solid white;
+  font-size: 1em;
+}
+
+#filters,
+.modal,
+.modal-container,
+.modal-container > section,
+.modal-container > section > div {
+  display: flex;
+}
+
+#filters,
+.modal-container > section {
+  flex-direction: row;
+}
+
+#filters,
+.modal,
+.modal-container > section {
+  justify-content: center;
+}
+
+#filters > .filter,
+.modal-container > section button {
+  border-radius: 5px;
+}
+
+#filters > .filter,
+.modal-close {
+  outline: none;
+}
+
+#filters > select,
+.modal-close {
+  cursor: pointer;
+}
+
+.modal,
+.modal-container,
+.modal-container > section,
+.modal-container > section > div {
+  align-items: center;
+}
+
+.modal-bg,
+.modal-close {
+  position: absolute;
+}
+
+.modal-bg,
+.modal-container img {
+  height: 100%;
+}
+
+.modal-close,
+.modal-container > section button {
+  color: #fff;
+}
+
+.modal-close,
+.modal-container > h3 {
+  font-size: 2em;
+}
+
+.modal-container,
+.modal-container img {
+  border-radius: 10px;
+}
+
+.modal-container,
+.modal-container > section > div {
+  flex-direction: column;
+}
+
 /* Filters */
 #filters {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   margin-top: 50px;
 }
 
 #filters > .filter {
-  border: 1px solid white;
   background: transparent;
-  border-radius: 5px;
   padding: 10px;
   font-family: inherit;
-  font-size: 1em;
   color: #000;
-  outline: none;
 }
 
 #filters > input {
@@ -28,7 +100,6 @@
 
 #filters > select {
   margin-left: 50px;
-  cursor: pointer;
 }
 
 /* Modal */
@@ -41,9 +112,6 @@
   /* transition: all 0.3s ease; */
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .modal-open {
@@ -53,61 +121,42 @@
 }
 
 .modal-bg {
-  position: absolute;
   width: 100%;
-  height: 100%;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2.5px);
 }
 
 .modal-close {
-  position: absolute;
   right: 15px;
   top: 15px;
-  outline: none;
   appearance: none;
-  color: #fff;
   background: none;
   border: 0px;
   font-weight: bold;
-  font-size: 2em;
-  cursor: pointer;
 }
 
 /* Modal Container */
 .modal-container {
-  border-radius: 10px;
   background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.55) 100%);
   position: relative;
   padding: 30px;
-  display: flex;
-  flex-direction: column;
   text-align: center;
-  align-items: center;
 }
 
 .modal-container > h3 {
   margin-top: 20px;
   margin-bottom: 30px;
-  font-size: 2em;
   font-weight: normal;
   max-width: 350px;
 }
 
 .modal-container > section {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 50px;
 }
 
 .modal-container > section > div {
-  display: flex;
-  flex-direction: column;
   max-width: 250px;
   margin-left: 15px;
-  align-items: center;
   font-size: 1.5em;
 }
 
@@ -119,15 +168,9 @@
 
 .modal-container img {
   width: 250px;
-  height: 100%;
-  border-radius: 10px;
   margin-right: 15px;
 }
 
 .modal-container > section button {
   max-width: 200px;
-  color: #fff;
-  font-size: 1em;
-  border: 1px solid white;
-  border-radius: 5px;
 }

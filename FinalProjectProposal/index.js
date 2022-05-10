@@ -57,12 +57,22 @@
     "Netflix",
   ];
 
+  /**
+   * Initialize necessary event listeners and create all item cards.
+   * No parameters.
+   * @returns {void}
+   */
   function init() {
     id("search-bar").addEventListener("input", populateProducts);
     id("dropdown").addEventListener("change", populateProducts);
     populateProducts();
   }
 
+  /**
+   * Handle opening the modal when a product card is clicked on.
+   * @param {Element} modal - The modal to be opened
+   * @returns {void}
+   */
   function openCardModal(modal) {
     modal.classList.add("modal-open");
     const exits = modal.querySelectorAll(".modal-exit");
@@ -73,10 +83,22 @@
     }
   }
 
-  function onAddToCart(title) {
+  /**
+   * Handle adding item to cart
+   * No parameters - this will change when we have APIs
+   * @returns {void}
+   */
+  function onAddToCart() {
     // handle with API Calls
   }
 
+  /**
+   * Create a modal
+   * @param {string} title - name of the product
+   * @param {string} img_path - path to image of the product
+   * @param {string} category_name - game or platform category
+   * @returns {Element} - the modal that was just created
+   */
   function makeModal(title, img_path, category_name) {
     /* Modal */
     let modal = gen("div");
@@ -114,8 +136,9 @@
     last_sold.textContent = "Last Sold: May 9, 2022"; // Will be replaced with API Call
     let add_to_cart = gen("button");
     add_to_cart.textContent = "Add to Cart";
+    // im using an arrow function here since we will pass arguments when we use API call
     add_to_cart.addEventListener("click", () => {
-      onAddToCart(title);
+      onAddToCart();
     });
     text_info.appendChild(stock);
     text_info.appendChild(category);
@@ -139,6 +162,13 @@
     return modal;
   }
 
+  /**
+   * Create a product card
+   * @param {string} title - name of the product
+   * @param {string} img_path - path to image of the product
+   * @param {string} category - game or platform category
+   * @returns {void}
+   */
   function makeCard(title, img_path, category) {
     let card = gen("div");
     let image = gen("img");
@@ -159,6 +189,11 @@
     card.addEventListener("click", () => openCardModal(modal));
   }
 
+  /**
+   * Update product listing based on search and dropdown filter queries
+   * No parameters.
+   * @return {void}
+   */
   function populateProducts() {
     // Remove all products
     const products = id("products");

@@ -1,5 +1,88 @@
-body {
+/* Groupings since I have to deal with CSS redundancy as per CS 132 rules */
+/* Not a fan of this though. */
+body,
+nav > h1,
+nav > ul,
+.product-card > p {
   margin: 0;
+}
+
+nav,
+nav > ul,
+#products,
+.product-card {
+  display: flex;
+}
+
+nav,
+#products {
+  flex-direction: row;
+}
+
+nav,
+.product-card {
+  align-items: center;
+}
+
+nav,
+nav > ul {
+  justify-content: space-between;
+}
+
+nav,
+.product-card {
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.66) 100%);
+}
+
+nav > h1,
+h2 {
+  font-weight: normal;
+}
+
+nav > h1,
+.product-card {
+  margin-right: 20px;
+}
+
+nav > ul,
+.product-card {
+  margin-left: 20px;
+}
+
+h2,
+.product-card {
+  text-align: center;
+}
+
+h2,
+#products {
+  margin-top: 50px;
+}
+
+.product-card,
+.card-img {
+  margin-top: 30px;
+}
+
+.product-card,
+.product-card > p {
+  margin-bottom: 30px;
+}
+
+.product-card:hover,
+.modal-container > section button,
+#checkout > button {
+  cursor: pointer;
+}
+
+.product-card > p,
+.modal-container > section button,
+#checkout > button {
+  margin-top: 20px;
+}
+
+/* Body */
+body {
   font-family: "Play";
   color: #fff;
   background: linear-gradient(
@@ -12,29 +95,17 @@ body {
 
 /* Navbar */
 nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   padding: 20px 50px 20px 50px;
-  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.66) 100%);
 }
 
 nav > h1 {
-  margin: 0;
-  font-weight: normal;
   font-size: 1.5em;
   min-width: 245px;
-  margin-right: 20px;
 }
 nav > ul {
-  display: flex;
-  justify-content: space-between;
   list-style-type: none;
   padding: 0;
-  margin: 0;
   max-width: 310px;
-  margin-left: 20px;
 }
 
 nav a {
@@ -49,18 +120,12 @@ nav > ul > li {
 
 /* Title */
 h2 {
-  text-align: center;
-  margin-top: 50px;
-  font-weight: normal;
   font-size: 2em;
 }
 
 /* Product Cards */
 #products {
-  display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 50px;
   justify-content: center;
   margin-bottom: 50px;
 }
@@ -68,45 +133,30 @@ h2 {
 .product-card {
   width: 200px;
   height: auto;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   border-radius: 20px;
-  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.66) 100%);
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .product-card:hover {
   transform: scale(1.01);
   transition: 0.5s;
-  cursor: pointer;
 }
 
 .card-img {
   width: 67%;
   border-radius: 10px;
-  margin-top: 30px;
 }
 
 .product-card > p {
   width: 150px;
-  margin: 0;
-  margin-top: 20px;
-  margin-bottom: 30px;
 }
 
 .modal-container > section button,
 #checkout > button {
-  margin-top: 20px;
   background: transparent;
   font-family: inherit;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
-  cursor: pointer;
 }

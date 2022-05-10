@@ -39,6 +39,13 @@ form textarea {
   margin-top: 20px;
 }
 
+form #name::placeholder,
+form #email::placeholder,
+form #subject::placeholder,
+form #message-body::placeholder {
+  color: #3e4042;
+}
+
 form #submit {
   margin-top: 50px;
 }
