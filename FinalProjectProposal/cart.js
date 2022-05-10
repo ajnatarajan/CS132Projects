@@ -38,12 +38,24 @@
   }
 
   /**
+   * Handle removal of item from cart.
+   * No parameters. (Will change when we have API calls)
+   * @returns {void}
+   */
+  function onRemove() {
+    // Will make API Calls to handle removing item
+  }
+
+  /**
    * Create a product card in the cart.
    * @param {string} title - name of the product
    * @param {string} img_path - path to the image
    * @returns {void}
    */
   function makeCard(title, img_path) {
+    let card_container = gen("div");
+    card_container.classList.add("card-container");
+    /* Create card and add to container */
     let card = gen("div");
     let image = gen("img");
     image.src = "imgs/" + img_path;
@@ -57,7 +69,15 @@
     card.appendChild(image);
     card.appendChild(text);
 
-    id("products").appendChild(card);
+    card_container.appendChild(card);
+
+    /* Create remove button and add to container */
+    let remove_button = gen("button");
+    remove_button.textContent = "Remove from Cart";
+    remove_button.addEventListener("click", onRemove);
+    card_container.appendChild(remove_button);
+
+    id("products").appendChild(card_container);
   }
 
   /**
