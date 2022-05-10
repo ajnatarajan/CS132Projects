@@ -79,40 +79,40 @@
 
   function makeModal(title, img_path, category_name) {
     /* Modal */
-    let modal = document.createElement("div");
+    let modal = gen("div");
     modal.classList.add("modal");
 
     /* Background - takes up the whole page */
-    let bg = document.createElement("div");
+    let bg = gen("div");
     bg.classList.add("modal-bg", "modal-exit");
 
     /* The actual modal pop up */
-    let container = document.createElement("div");
+    let container = gen("div");
     container.classList.add("modal-container");
 
     /* Make heading */
-    let heading = document.createElement("h3");
+    let heading = gen("h3");
     heading.textContent = title;
     container.appendChild(heading);
 
     /* Make body */
-    let info = document.createElement("section");
+    let info = gen("section");
 
     /* Make image */
-    let image = document.createElement("img");
+    let image = gen("img");
     image.src = "imgs/" + img_path;
     image.alt = title + " Image";
     info.appendChild(image);
 
     /* Make text info */
-    let text_info = document.createElement("div");
-    let stock = document.createElement("p");
+    let text_info = gen("div");
+    let stock = gen("p");
     stock.textContent = "Stock Remaining: 35"; // Will be replaced with API Call
-    let category = document.createElement("p");
+    let category = gen("p");
     category.textContent = "Category: " + category_name;
-    let last_sold = document.createElement("p");
+    let last_sold = gen("p");
     last_sold.textContent = "Last Sold: May 9, 2022"; // Will be replaced with API Call
-    let add_to_cart = document.createElement("button");
+    let add_to_cart = gen("button");
     add_to_cart.textContent = "Add to Cart";
     add_to_cart.addEventListener("click", () => {
       onAddToCart(title);
@@ -124,7 +124,7 @@
     info.append(text_info);
 
     /* Add close button */
-    let close_button = document.createElement("button");
+    let close_button = gen("button");
     close_button.classList.add("modal-close", "modal-exit");
     close_button.textContent = "X"; // X works pretty well as a close button
 
@@ -134,17 +134,17 @@
     modal.appendChild(bg);
     modal.appendChild(container);
 
-    document.querySelector("body").appendChild(modal);
+    qs("body").appendChild(modal);
 
     return modal;
   }
 
   function makeCard(title, img_path, category) {
-    let card = document.createElement("div");
-    let image = document.createElement("img");
+    let card = gen("div");
+    let image = gen("img");
     image.src = "imgs/" + img_path;
     image.alt = title + " Preview Image";
-    let text = document.createElement("p");
+    let text = gen("p");
     text.textContent = title;
 
     card.classList.add("product-card");

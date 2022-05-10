@@ -19,9 +19,7 @@
   ];
 
   function init() {
-    document
-      .querySelector("#checkout > button")
-      .addEventListener("click", onCheckout);
+    qs("#checkout > button").addEventListener("click", onCheckout);
     populateCart();
   }
 
@@ -30,11 +28,11 @@
   }
 
   function makeCard(title, img_path) {
-    let card = document.createElement("div");
-    let image = document.createElement("img");
+    let card = gen("div");
+    let image = gen("img");
     image.src = "imgs/" + img_path;
     image.alt = title + " Preview Image";
-    let text = document.createElement("p");
+    let text = gen("p");
     text.textContent = title;
 
     card.classList.add("product-card");
