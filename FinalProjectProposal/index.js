@@ -172,6 +172,7 @@
   function makeCard(title, img_path, category) {
     let card = gen("div");
     let image = gen("img");
+    // All images taken from corresponding platform websites.
     image.src = "imgs/" + img_path;
     image.alt = title + " Preview Image";
     let text = gen("p");
