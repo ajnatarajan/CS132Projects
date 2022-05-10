@@ -40,5 +40,10 @@
   color: #fff;
   font-family: inherit;
   border-radius: 5px;
+}
+
+.card-container > button:hover {
   cursor: pointer;
+  transform: scale(1.03);
+  transition: 0.5s;
 }
