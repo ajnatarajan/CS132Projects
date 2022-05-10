@@ -73,6 +73,10 @@
     }
   }
 
+  function onAddToCart(title) {
+    // handle with API Calls
+  }
+
   function makeModal(title, img_path, category_name) {
     /* Modal */
     let modal = document.createElement("div");
@@ -110,6 +114,9 @@
     last_sold.textContent = "Last Sold: May 9, 2022"; // Will be replaced with API Call
     let add_to_cart = document.createElement("button");
     add_to_cart.textContent = "Add to Cart";
+    add_to_cart.addEventListener("click", () => {
+      onAddToCart(title);
+    });
     text_info.appendChild(stock);
     text_info.appendChild(category);
     text_info.append(last_sold);

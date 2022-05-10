@@ -1,0 +1,133 @@
+/* Filters */
+#filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#filters > .filter {
+  border: 1px solid white;
+  background: transparent;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 1em;
+  color: #000;
+  outline: none;
+}
+
+#filters > input {
+  margin-right: 50px;
+  width: 200px;
+}
+
+#filters > input::placeholder {
+  color: #3e4042;
+}
+
+#filters > select {
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  /* transition: all 0.3s ease; */
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-open {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.modal-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2.5px);
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  outline: none;
+  appearance: none;
+  color: #fff;
+  background: none;
+  border: 0px;
+  font-weight: bold;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+/* Modal Container */
+.modal-container {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.55) 100%);
+  position: relative;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.modal-container > h3 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 2em;
+  font-weight: normal;
+  max-width: 350px;
+}
+
+.modal-container > section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.modal-container > section > div {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  margin-left: 15px;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.modal-container p {
+  margin: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.modal-container img {
+  width: 250px;
+  height: 100%;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.modal-container > section button {
+  max-width: 200px;
+  color: #fff;
+  font-size: 1em;
+  border: 1px solid white;
+  border-radius: 5px;
+}
