@@ -189,6 +189,7 @@ button:hover {
 
 #spotify-info img {
   width: 200px;
+  cursor: pointer;
 }
 
 /* .fade-in#spotify-info {

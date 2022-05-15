@@ -93,17 +93,26 @@
     img.src = data.images[0].url;
     img.alt = data.name + " Image";
     caption.textContent = "Artist: " + data.name;
+    img.addEventListener("click", () => {
+      window.open(`${data.external_urls.spotify}`, "_blank");
+    });
   }
 
   function updateSong(img, caption, data) {
     img.src = data.album.images[0].url;
     img.alt = data.name + " Image";
     caption.textContent = "Song: " + data.name;
+    img.addEventListener("click", () => {
+      window.open(`${data.album.external_urls.spotify}`, "_blank");
+    });
   }
   function updateUser(img, caption, data) {
     img.src = data.images[0].url;
     img.alt = data.display_name + " Image";
     caption.textContent = "User: " + data.display_name;
+    img.addEventListener("click", () => {
+      window.open(`${data.external_urls.spotify}`, "_blank");
+    });
   }
 
   async function init() {
