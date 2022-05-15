@@ -58,6 +58,10 @@
       contactSection.classList.toggle("light-mode");
       contactSection.classList.toggle("dark-mode");
     }
+
+    /* Handle footer */
+    qs("footer").classList.toggle("nav-light");
+    qs("footer").classList.toggle("nav-dark");
   }
 
   init();

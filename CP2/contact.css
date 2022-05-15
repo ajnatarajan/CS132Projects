@@ -36,6 +36,10 @@ h1 {
   text-align: center;
 }
 
+#contact-section {
+  height: 400px;
+}
+
 #contact-section > ul > li {
   display: flex;
   flex-direction: row;

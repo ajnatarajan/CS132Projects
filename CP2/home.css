@@ -67,19 +67,20 @@ section > ul {
   margin-top: 1.25em;
 }
 
-section > ul > li {
-  margin-right: 1em;
+section > ul > li > figure {
   display: flex;
+  margin: 0;
+  margin-right: 1em;
 }
 
-section > ul > li > p {
-  margin-top: 1em;
-  font-size: 1em;
-}
-
-section > ul > li > img {
+section > ul > li > figure > img {
   height: 70px;
   width: 70px;
+}
+
+section > ul > li > figure > figcaption {
+  margin-top: 1em;
+  font-size: 1em;
 }
 
 #home-current-side-project > p {

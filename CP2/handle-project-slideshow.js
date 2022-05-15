@@ -10,6 +10,16 @@
 (function () {
   "use strict";
   const NUM_IMAGES = 3;
+  const IMGS = [
+    "imgs/home-page-icons/side-project-0.svg",
+    "imgs/home-page-icons/side-project-1.svg",
+    "imgs/home-page-icons/side-project-2.svg",
+  ];
+  const ALTS = [
+    "[Qup.gg Home Page]",
+    "[Qup.gg Game Selection]",
+    "[Qup.gg Profile Swiping]",
+  ];
   let currImgIndex = 0;
 
   /**
@@ -23,7 +33,7 @@
   }
 
   /**
-   * Gets previous image index and calls showImage helper function to render it.
+   * Gets previous image index and renders previous image.
    * No parameters.
    * @returns {void}
    */
@@ -34,7 +44,7 @@
   }
 
   /**
-   * Gets next image index and calls showImage helper function to render it.
+   * Gets next image index and renders next image.
    * No parameters.
    * @returns {void}
    */
@@ -50,16 +60,6 @@
    * @returns {void}
    */
   function showImage(imageIndex) {
-    const IMGS = [
-      "imgs/home-page-icons/side-project-0.svg",
-      "imgs/home-page-icons/side-project-1.svg",
-      "imgs/home-page-icons/side-project-2.svg",
-    ];
-    const ALTS = [
-      "[Qup.gg Home Page]",
-      "[Qup.gg Game Selection]",
-      "[Qup.gg Profile Swiping]",
-    ];
     let newImg = gen("img");
     newImg.src = IMGS[imageIndex];
     newImg.alt = ALTS[imageIndex];

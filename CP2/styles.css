@@ -71,11 +71,13 @@ ul {
 body,
 nav > ul,
 nav > ul > li,
-nav > ul > li > a {
+nav > ul > li > a,
+footer {
   display: flex;
 }
 
-nav > ul {
+nav > ul,
+footer {
   justify-content: center;
 }
 
@@ -244,4 +246,15 @@ a:active {
   -webkit-animation-duration: 0.75s;
   -moz-animation-duration: 0.75s;
   animation-duration: 0.75s;
+}
+
+/* Sticky footer */
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  flex-shrink: 0;
 }
