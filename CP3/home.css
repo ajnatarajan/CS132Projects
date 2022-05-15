@@ -192,8 +192,14 @@ button:hover {
   cursor: pointer;
 }
 
-/* .fade-in#spotify-info {
+.fade-in#spotify-info {
   -webkit-animation-delay: 2s;
   -moz-animation-delay: 2s;
   animation-delay: 2s;
-} */
+}
+
+@media (max-width: 964px) {
+  #spotify-info > div {
+    flex-direction: column;
+  }
+}

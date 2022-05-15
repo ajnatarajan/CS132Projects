@@ -1,3 +1,12 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 15th, 2022
+  This is the spotify-api.js file for my personal website. It is used
+  by index.html to handle displaying some of my favorite Spotify-related
+  items. It uses the Spotify API.
+ */
+
 (function () {
   "use strict";
 
