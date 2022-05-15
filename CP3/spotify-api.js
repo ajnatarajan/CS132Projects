@@ -6,105 +6,80 @@
 
   function checkStatus(response) {
     if (!response.ok) {
-      return Error("Spotify API getting gapped");
+      throw Error("Spotify API Error. Try again later.");
     } else {
       return response;
     }
   }
 
   function handleRequestError(err) {
-    console.error("Error: " + err);
+    let msg = gen("p");
+    msg.textContent = err;
+    id("spotify-info").appendChild(msg);
   }
 
-  function getToken() {
-    fetch("https://accounts.spotify.com/api/token", {
+  async function getToken() {
+    let data = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
       },
       body: "grant_type=client_credentials",
-    })
-      .then(checkStatus)
-      .then((response) => response.json())
-      .then((data) => data.access_token);
+    });
+    checkStatus(data);
+    data = await data.json();
+    return data.access_token;
   }
 
   async function getFavoriteArtist(access_token) {
-    try {
-      let data = await fetch(
-        "https://api.spotify.com/v1/artists/4WC54JUV6ewZOuz8Cl2Cym",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + access_token,
-          },
-        }
-      );
-      checkStatus(data);
-      data = await data.json();
-      return data;
-    } catch (err) {
-      handleRequestError(err);
-    }
-  }
-
-  async function getFavoriteSong(access_token) {
-    try {
-      let data = await fetch(
-        "https://api.spotify.com/v1/tracks/4DuUwzP4ALMqpquHU0ltAB",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + access_token,
-          },
-        }
-      );
-      checkStatus(data);
-      data = await data.json();
-      return data;
-    } catch (err) {
-      handleRequestError(err);
-    }
-  }
-
-  async function getFavoriteUser(access_token) {
-    try {
-      let data = await fetch("https://api.spotify.com/v1/users/ahong135", {
+    let data = await fetch(
+      "https://api.spotify.com/v1/artists/4WC54JUV6ewZOuz8Cl2Cym",
+      {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + access_token,
         },
-      });
-      checkStatus(data);
-      data = await data.json();
-      return data;
-    } catch (err) {
-      handleRequestError(err);
-    }
+      }
+    );
+    checkStatus(data);
+    data = await data.json();
+    return data;
   }
 
-  async function init() {
-    const access_token = await getToken();
-    let ids = ["artist", "song", "user"];
-    let promises = [];
-    promises.push(getFavoriteArtist(access_token));
-    promises.push(getFavoriteSong(access_token));
-    promises.push(getFavoriteUser(access_token));
-    try {
-      let results = await Promise.all(promises);
-      for (let i = 0; i < results.length; i++) {
-        let data = results[i];
-        updateSpotifyElement(ids[i], data);
+  async function getFavoriteSong(access_token) {
+    let data = await fetch(
+      "https://api.spotify.com/v1/tracks/4DuUwzP4ALMqpquHU0ltAB",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + access_token,
+        },
       }
-    } catch (err) {
-      handleRequestError(err);
-    }
+    );
+    checkStatus(data);
+    data = await data.json();
+    return data;
+  }
+
+  async function getFavoriteUser(access_token) {
+    let data = await fetch("https://api.spotify.com/v1/users/ahong135", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + access_token,
+      },
+    });
+    checkStatus(data);
+    data = await data.json();
+    return data;
   }
 
   function updateSpotifyElement(id, data) {
-    let img = qs(`#spotify-info #${id} > img`);
-    let caption = qs(`#spotify-info #${id} > figcaption`);
+    let img = gen("img");
+    let caption = gen("figcaption");
+    let figure = qs(`#spotify-info #${id}`);
+    figure.appendChild(img);
+    figure.appendChild(caption);
     if (id === "artist") {
       updateArtist(img, caption, data);
     } else if (id === "song") {
@@ -131,5 +106,24 @@
     caption.textContent = "User: " + data.display_name;
   }
 
-  init();
+  async function init() {
+    let ids = ["artist", "song", "user"];
+    let promises = [];
+
+    try {
+      const access_token = await getToken();
+      promises.push(getFavoriteArtist(access_token));
+      promises.push(getFavoriteSong(access_token));
+      promises.push(getFavoriteUser(access_token));
+      let results = await Promise.all(promises);
+      for (let i = 0; i < results.length; i++) {
+        let data = results[i];
+        updateSpotifyElement(ids[i], data);
+      }
+    } catch (err) {
+      handleRequestError(err);
+    }
+  }
+
+  window.addEventListener("load", init);
 })();
