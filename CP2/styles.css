@@ -250,7 +250,9 @@ a:active {
 
 /* Sticky footer */
 main {
-  flex: 1 0 auto;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
 }
 
 footer {
