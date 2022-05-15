@@ -9,9 +9,7 @@
 
 #home-top {
   display: flex;
-  justify-content: center;
   margin-top: 2.5em;
-  margin-bottom: 3em;
 }
 
 #home-top-right {
@@ -24,15 +22,12 @@
   height: 28.5em;
 }
 
-#home-intro-section {
-  margin-bottom: 1em;
-}
-
 #home-current-side-project {
   display: flex;
   margin-bottom: 2.5em;
 }
 
+#home-intro-section,
 #home-current-side-project > h1 {
   margin-bottom: 1em;
 }
@@ -62,7 +57,6 @@ section > p {
 
 section > ul {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   margin-top: 1.25em;
 }
@@ -85,31 +79,6 @@ section > ul > li > figure > figcaption {
 
 #home-current-side-project > p {
   font-size: 1.5em;
-}
-
-@media (max-width: 964px) {
-  #home-top {
-    flex-direction: column;
-  }
-
-  #profile-picture {
-    margin: 0;
-  }
-
-  #home-top-right {
-    margin-top: 1.5em;
-    margin-left: 0;
-  }
-
-  #home-top-right,
-  #home-internships-section {
-    align-items: center;
-  }
-
-  #home-intro-section,
-  #home-internships-section {
-    text-align: center;
-  }
 }
 
 .flex-column {
@@ -150,8 +119,6 @@ section > ul > li > figure > figcaption {
   height: calc(24px + 3vw);
   max-width: 52px;
   max-height: 52px;
-  border-radius: 10px;
-  cursor: pointer;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -164,23 +131,34 @@ button:hover {
 /* Spotify Section */
 #spotify-info {
   display: flex;
+}
+
+#home-top,
+#spotify-info {
   margin-bottom: 3em;
 }
 
 #spotify-info > div {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   margin-top: 2em;
+}
+
+#home-top,
+#spotify-info > div {
+  justify-content: center;
+}
+
+#spotify-info > div,
+section > ul {
+  flex-direction: row;
 }
 
 #spotify-info figure {
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-#spotify-info img {
+#spotify-info img,
+#home-current-side-project button {
   border-radius: 10px;
 }
 #spotify-info figcaption {
@@ -189,6 +167,10 @@ button:hover {
 
 #spotify-info img {
   width: 200px;
+}
+
+#spotify-info img,
+#home-current-side-project button {
   cursor: pointer;
 }
 
@@ -198,8 +180,29 @@ button:hover {
   animation-delay: 2s;
 }
 
+/* Responsive queries */
 @media (max-width: 964px) {
+  #home-top,
   #spotify-info > div {
     flex-direction: column;
+  }
+
+  #profile-picture {
+    margin: 0;
+  }
+
+  #home-top-right {
+    margin-top: 1.5em;
+    margin-left: 0;
+  }
+
+  #home-top-right,
+  #home-internships-section {
+    align-items: center;
+  }
+
+  #home-intro-section,
+  #home-internships-section {
+    text-align: center;
   }
 }
