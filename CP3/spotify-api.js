@@ -86,6 +86,7 @@
 
   async function init() {
     const access_token = await getToken();
+    let ids = ["artist", "song", "user"];
     let promises = [];
     promises.push(getFavoriteArtist(access_token));
     promises.push(getFavoriteSong(access_token));
@@ -94,41 +95,41 @@
       let results = await Promise.all(promises);
       for (let i = 0; i < results.length; i++) {
         let data = results[i];
-        console.log(data);
+        updateSpotifyElement(ids[i], data);
       }
     } catch (err) {
       handleRequestError(err);
     }
   }
 
+  function updateSpotifyElement(id, data) {
+    let img = qs(`#spotify-info #${id} > img`);
+    let caption = qs(`#spotify-info #${id} > figcaption`);
+    if (id === "artist") {
+      updateArtist(img, caption, data);
+    } else if (id === "song") {
+      updateSong(img, caption, data);
+    } else {
+      updateUser(img, caption, data);
+    }
+  }
+
+  function updateArtist(img, caption, data) {
+    img.src = data.images[0].url;
+    img.alt = data.name + " Image";
+    caption.textContent = "Artist: " + data.name;
+  }
+
+  function updateSong(img, caption, data) {
+    img.src = data.album.images[0].url;
+    img.alt = data.name + " Image";
+    caption.textContent = "Song: " + data.name;
+  }
+  function updateUser(img, caption, data) {
+    img.src = data.images[0].url;
+    img.alt = data.display_name + " Image";
+    caption.textContent = "User: " + data.display_name;
+  }
+
   init();
 })();
-
-// (function () {
-//   "use strict";
-
-//   function requestAuthorization() {
-//     var redirect_uri = "http://127.0.0.1:5500/CS132Projects/CP3/index.html";
-
-//     var client_id = "7bc07b0bb69647c687d4d4d42690ccac";
-//     var client_secret = "d64225d0b2854d8a9850b51f3598478b";
-//     const AUTHORIZE = "https://accounts.spotify.com/authorize";
-//     let url = AUTHORIZE;
-//     url += "?client_id=" + client_id;
-//     url += "&response_type=code";
-//     url += "&redirect_uri=" + encodeURI(redirect_uri);
-//     url += "&show_dialog=true";
-//     url +=
-//       "&scope=user-read-playback-state user-read-currently-playing user-follow-read user-read-recently-played user-read-playback-position playlist-read-collaborative playlist-read-private user-read-email user-read-private user-library-read";
-//     console.log(url);
-//     window.location.href = url;
-//   }
-
-//   function init() {
-//     id("spotify-oauth").addEventListener("click", requestAuthorization);
-//   }
-
-//   init();
-// })();
-
-// http://127.0.0.1:5500/CS132Projects/CP3/index.html?code=AQD3ZvWu3A6IMpkpUt1nrVKIIob5uUR4iAjvWxyChdHC8f-areNaEn5mx-Hdn2FDWvVCftZZj3uG2EGp9DuEvCCCX3k-3RqC0BR2eciVoNMJPsgTJhAGMxiZ16Iui_uK2UK-c_Zor2WJymyxN8BfSLtozyC5FUhpFs3cDwacxMtqmYmd1TOIOiCox9T3vyAcDMwWZ1NvbpyFm5ArUdy6wf1EiHlBIRNY7w6UjD2-dzo8fVShglnrPh7HNcBLixWZu8yUpQag145BiSXos8_GH_G8XSVoKyYUTj3TOi4ZA88-pVnZ6qScPzF-yphNKM1kfqkGVn9z56Ld_VVk3yUf5IVsydNvaADIKze85lia1Sn6LtTqDdVOOLGil_GPCsofOVNmJ2TKLmfAbWlIyn3eJxPGRpoCRMB8SK-9jxuwWUqejwpwaG4YSV5o40Z8JzhiRW2Z9HWOD_TSp-DgbENHTGj2gBTo79WaAnKogDBUCjF4Zs6Dc4P0P3VlruCybWARRwc

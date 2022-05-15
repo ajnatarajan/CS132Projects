@@ -30,7 +30,7 @@
 
 #home-current-side-project {
   display: flex;
-  margin-bottom: 3.5em;
+  margin-bottom: 2.5em;
 }
 
 #home-current-side-project > h1 {
@@ -164,6 +164,7 @@ button:hover {
 /* Spotify Section */
 #spotify-info {
   display: flex;
+  margin-bottom: 3em;
 }
 
 #spotify-info > div {
