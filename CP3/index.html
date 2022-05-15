@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the index.html page for my personal website. It lists a few things
+  about me, goes over what companies I have worked for, and showcases my most
+  recent project that I'm working on.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Ajay Natarajan</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="helpers.js"></script>
+    <script defer src="handle-toggle.js"></script>
+    <script defer src="handle-project-slideshow.js"></script>
+    <!-- <script defer src="spotify-api.js"></script> -->
+  </head>
+  <body class="light-body">
+    <header>Ajay Natarajan</header>
+    <nav class="nav-light">
+      <!--
+        All navbar icons come from the Unicons - Shared Library in Figma: 
+        https://www.figma.com/community/file/931512007012650048
+      -->
+      <ul>
+        <li class="flex-row">
+          <a href="index.html" class="flex-row light-text">
+            <img
+              src="imgs/navbar-icons/home-icon-selected.svg"
+              alt="Home Icon"
+            />
+            <img
+              src="imgs/navbar-icons/dark-home-icon-selected.svg"
+              alt="Home Icon"
+              class="hidden"
+            />
+            <p class="nav-selected">Home</p>
+          </a>
+        </li>
+        <li class="flex-row">
+          <a
+            href="https://drive.google.com/file/d/1ZQEIRZUiXE2WFaz9T4MuNapYayx9jygq/view?usp=sharing"
+            target="_blank"
+            class="flex-row light-text"
+          >
+            <img src="imgs/navbar-icons/resume-icon.svg" alt="Resume Icon" />
+            <img
+              src="imgs/navbar-icons/dark-resume-icon.svg"
+              alt="Resume Icon"
+              class="hidden"
+            />
+            <p>Resume</p>
+          </a>
+        </li>
+        <li class="flex-row">
+          <a href="contact.html" class="flex-row light-text">
+            <img src="imgs/navbar-icons/contact-icon.svg" alt="Contact Icon" />
+            <img
+              src="imgs/navbar-icons/dark-contact-icon.svg"
+              alt="Contact Icon"
+              class="hidden"
+            />
+            <p>Contact</p>
+          </a>
+        </li>
+        <li class="flex-row flex-align-items-center">
+          <img
+            src="imgs/navbar-icons/toggle/sun.svg"
+            alt="Light Mode"
+            class="color-mode-logo sun-logo"
+          />
+          <img
+            src="imgs/navbar-icons/toggle/dark-sun.svg"
+            alt="Light Mode"
+            class="color-mode-logo sun-logo hidden"
+          />
+          <div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-switch" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <img
+            src="imgs/navbar-icons/toggle/moon.svg"
+            alt="Dark Mode"
+            class="color-mode-logo moon-logo"
+          />
+          <img
+            src="imgs/navbar-icons/toggle/dark-moon.svg"
+            alt="Dark Mode"
+            class="color-mode-logo moon-logo hidden"
+          />
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div id="home-top">
+        <!--
+          Photo taken by: Peter Zhu
+          https://www.facebook.com/photo/?fbid=2456573734565232&set=a.1375316419357641
+        -->
+        <img
+          src="imgs/home-page-icons/profilepic.svg"
+          alt="Profile Picture"
+          id="profile-picture"
+          class="fade-in"
+        />
+        <div id="home-top-right" class="flex-column">
+          <section id="home-intro-section" class="fade-in">
+            <h1>A Quick Intro</h1>
+            <p>
+              Hey there! My name’s Ajay, and I’m a Caltech senior double
+              majoring in CS and Economics with a minor in IDS. Love multiplayer
+              games!
+            </p>
+            <p>
+              I’m deep in the blockchain space with a key focus on finding
+              applications of blockchain to status quo problems i.e. election
+              voting.
+            </p>
+          </section>
+          <section id="home-internships-section" class="fade-in flex-column">
+            <h1>Internships</h1>
+            <ul>
+              <li>
+                <figure class="flex-column flex-align-items-center">
+                  <!--
+                  Kleiner Perkins logo taken from The Rivalry
+                  https://therivalry.co/project/kleiner-perkins-logo
+                -->
+                  <img
+                    src="imgs/internship-icons/kleinerperkins.svg"
+                    alt="Kleiner Perkins Icon"
+                  />
+                  <figcaption>KPCB</figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="flex-column flex-align-items-center">
+                  <!--
+                  Robinhood logo taken from the Google Play store
+                  https://play.google.com/store/apps/dev?id=6660669299832938042&hl=en_US&gl=US
+                -->
+                  <img
+                    src="imgs/internship-icons/robinhood.svg"
+                    alt="Robinhood Icon"
+                  />
+                  <figcaption>Robinhood</figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="flex-column flex-align-items-center">
+                  <!--
+                  8VC logo taken from Crunchbase
+                  https://www.crunchbase.com/organization/8vc
+                -->
+                  <img src="imgs/internship-icons/eightvc.svg" alt="8VC Icon" />
+                  <figcaption>8VC</figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="flex-column flex-align-items-center">
+                  <!--
+                  Asana logo taken from the Asana blog
+                  https://blog.asana.com/2015/10/teamwork-is-beautiful-introducing-asanas-new-look/
+                -->
+                  <img src="imgs/internship-icons/asana.svg" alt="Asana Icon" />
+                  <figcaption>Asana</figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="flex-column flex-align-items-center">
+                  <!--
+                  NASA logo taken from nasa.gov website
+                  https://www.nasa.gov/audience/forstudents/5-8/features/symbols-of-nasa.html
+                -->
+                  <img
+                    src="imgs/internship-icons/nasa.svg"
+                    alt="NASA JPL Icon"
+                  />
+                  <figcaption>NASA JPL</figcaption>
+                </figure>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <section
+        id="home-current-side-project"
+        class="fade-in flex-column flex-align-items-center"
+      >
+        <h1>Current Side Project</h1>
+        <!--
+          Image taken from Figma file, designed by Ajay Natarajan and Eugene Shao
+          https://www.figma.com/file/6AuWJWsHZifzVpFpctjjU8/qup.gg?node-id=0%3A1
+        -->
+        <img
+          src="imgs/home-page-icons/side-project-0.svg"
+          alt="Side Project Image"
+        />
+        <div>
+          <button id="left-arrow-button">
+            <img
+              src="./imgs/home-page-icons/left-button.svg"
+              alt="Previous Side Project Image"
+            />
+          </button>
+          <button id="right-arrow-button">
+            <img
+              src="./imgs/home-page-icons/right-button.svg"
+              alt="Next Side Project Image"
+            />
+          </button>
+        </div>
+        <p>
+          With the recent explosion in multiplayer gaming, there’s a sore need
+          for additional platforms to connect gamers in ways Discord fails to
+          do. Going live soon!
+        </p>
+      </section>
+      <section
+        id="spotify-info"
+        class="fade-in flex-column flex-align-items-center"
+      >
+        <h1>Spotify Favorites</h1>
+        <div>
+          <figure>
+            <img
+              src="https://i.scdn.co/image/ab6761610000e5ebd465aa6e29f64be15c047abc"
+            />
+            <figcaption>Joel Sunny</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://i.scdn.co/image/ab67616d0000b273d12510170b4c55664e96e9a5"
+            />
+            <figcaption>Tyler Herro</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://i.scdn.co/image/ab6775700000ee85148116583422b4cf0b8dd3be"
+            />
+            <figcaption>Audrey ❀</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+    <footer class="nav-light">NB: Icons cited in page source</footer>
+  </body>
+</html>

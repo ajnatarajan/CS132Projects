@@ -1,0 +1,197 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: April 7th, 2022
+  This is the home.css page for my personal website. It is exclusively used by
+  index.html to style different sections of the home page. It offers responsive
+  sizing and styling and some sleek fade in animations.
+*/
+
+#home-top {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5em;
+  margin-bottom: 3em;
+}
+
+#home-top-right {
+  margin-left: 2em;
+  display: flex;
+}
+
+#profile-picture {
+  margin-right: 2em;
+  height: 28.5em;
+}
+
+#home-intro-section {
+  margin-bottom: 1em;
+}
+
+#home-current-side-project {
+  display: flex;
+  margin-bottom: 3.5em;
+}
+
+#home-current-side-project > h1 {
+  margin-bottom: 1em;
+}
+
+#home-current-side-project > img {
+  width: 75vw;
+}
+
+#home-current-side-project > p {
+  text-align: center;
+  max-width: none;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 2.5em;
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+section > p {
+  font-size: 1.25em;
+  max-width: 20em;
+}
+
+section > ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 1.25em;
+}
+
+section > ul > li > figure {
+  display: flex;
+  margin: 0;
+  margin-right: 1em;
+}
+
+section > ul > li > figure > img {
+  height: 70px;
+  width: 70px;
+}
+
+section > ul > li > figure > figcaption {
+  margin-top: 1em;
+  font-size: 1em;
+}
+
+#home-current-side-project > p {
+  font-size: 1.5em;
+}
+
+@media (max-width: 964px) {
+  #home-top {
+    flex-direction: column;
+  }
+
+  #profile-picture {
+    margin: 0;
+  }
+
+  #home-top-right {
+    margin-top: 1.5em;
+    margin-left: 0;
+  }
+
+  #home-top-right,
+  #home-internships-section {
+    align-items: center;
+  }
+
+  #home-intro-section,
+  #home-internships-section {
+    text-align: center;
+  }
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.fade-in#home-intro-section {
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+
+.fade-in#home-internships-section {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.fade-in#home-current-side-project {
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+}
+
+#home-current-side-project > img {
+  max-height: 500px;
+}
+
+#home-current-side-project > p {
+  max-width: 598px;
+}
+
+#home-current-side-project button {
+  margin-top: 20px;
+  padding: 0;
+  border: 0;
+  width: calc(24px + 3vw);
+  height: calc(24px + 3vw);
+  max-width: 52px;
+  max-height: 52px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button:active,
+button:hover {
+  border: none;
+}
+
+/* Spotify Section */
+#spotify-info {
+  display: flex;
+}
+
+#spotify-info > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+#spotify-info figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#spotify-info img {
+  border-radius: 10px;
+}
+#spotify-info figcaption {
+  margin-top: 1.5em;
+}
+
+#spotify-info img {
+  width: 200px;
+}
+
+/* .fade-in#spotify-info {
+  -webkit-animation-delay: 2s;
+  -moz-animation-delay: 2s;
+  animation-delay: 2s;
+} */
