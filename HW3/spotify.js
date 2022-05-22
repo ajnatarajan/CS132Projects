@@ -109,8 +109,20 @@
   function populateArtistResults(artistsData) {
     const noArtistErr =
       "The search didn't return any artists on Spotify; please try again.";
-    // Part 2b: TODO
-    console.log(artistsData);
+    const results_area = id("search-results");
+    while (results_area.firstChild) {
+      results_area.removeChild(results_area.firstChild);
+    }
+
+    if (artistsData.artists.items.length === 0) {
+      handleError(noArtistErr);
+    }
+
+    id("message-area").classList.add("hidden");
+    for (let i = 0; i < artistsData.artists.items.length; i++) {
+      const card = genArtistCard(artistsData.artists.items[i]);
+      results_area.appendChild(card);
+    }
   }
 
   /**
@@ -132,7 +144,20 @@
    * </article>
    */
   function genArtistCard(artistInfo) {
-    // Part 2c: TODO
+    let card = gen("article");
+    if (artistInfo.images.length > 0) {
+      let image = gen("img");
+      image.src = artistInfo.images[0].url;
+      image.alt = artistInfo.name;
+      card.appendChild(image);
+    }
+    let card_title = gen("h3");
+    card_title.textContent = artistInfo.name;
+    card.appendChild(card_title);
+    card.addEventListener("click", () => {
+      fetchArtistTopTracks(artistInfo.id);
+    });
+    return card;
   }
 
   /**
@@ -148,8 +173,24 @@
    * @returns none
    */
   async function fetchArtistTopTracks(artistId) {
-    // Part 3a: TODO
-    // Reminder: Set fetch header options with { Authorization: Bearer _accessToken_ }
+    try {
+      let resp = await fetch(ARTIST_EP + artistId + "/top-tracks?market=US", {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      });
+      checkStatus(resp);
+      let data = await resp.json();
+      let handleData = function (data) {
+        id("message-area").classList.add("hidden");
+        initializeTracks(data);
+        populateTracks();
+        showSection("play-view");
+      };
+      handleData(data);
+    } catch (err) {
+      handleError(err);
+    }
   }
 
   /**
