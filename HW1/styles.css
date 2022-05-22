@@ -6,7 +6,6 @@
  * This is the styles.css page for the index.html page in the same directory.
  * It provides all styles for the index page.
 */
-.flex-container,
 body,
 main,
 #examples,
@@ -97,6 +96,7 @@ aside a {
   color: #fdfdfd;
 }
 
+#examples > div > p,
 figcaption,
 blockquote > p {
   font-style: italic;
@@ -108,11 +108,6 @@ nav > a {
 
 header > div {
   height: 60px;
-}
-
-header > div,
-footer {
-  align-items: center;
 }
 
 footer {
@@ -128,9 +123,15 @@ main,
 #examples,
 #examples > div,
 #html-comparison,
-.main-structure,
-.flex-container {
+.main-structure {
   justify-content: space-between;
+}
+
+header > div,
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 pre {
@@ -171,10 +172,6 @@ body,
 #examples > div > p,
 #tim-quote > figcaption {
   text-align: right;
-}
-
-#examples > div > p {
-  font-style: italic;
 }
 
 #xkcd-figure {
