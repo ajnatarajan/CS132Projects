@@ -1,6 +1,12 @@
 /*
- * TODO: Add student information and brief program overview.
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 21st, 2022
+  This is the spotify.js file that handles all program logic for homework 3.
+  Notably, this handles all API calls to spotify in order to respond to user
+  search, getting track data, and scoring the game.
  */
+
 (function () {
   "use strict";
 
@@ -200,7 +206,14 @@
    * @returns none
    */
   function populateTracks() {
-    // Part 3b: TODO
+    let track_container = id("track-container");
+    while (track_container.firstChild) {
+      track_container.removeChild(track_container.firstChild);
+    }
+    sortTracksByGameIdx();
+    for (let i = 0; i < tracks.length; i++) {
+      track_container.appendChild(genTrackCard(tracks[i]));
+    }
   }
 
   /* ------------------------------ Provided Helper Functions ------------------------------ */
