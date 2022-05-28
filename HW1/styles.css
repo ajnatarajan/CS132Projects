@@ -12,7 +12,9 @@ main,
 #examples > div,
 #html-comparison,
 #html-comparison > div,
-.main-structure {
+.main-structure,
+header > div,
+footer {
   display: flex;
 }
 
@@ -123,14 +125,14 @@ main,
 #examples,
 #examples > div,
 #html-comparison,
-.main-structure {
+.main-structure,
+header > div,
+footer {
   justify-content: space-between;
 }
 
 header > div,
 footer {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 

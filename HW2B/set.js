@@ -103,10 +103,10 @@
    * @returns {Date} - MM:SS conversion of seconds
    */
   function secondsToMMSS(seconds) {
-    const raw_minutes = Math.floor(seconds / 60);
-    const raw_seconds = seconds % 60;
-    const mm = (raw_minutes < 10 ? "0" : "") + raw_minutes.toString();
-    const ss = (raw_seconds < 10 ? "0" : "") + raw_seconds.toString();
+    const rawMinutes = Math.floor(seconds / 60);
+    const rawSeconds = seconds % 60;
+    const mm = (rawMinutes < 10 ? "0" : "") + rawMinutes.toString();
+    const ss = (rawSeconds < 10 ? "0" : "") + rawSeconds.toString();
     return mm + ":" + ss;
   }
 
@@ -310,11 +310,11 @@
       attributesForEachCard.push(selected[i].id.split("-"));
     }
     for (let j = 0; j < attributesForEachCard[0].length; j++) {
-      let attr_vals = [];
+      let attrVals = [];
       for (let i = 0; i < attributesForEachCard.length; i++) {
-        attr_vals.push(attributesForEachCard[i][j]);
+        attrVals.push(attributesForEachCard[i][j]);
       }
-      if (!allUnique(attr_vals) && !allEqual(attr_vals)) {
+      if (!allUnique(attrVals) && !allEqual(attrVals)) {
         return false;
       }
     }
