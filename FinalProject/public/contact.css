@@ -1,0 +1,56 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form #name {
+  margin-right: 10px;
+}
+
+form #email {
+  margin-left: 10px;
+}
+
+form #name,
+form #email {
+  width: 227px;
+}
+
+form #subject,
+form #message-body {
+  width: 500px;
+}
+
+form #message-body {
+  height: 300px;
+}
+
+form input,
+form textarea {
+  border: 1px solid white;
+  background: transparent;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 1em;
+  color: #000;
+  outline: none;
+  margin-top: 20px;
+}
+
+form #name::placeholder,
+form #email::placeholder,
+form #subject::placeholder,
+form #message-body::placeholder {
+  color: #3e4042;
+}
+
+form #submit {
+  margin-top: 50px;
+}
+
+form #submit:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}

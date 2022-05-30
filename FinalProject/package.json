@@ -1,0 +1,11 @@
+{
+  "name": "finalproject",
+  "version": "1.0.0",
+  "description": "E-Commerce Store for Gaming and Anime",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ajay Natarajan",
+  "license": "ISC"
+}

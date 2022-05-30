@@ -1,0 +1,176 @@
+/* Groupings since I have to deal with CSS redundancy as per CS 132 rules */
+/* Personally though I would like to say I hate this, it makes the code hard to read */
+#filters > .filter,
+.modal-container > section button {
+  border: 1px solid white;
+  font-size: 1em;
+}
+
+#filters,
+.modal,
+.modal-container,
+.modal-container > section,
+.modal-container > section > div {
+  display: flex;
+}
+
+#filters,
+.modal-container > section {
+  flex-direction: row;
+}
+
+#filters,
+.modal,
+.modal-container > section {
+  justify-content: center;
+}
+
+#filters > .filter,
+.modal-container > section button {
+  border-radius: 5px;
+}
+
+#filters > .filter,
+.modal-close {
+  outline: none;
+}
+
+#filters > select,
+.modal-close {
+  cursor: pointer;
+}
+
+.modal,
+.modal-container,
+.modal-container > section,
+.modal-container > section > div {
+  align-items: center;
+}
+
+.modal-bg,
+.modal-close {
+  position: absolute;
+}
+
+.modal-bg,
+.modal-container img {
+  height: 100%;
+}
+
+.modal-close,
+.modal-container > section button {
+  color: #fff;
+}
+
+.modal-close,
+.modal-container > h3 {
+  font-size: 2em;
+}
+
+.modal-container,
+.modal-container img {
+  border-radius: 10px;
+}
+
+.modal-container,
+.modal-container > section > div {
+  flex-direction: column;
+}
+
+/* Filters */
+#filters {
+  margin-top: 50px;
+}
+
+#filters > .filter {
+  background: transparent;
+  padding: 10px;
+  font-family: inherit;
+  color: #000;
+}
+
+#filters > input {
+  margin-right: 50px;
+  width: 200px;
+}
+
+#filters > input::placeholder {
+  color: #3e4042;
+}
+
+#filters > select {
+  margin-left: 50px;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  /* transition: all 0.3s ease; */
+  top: 0;
+  left: 0;
+}
+
+.modal-open {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.modal-bg {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2.5px);
+}
+
+.modal-close {
+  right: 15px;
+  top: 15px;
+  appearance: none;
+  background: none;
+  border: 0px;
+  font-weight: bold;
+}
+
+/* Modal Container */
+.modal-container {
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.55) 100%);
+  position: relative;
+  padding: 30px;
+  text-align: center;
+}
+
+.modal-container > h3 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-weight: normal;
+  max-width: 350px;
+}
+
+.modal-container > section {
+  margin-bottom: 50px;
+}
+
+.modal-container > section > div {
+  max-width: 250px;
+  margin-left: 15px;
+  font-size: 1.5em;
+}
+
+.modal-container p {
+  margin: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.modal-container img {
+  width: 250px;
+  margin-right: 15px;
+}
+
+.modal-container > section button {
+  max-width: 200px;
+}
