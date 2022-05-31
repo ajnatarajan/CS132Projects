@@ -267,6 +267,7 @@
    * @returns {void}
    */
   function makeProductCards(data) {
+    let infos = [];
     data.forEach(async (individualData) => {
       let info;
       let pid = individualData.pid;
@@ -281,10 +282,25 @@
         id("products").appendChild(errorMsg);
         return;
       }
+
       for (let j = 0; j < individualData.quantity; j++) {
         makeCard(info);
       }
+
+      // infos.push({
+      //   pid: individualData.pid,
+      //   quantity: individualData.quantity,
+      //   info: info,
+      // });
     });
+
+    // infos.sort((data) => data.pid);
+    // console.log(infos);
+    // for (let i = 0; i < infos.length; i++) {
+    //   for (let j = 0; j < infos[i].quantity; j++) {
+    //     makeCard(infos[i].info);
+    //   }
+    // }
   }
 
   /**
