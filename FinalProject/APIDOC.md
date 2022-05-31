@@ -81,3 +81,83 @@
 
 **Error Handling:**
 { message: "Error filtering by category" } (ERROR: 400)
+
+## *Categories*
+**Request Format:** */categories*
+
+**Request Type:** *GET*
+
+**Returned Data Format**: JSON
+
+**Description:** *Returns all distinct categories.*
+
+**Example Request:** *localhost:8000/categories*
+
+**Example Response:**
+
+```json
+{"categories":["League of Legends","Valorant","Crunchyroll","Hulu","Netflix"]}
+```
+
+**Error Handling:**
+{ message: "Error fetching categories" } (ERROR: 400)
+
+## *Add to Cart*
+**Request Format:** */addToCart?pid=value*
+
+**Request Type:** *GET*
+
+**Returned Data Format**: JSON
+
+**Description:** *Adds an item to a user's cart.*
+
+**Example Request:** *localhost:8000/addToCart?pid=3*
+
+**Example Response:**
+
+```json
+{"message":"Successfully added item to cart!"}
+```
+
+**Error Handling:**
+{ message: "Error: Invalid PID" } (ERROR: 400)
+
+## *Remove from Cart*
+**Request Format:** */removeFromCart?pid=value*
+
+**Request Type:** *GET*
+
+**Returned Data Format**: JSON
+
+**Description:** *Removes an item from a user's cart.*
+
+**Example Request:** *localhost:8000/removeFromCart?pid=3*
+
+**Example Response:**
+
+```json
+{"message":"Successfully removed item from cart!"}
+```
+
+**Error Handling:**
+{ message: "Error: Invalid PID" } (ERROR: 400)
+
+## *Reduce Stock*
+**Request Format:** */reduceStock*
+
+**Request Type:** *POST*
+
+**Returned Data Format**: JSON
+
+**Description:** *Reduces the remaining stock of a given product by a given quantity.*
+
+**Example Request:** *localhost:8000/reduceStock*
+
+**Example Response:**
+
+```json
+{ message: "Successfully reduced stock of item! " }
+```
+
+**Error Handling:**
+{ message: "Error: Invalid PID" } (ERROR: 400)
