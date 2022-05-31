@@ -9,28 +9,25 @@
 
 (function () {
   "use strict";
-  /**
-   * Initialize page by populating all FAQs
-   * No parameters.
-   * @returns {void}
-   */
-  async function init() {
-    const faqs = id("faqs");
-    let faqsResp;
-    try {
-      faqsResp = await fetch("/faqs");
-      faqsResp = checkStatus(faqsResp);
-      faqsResp = await faqsResp.json();
-    } catch (err) {
-      let errorBox = gen("div");
-      let errorMsg = gen("p");
-      errorMsg.textContent =
-        "Store is currently down. Please visit again later.";
-      errorBox.appendChild(errorMsg);
-      id("faqs").appendChild(errorBox);
-      return;
-    }
 
+  /**
+   * API call to get FAQs
+   * No parameters
+   * @returns {JSON} faqsResp - faqs and their answers
+   */
+  async function getFaqs() {
+    let faqsResp = await fetch("/faqs");
+    faqsResp = checkStatus(faqsResp);
+    faqsResp = await faqsResp.json();
+    return faqsResp;
+  }
+
+  /**
+   * Populate the page with the FAQs and corresponding answers
+   * @param {JSON} faqsResp - faqs and their answers
+   */
+  function populateFaqs(faqsResp) {
+    const faqs = id("faqs");
     let keys = Object.keys(faqsResp);
     keys.sort();
     for (let i = 0; i < keys.length; i++) {
@@ -44,6 +41,36 @@
       faq.appendChild(answer);
       faqs.appendChild(faq);
     }
+  }
+
+  /**
+   * Make error message
+   * No parameters
+   * @returns {void}
+   */
+  function makeErrorMsg() {
+    let errorBox = gen("div");
+    let errorMsg = gen("p");
+    errorMsg.textContent = "Store is currently down. Please visit again later.";
+    errorBox.appendChild(errorMsg);
+    id("faqs").appendChild(errorBox);
+  }
+
+  /**
+   * Initialize page by populating all FAQs
+   * No parameters.
+   * @returns {void}
+   */
+  async function init() {
+    let faqsResp;
+    try {
+      faqsResp = await getFaqs();
+    } catch (err) {
+      makeErrorMsg();
+      return;
+    }
+
+    populateFaqs(faqsResp);
   }
 
   init();
