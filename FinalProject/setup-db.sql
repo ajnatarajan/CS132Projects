@@ -1,3 +1,16 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the setup-db.sql for my gaming and anime e-commerce site which is serving
+  as my final project for CS 132. It handles setting up the database and relevant
+  tables to persistently track data. There are four tables, aptly named.
+  The cart table holds all info about the user's cart.
+  The products table holds ALL information about ALL products.
+  The feedback table stores customer feedback.
+  The faqs table holds all FAQs and their answers.
+ */
+
 -- CREATE DATABASE IF NOT EXISTS commercedb;
 -- USE commercedb;
 
