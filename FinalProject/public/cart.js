@@ -116,7 +116,7 @@
   /**
    * Clear cart
    * No parameters.
-   * @returns {void}
+   * @returns {JSON} - success message, or will throw error if failure
    */
   async function clearCart() {
     let clearResp = await fetch("/clearCart", {
@@ -127,6 +127,7 @@
     });
     clearResp = checkStatus(clearResp);
     clearResp = await clearResp.json();
+    return clearResp;
   }
 
   /**

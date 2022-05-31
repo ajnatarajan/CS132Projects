@@ -196,27 +196,33 @@ app.post("/removeFromCart", async (req, res) => {
 
 /* Reduce stock of a given product by a given quantity. */
 app.post("/reduceStock", async (req, res) => {
-  let db;
-  try {
-    db = await getDB();
-    let row = await db.query(
-      `SELECT * FROM products WHERE pid = ${req.body.pid}`
-    );
-    if (row.length === 0) {
-      res.status(400).json({ message: "Invalid PID" });
-    } else if (row[0].stock < req.body.qty) {
-      res.status(400).json({ message: "Not enough stock to support order. " });
-    } else {
-      await db.query(
-        `UPDATE products SET stock = (stock - ${req.body.qty}) WHERE pid = ${req.body.pid}`
+  if (req.body.pid) {
+    let db;
+    try {
+      db = await getDB();
+      let row = await db.query(
+        `SELECT * FROM products WHERE pid = ${req.body.pid}`
       );
-      res.json({ message: "Successfully reduced stock of item! " });
+      if (row.length === 0) {
+        res.status(400).json({ message: "Invalid PID" });
+      } else if (row[0].stock < req.body.qty) {
+        res
+          .status(400)
+          .json({ message: "Not enough stock to support order. " });
+      } else {
+        await db.query(
+          `UPDATE products SET stock = (stock - ${req.body.qty}) WHERE pid = ${req.body.pid}`
+        );
+        res.json({ message: "Successfully reduced stock of item! " });
+      }
+    } catch (err) {
+      res.status(400).json({ message: "Error reducing stock of item" });
     }
-  } catch (err) {
-    res.status(400).json({ message: "Error reducing stock of item" });
-  }
-  if (db) {
-    db.end();
+    if (db) {
+      db.end();
+    }
+  } else {
+    res.status(400).json({ message: "Missing required parameter: pid" });
   }
 });
 
