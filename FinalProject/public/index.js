@@ -111,12 +111,9 @@
     searchQuery,
     productsInSelectedCategory
   ) {
-    let keys = Object.keys(allProducts);
-    keys.sort((e) => parseInt(e));
-    for (let i = 0; i < keys.length; i++) {
-      let data = allProducts[keys[i]];
+    allProducts.products.forEach((data) => {
       if (!data.title.toLowerCase().includes(searchQuery.toLowerCase())) {
-        continue;
+        return;
       }
 
       // Check that this product is in the list of products that satisfy category
@@ -124,11 +121,11 @@
         productsInSelectedCategory &&
         !(data.pid in productsInSelectedCategory)
       ) {
-        continue;
+        return;
       }
 
       makeCard(data);
-    }
+    });
   }
 
   /**

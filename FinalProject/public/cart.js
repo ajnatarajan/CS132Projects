@@ -30,7 +30,7 @@
     let resp = await fetch("/cart");
     resp = checkStatus(resp);
     resp = await resp.json();
-    return resp;
+    return resp.cart;
   }
 
   /**
@@ -55,8 +55,7 @@
    * @returns {void}
    */
   async function checkEnoughStock(resp) {
-    for (let i = 0; i < Object.keys(resp).length; i++) {
-      let data = resp[Object.keys(resp)[i]];
+    resp.forEach(async (data) => {
       let enoughStock = await fetch(
         `/isEnoughStock?pid=${data.pid}&qty=${data.quantity}`
       );
@@ -65,7 +64,7 @@
       if (!enoughStock.isEnoughStock) {
         throw Error;
       }
-    }
+    });
   }
 
   /**
@@ -74,8 +73,7 @@
    * @returns {void}
    */
   async function reduceStock(resp) {
-    for (let i = 0; i < Object.keys(resp).length; i++) {
-      let data = resp[Object.keys(resp)[i]];
+    resp.forEach(async (data) => {
       let reduceResp = await fetch("/reduceStock", {
         method: "POST",
         headers: {
@@ -88,7 +86,7 @@
       });
       reduceResp = checkStatus(reduceResp);
       reduceResp = await reduceResp.json();
-    }
+    });
   }
 
   /**
@@ -97,8 +95,7 @@
    * @returns {void}
    */
   async function updateLastSold(resp) {
-    for (let i = 0; i < Object.keys(resp).length; i++) {
-      let data = resp[Object.keys(resp)[i]];
+    resp.forEach(async (data) => {
       let lastSoldResp = await fetch("/updateLastSold", {
         method: "POST",
         headers: {
@@ -110,7 +107,7 @@
       });
       lastSoldResp = checkStatus(lastSoldResp);
       lastSoldResp = await lastSoldResp.json();
-    }
+    });
   }
 
   /**
@@ -270,6 +267,32 @@
   }
 
   /**
+   * Makes product DOM elements for all products in cart.
+   * @param {JSON} data - data about all products in cart
+   * @returns {void}
+   */
+  function makeProductCards(data) {
+    data.forEach(async (individualData) => {
+      let info;
+      let pid = individualData.pid;
+      try {
+        let resp = await fetch(`/info?pid=${pid}`);
+        resp = checkStatus(resp);
+        info = await resp.json();
+      } catch (err) {
+        let errorMsg = gen("p");
+        errorMsg.textContent =
+          "Store is currently down. Please visit again later";
+        id("products").appendChild(errorMsg);
+        return;
+      }
+      for (let j = 0; j < individualData.quantity; j++) {
+        makeCard(info);
+      }
+    });
+  }
+
+  /**
    * Update what products to show in the cart
    * No parameters.
    * @returns {void}
@@ -294,28 +317,7 @@
     }
 
     // Get more information about each individual product
-    let keys = Object.keys(data);
-    keys.sort((e) => parseInt(e));
-    for (let i = 0; i < keys.length; i++) {
-      let info;
-      let pid = data[keys[i]].pid;
-      try {
-        let resp = await fetch(`/info?pid=${pid}`);
-        resp = checkStatus(resp);
-        info = await resp.json();
-      } catch (err) {
-        let errorMsg = gen("p");
-        errorMsg.textContent =
-          "Store is currently down. Please visit again later";
-        id("products").appendChild(errorMsg);
-        return;
-      }
-
-      // Make product card
-      for (let j = 0; j < data[keys[i]].quantity; j++) {
-        makeCard(info[pid]);
-      }
-    }
+    makeProductCards(data);
   }
 
   init();

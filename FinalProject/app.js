@@ -1,3 +1,10 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the Node.js/Express API for my Game Anime Shop final project.
+ */
+
 "use strict";
 const express = require("express");
 const mysql = require("promise-mysql");
@@ -32,9 +39,9 @@ app.get("/products", async (req, res) => {
     db = await getDB();
     let qry = "SELECT * FROM products";
     const rows = await db.query(qry);
-    let products = {};
+    let products = { products: [] };
     for (let i = 0; i < rows.length; i++) {
-      products[rows[i].pid] = { ...rows[i] };
+      products.products.push({ ...rows[i] });
     }
     res.json(products);
   } catch (err) {
@@ -53,9 +60,13 @@ app.get("/info", async (req, res) => {
       db = await getDB();
       let qry = `SELECT * FROM products WHERE pid = ${req.query["pid"]}`;
       const rows = await db.query(qry);
-      let info = {};
-      info[req.query["pid"]] = { ...rows[0] }; // There will only be one row
-      res.json(info);
+      if (rows.length === 0) {
+        res.status(400).json({ message: "Error: Invalid PID" });
+      } else {
+        let info = {};
+        info = { ...rows[0] }; // There will only be one row
+        res.json(info);
+      }
     } catch (err) {
       res.status(400).json({ message: "Error fetching product info" });
     }
@@ -74,9 +85,9 @@ app.get("/cart", async (req, res) => {
     db = await getDB();
     let qry = "SELECT * FROM cart WHERE quantity > 0";
     const rows = await db.query(qry);
-    let cart = {};
+    let cart = { cart: [] };
     for (let i = 0; i < rows.length; i++) {
-      cart[rows[i].pid] = { ...rows[i] };
+      cart.cart.push({ ...rows[i] });
     }
     res.json(cart);
   } catch (err) {
