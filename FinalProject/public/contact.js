@@ -41,21 +41,30 @@
     } else if (id("message-body").value === "") {
       msg.textContent = "Message field required";
     } else {
-      const params = new FormData(qs("form"));
-      try {
-        let resp = await fetch("/feedback", {
-          method: "POST",
-          body: params,
-        });
-        resp = checkStatus(resp);
-        resp = await resp.json();
-        msg.classList.remove("red-text");
-        msg.textContent = "Message successfully sent!";
-      } catch (err) {
-        msg.textContent = "Message failed to send. Try again later.";
-      }
+      postFeedback(msg);
     }
     qs("form").appendChild(msg);
+  }
+
+  /**
+   * Makes the actual fetch post request to store the feedback in the database.
+   * @param {Element} msg - message to display back to user upon completion
+   * @returns {void}
+   */
+  async function postFeedback(msg) {
+    const params = new FormData(qs("form"));
+    try {
+      let resp = await fetch("/feedback", {
+        method: "POST",
+        body: params,
+      });
+      resp = checkStatus(resp);
+      resp = await resp.json();
+      msg.classList.remove("red-text");
+      msg.textContent = "Message successfully sent!";
+    } catch (err) {
+      msg.textContent = "Message failed to send. Try again later.";
+    }
   }
 
   init();
