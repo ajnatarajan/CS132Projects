@@ -138,7 +138,9 @@
       "image_name":"netflix50.jpg",
       "category":"Netflix",
       "last_sold":"2022-05-31T04:27:01.000Z",
-      "stock":150},"products":[]}
+      "stock":150}
+    }
+}
 ```
 
 **Error Handling:**
@@ -158,7 +160,16 @@
 **Example Response:**
 
 ```json
-{"categories":["League of Legends","Valorant","Crunchyroll","Hulu","Netflix"]}
+{
+  "categories":
+    [
+      "League of Legends",
+      "Valorant",
+      "Crunchyroll",
+      "Hulu",
+      "Netflix"
+    ]
+}
 ```
 
 **Error Handling:**
@@ -182,7 +193,7 @@
 ```
 
 **Error Handling:**
-{ message: "Error: Invalid PID" } (ERROR: 400)
+{ "message": "Error: Invalid PID" } (ERROR: 400)
 
 ## *removeFromCart*
 **Request Format:** */removeFromCart*
@@ -202,7 +213,7 @@
 ```
 
 **Error Handling:**
-{ message: "Error: Invalid PID" } (ERROR: 400)
+{ "message": "Error: Invalid PID" } (ERROR: 400)
 
 ## *reduceStock*
 **Request Format:** */reduceStock*
@@ -218,11 +229,11 @@
 **Example Response:**
 
 ```json
-{ message: "Successfully reduced stock of item! " }
+{ "message": "Successfully reduced stock of item! " }
 ```
 
 **Error Handling:**
-{ message: "Error: Invalid PID" } (ERROR: 400)
+{ "message": "Error: Invalid PID" } (ERROR: 400)
 
 ## *isEnoughStock*
 **Request Format:** */isEnoughStock?pid=value&qty=value*
@@ -242,7 +253,7 @@
 ```
 
 **Error Handling:**
-{ message: "Error checking availability of item" } (ERROR: 500)
+{ "message": "Error checking availability of item" } (ERROR: 500)
 
 ## *updateLastSold*
 **Request Format:** */updateLastSold*
@@ -258,11 +269,11 @@
 **Example Response:**
 
 ```json
-{ message: "Successfully updated last sold time. " }
+{ "message": "Successfully updated last sold time. " }
 ```
 
 **Error Handling:**
-{ message: "Error while updating last sold time. " } (ERROR: 500)
+{ "message": "Error while updating last sold time. " } (ERROR: 500)
 
 ## *clearCart*
 **Request Format:** */clearCart*
@@ -278,11 +289,11 @@
 **Example Response:**
 
 ```json
-{ message: "Successfully updated last sold time. " }
+{ "message": "Successfully updated last sold time. " }
 ```
 
 **Error Handling:**
-{ message: "Error clearing cart." } (ERROR: 500)
+{ "message": "Error clearing cart." } (ERROR: 500)
 
 ## *Faqs*
 **Request Format:** */faqs*
@@ -298,11 +309,45 @@
 **Example Response:**
 
 ```json
-{"faqs":[{"faq_id":1,"question":"How long did it take to make this e-commerce site?","answer":"Though people often like to say Rome wasn't built in a day, this final project proposal was indeed built in a single day. It was quite the grind if I do say so myself."},{"faq_id":2,"question":"It's been 10 days, why haven't my items shipped to me?","answer":"Great observation! So the issue is this e-commerce store doesn't actually handle payment and shipping which means your purchase was actually a phantom transaction and you will never actually receive the goods you ordered. On the bright side, you didn't actually pay any money so I'd say all's well that ends well."},{"faq_id":3,"question":"How long would it take me to make a site as beautiful as this?","answer":"The process is quite simple really- get into Caltech, take CS 132, and in six short weeks, you'll be ready to built sites like this one."},{"faq_id":4,"question":"Are there any other sites I should check out?","answer":"Visit qup.gg and sign up to be among our first batch of beta testers!"},{"faq_id":5,"question":"How did you make these super aesthetic gradients, Ajay?","answer":"Figma magic, baby."},{"faq_id":6,"question":"Any cool life hacks you know?","answer":"When in doubt, drink water."}]}
+{
+  "faqs":
+    [
+      {
+        "faq_id":1,
+        "question":"How long did it take to make this e-commerce site?",
+        "answer":"Though people often like to say Rome wasn't built in a day, this final project proposal was indeed built in a single day. It was quite the grind if I do say so myself."
+      },
+      {
+        "faq_id":2,
+        "question":"It's been 10 days, why haven't my items shipped to me?",
+        "answer":"Great observation! So the issue is this e-commerce store doesn't actually handle payment and shipping which means your purchase was actually a phantom transaction and you will never actually receive the goods you ordered. On the bright side, you didn't actually pay any money so I'd say all's well that ends well."
+      },
+      {
+        "faq_id":3,
+        "question":"How long would it take me to make a site as beautiful as this?",
+        "answer":"The process is quite simple really- get into Caltech, take CS 132, and in six short weeks, you'll be ready to built sites like this one."
+      },
+      {
+        "faq_id":4,
+        "question":"Are there any other sites I should check out?",
+        "answer":"Visit qup.gg and sign up to be among our first batch of beta testers!"
+      },
+      {
+        "faq_id":5,
+        "question":"How did you make these super aesthetic gradients, Ajay?",
+        "answer":"Figma magic, baby."
+      },
+      {
+        "faq_id":6,
+        "question":"Any cool life hacks you know?",
+        "answer":"When in doubt, drink water."
+      }
+    ]
+}
 ```
 
 **Error Handling:**
-{ message: "Error fetching FAQs." } (ERROR: 500)
+{ "message": "Error fetching FAQs." } (ERROR: 500)
 
 ## *Feedback*
 **Request Format:** */feedback*
@@ -318,8 +363,8 @@
 **Example Response:**
 
 ```json
-{ message: "Successfully submitted feedback" }
+{ "message": "Successfully submitted feedback" }
 ```
 
 **Error Handling:**
-{ message: "Error submitting feedback. " } (ERROR: 500)
+{ "message": "Error submitting feedback. " } (ERROR: 500)
