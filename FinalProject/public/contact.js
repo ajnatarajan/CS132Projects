@@ -44,7 +44,7 @@
         msg.classList.remove("red-text");
         msg.textContent = "Message successfully sent!";
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
     qs("form").appendChild(msg);

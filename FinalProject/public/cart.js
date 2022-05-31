@@ -49,7 +49,6 @@
     try {
       for (let i = 0; i < Object.keys(resp).length; i++) {
         let data = resp[Object.keys(resp)[i]];
-        console.log(data);
         let reduceResp = await fetch(
           `/reduceStock?pid=${data.pid}&qty=${data.quantity}`
         );
@@ -58,6 +57,19 @@
       }
     } catch (err) {
       console.error("Error reducing stock.");
+      return;
+    }
+
+    /* Update last sold time */
+    try {
+      for (let i = 0; i < Object.keys(resp).length; i++) {
+        let data = resp[Object.keys(resp)[i]];
+        let lastSoldResp = await fetch(`/updateLastSold?pid=${data.pid}`);
+        lastSoldResp = checkStatus(lastSoldResp);
+        lastSoldResp = await lastSoldResp.json();
+      }
+    } catch (err) {
+      console.error("Error while updating last sold time");
       return;
     }
 

@@ -234,6 +234,30 @@ app.get("/isEnoughStock", async (req, res) => {
   }
 });
 
+app.get("/updateLastSold", async (req, res) => {
+  if (req.query["pid"]) {
+    let db;
+    try {
+      db = await getDB();
+      await db.query(
+        `UPDATE products SET last_sold = CURRENT_TIMESTAMP WHERE pid = ${req.query["pid"]}`
+      );
+      res.json({ message: "Successfully updated last sold time. " });
+    } catch (err) {
+      res
+        .status(400)
+        .json({ message: "Error while updating last sold time. " });
+    }
+    if (db) {
+      db.end();
+    }
+  } else {
+    res
+      .status(400)
+      .json({ message: "Error: missing required pid query parameter." });
+  }
+});
+
 app.get("/clearCart", async (req, res) => {
   let db;
   try {
