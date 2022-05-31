@@ -168,5 +168,76 @@ app.get("/removeFromCart", async (req, res) => {
   }
 });
 
+app.get("/reduceStock", async (req, res) => {
+  if (req.query["pid"] && req.query["qty"]) {
+    let db;
+    try {
+      db = await getDB();
+      let row = await db.query(
+        `SELECT * FROM products WHERE pid = ${req.query["pid"]}`
+      );
+      if (row.length === 0) {
+        res.status(400).json({ message: "Invalid PID" });
+      } else if (row[0].stock < req.query["qty"]) {
+        res
+          .status(400)
+          .json({ message: "Not enough stock to support order. " });
+      } else {
+        await db.query(
+          `UPDATE products SET stock = (stock - ${req.query["qty"]}) WHERE pid = ${req.query["pid"]}`
+        );
+        res.json({ message: "Successfully reduced stock of item! " });
+      }
+    } catch (err) {
+      res.status(400).json({ message: "Error reducing stock of item" });
+    }
+    if (db) {
+      db.end();
+    }
+  } else {
+    res.status(400).json({ message: "Missing required parameter, pid or qty" });
+  }
+});
+
+app.get("/isEnoughStock", async (req, res) => {
+  if (req.query["pid"] && req.query["qty"]) {
+    let db;
+    try {
+      db = await getDB();
+      let row = await db.query(
+        `SELECT * FROM products WHERE pid = ${req.query["pid"]}`
+      );
+      if (row.length === 0) {
+        res.status(400).json({ message: "Invalid PID" });
+      } else if (row[0].stock < req.query["qty"]) {
+        res.json({ isEnoughStock: false });
+      } else {
+        res.json({ isEnoughStock: true });
+      }
+    } catch (err) {
+      res.status(400).json({ message: "Error reducing stock of item" });
+    }
+    if (db) {
+      db.end();
+    }
+  } else {
+    res.status(400).json({ message: "Missing required parameter, pid or qty" });
+  }
+});
+
+app.get("/clearCart", async (req, res) => {
+  let db;
+  try {
+    db = await getDB();
+    await db.query("DELETE FROM cart");
+    res.json({ message: "Successfully cleared cart. " });
+  } catch (err) {
+    res.status(400).json({ message: "Error clearing cart." });
+  }
+  if (db) {
+    db.end();
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log("Listening on port " + PORT));

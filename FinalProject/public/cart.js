@@ -16,8 +16,64 @@
    * No parameters.
    * @returns {void}
    */
-  function onCheckout() {
-    // Will make API Calls to handle checkout
+  async function onCheckout() {
+    let resp;
+    try {
+      /* Check if we have enough stock */
+      resp = await fetch("/cart");
+      resp = checkStatus(resp);
+      resp = await resp.json();
+    } catch (err) {
+      console.error("Error fetching from cart.");
+      return;
+    }
+
+    try {
+      for (let i = 0; i < Object.keys(resp).length; i++) {
+        let data = resp[Object.keys(resp)[i]];
+        let enoughStock = await fetch(
+          `/isEnoughStock?pid=${data.pid}&qty=${data.quantity}`
+        );
+        enoughStock = checkStatus(enoughStock);
+        enoughStock = await enoughStock.json();
+        if (!enoughStock.isEnoughStock) {
+          throw Error("Not enough stock to satisfy your request.");
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      return;
+    }
+
+    /* Reduce the stock remaining */
+    try {
+      for (let i = 0; i < Object.keys(resp).length; i++) {
+        let data = resp[Object.keys(resp)[i]];
+        console.log(data);
+        let reduceResp = await fetch(
+          `/reduceStock?pid=${data.pid}&qty=${data.quantity}`
+        );
+        reduceResp = checkStatus(reduceResp);
+        reduceResp = await reduceResp.json();
+      }
+    } catch (err) {
+      console.error("Error reducing stock.");
+      return;
+    }
+
+    try {
+      /* Clear the cart and display message for user indicating purchase */
+      let clearResp = await fetch("/clearCart");
+      clearResp = checkStatus(clearResp);
+      clearResp = await clearResp.json();
+      console.log(clearResp);
+    } catch (err) {
+      console.error("Error clearing cart.");
+      return;
+    }
+
+    /* Update cart display */
+    populateCart();
   }
 
   /**
