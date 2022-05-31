@@ -1,6 +1,7 @@
 "use strict";
 const express = require("express");
 const mysql = require("promise-mysql");
+const multer = require("multer");
 const app = express();
 
 async function getDB() {
@@ -15,6 +16,14 @@ async function getDB() {
 }
 
 app.use(express.static("public"));
+
+/* Copy-pasted from Lecture 18 */
+// for application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true })); // built-in middleware
+// for application/json
+app.use(express.json()); // built-in middleware
+// for multipart/form-data (required with FormData)
+app.use(multer().none()); // requires the "multer" module
 
 /* Display all products */
 app.get("/products", async (req, res) => {
@@ -255,6 +264,12 @@ app.get("/faqs", async (req, res) => {
   if (db) {
     db.end();
   }
+});
+
+app.post("/feedback", async (req, res) => {
+  const name = req.body.name;
+  console.log(name);
+  res.json({ message: name });
 });
 
 const PORT = process.env.PORT || 8000;

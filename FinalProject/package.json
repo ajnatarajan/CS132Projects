@@ -9,7 +9,9 @@
   "author": "Ajay Natarajan",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.18.1",
+    "multer": "^1.4.5-lts.1",
     "promise-mysql": "^5.2.0"
   }
 }
