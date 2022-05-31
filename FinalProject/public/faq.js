@@ -22,7 +22,6 @@
       faqsResp = checkStatus(faqsResp);
       faqsResp = await faqsResp.json();
     } catch (err) {
-      console.error(err);
       let errorBox = gen("div");
       let errorMsg = gen("p");
       errorMsg.textContent =

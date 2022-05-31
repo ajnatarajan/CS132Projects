@@ -22,11 +22,6 @@ nav > ul,
 }
 
 nav,
-#products {
-  flex-direction: row;
-}
-
-nav,
 .product-card {
   align-items: center;
 }

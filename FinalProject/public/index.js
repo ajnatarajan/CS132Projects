@@ -173,7 +173,11 @@
       categories = checkStatus(categories);
       categories = await categories.json();
     } catch (err) {
-      console.log(err);
+      let errorMsg = gen("p");
+      errorMsg.classList.add("dropdown-error-msg");
+      errorMsg.textContent = "Unexpected error. Please try again.";
+      qs("body").insertBefore(errorMsg, id("products"));
+      return;
     }
 
     categories = categories.categories;

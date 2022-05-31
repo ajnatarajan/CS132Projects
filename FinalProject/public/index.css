@@ -22,11 +22,6 @@
 }
 
 #filters,
-.modal-container > section {
-  flex-direction: row;
-}
-
-#filters,
 .modal,
 .modal-container > section {
   justify-content: center;
@@ -184,4 +179,9 @@
 
 .red-text {
   color: #cc3333;
+}
+
+.dropdown-error-msg {
+  width: 100%;
+  text-align: center;
 }
