@@ -1,61 +1,5 @@
 (function () {
   "use strict";
-  // Anywhere IMGS is used, we will replace with an API Call
-  const IMGS = [
-    "lol10.jpg",
-    "lol25.jpg",
-    "lol50.jpg",
-    "lol100.jpg",
-    "valorant10.jpg",
-    "valorant25.jpg",
-    "valorant50.jpg",
-    "valorant100.jpg",
-    "crunchyroll25.jpg",
-    "hulu25.jpg",
-    "hulu50.jpg",
-    "hulu100.jpg",
-    "netflix15.jpg",
-    "netflix30.jpg",
-    "netflix50.jpg",
-  ];
-
-  // Anywhere TITLES is used, we will replace with an API Call
-  const TITLES = [
-    "League of Legends $10 Gift Card",
-    "League of Legends $25 Gift Card",
-    "League of Legends $50 Gift Card",
-    "League of Legends $100 Gift Card",
-    "Valorant $10 Gift Card",
-    "Valorant $25 Gift Card",
-    "Valorant $50 Gift Card",
-    "Valorant $100 Gift Card",
-    "Crunchyroll $25 Gift Card",
-    "Hulu $25 Gift Card",
-    "Hulu $50 Gift Card",
-    "Hulu $100 Gift Card",
-    "Netflix $15 Gift Card",
-    "Netflix $30 Gift Card",
-    "Netflix $50 Gift Card",
-  ];
-
-  // Anywhere CATEGORIES is used, we will replace with an API Call
-  const CATEGORIES = [
-    "League of Legends",
-    "League of Legends",
-    "League of Legends",
-    "League of Legends",
-    "Valorant",
-    "Valorant",
-    "Valorant",
-    "Valorant",
-    "Crunchyroll",
-    "Hulu",
-    "Hulu",
-    "Hulu",
-    "Netflix",
-    "Netflix",
-    "Netflix",
-  ];
 
   /**
    * Initialize necessary event listeners and create all item cards.
@@ -88,18 +32,25 @@
    * No parameters - this will change when we have APIs
    * @returns {void}
    */
-  function onAddToCart() {
-    // handle with API Calls
+  async function onAddToCart(data) {
+    try {
+      let resp = await fetch(`/addToCart?pid=${data.pid}`);
+      resp = checkStatus(resp);
+      resp = await resp.json();
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   /**
    * Create a modal
    * @param {string} title - name of the product
-   * @param {string} img_path - path to image of the product
-   * @param {string} category_name - game or platform category
+   * @param {string} imgPath - path to image of the product
+   * @param {string} categoryName - game or platform category
    * @returns {Element} - the modal that was just created
    */
-  function makeModal(title, img_path, category_name) {
+  async function makeModal(data) {
     /* Modal */
     let modal = gen("div");
     modal.classList.add("modal");
@@ -114,7 +65,7 @@
 
     /* Make heading */
     let heading = gen("h3");
-    heading.textContent = title;
+    heading.textContent = data.title;
     container.appendChild(heading);
 
     /* Make body */
@@ -122,37 +73,39 @@
 
     /* Make image */
     let image = gen("img");
-    image.src = "imgs/" + img_path;
-    image.alt = title + " Image";
+    image.src = "imgs/" + data.image_name;
+    image.alt = data.title + " Image";
     info.appendChild(image);
 
     /* Make text info */
-    let text_info = gen("div");
+    let textInfo = gen("div");
     let stock = gen("p");
-    stock.textContent = "Stock Remaining: 35"; // Will be replaced with API Call
+    stock.textContent = `Stock Remaining: ${data.stock}`;
     let category = gen("p");
-    category.textContent = "Category: " + category_name;
-    let last_sold = gen("p");
-    last_sold.textContent = "Last Sold: May 9, 2022"; // Will be replaced with API Call
-    let add_to_cart = gen("button");
-    add_to_cart.textContent = "Add to Cart";
-    // im using an arrow function here since we will pass arguments when we use API call
-    add_to_cart.addEventListener("click", () => {
-      onAddToCart();
+    category.textContent = `Category: ${data.category}`;
+    let lastSold = gen("p");
+    let date = new Date(data.last_sold);
+    lastSold.textContent = `Last Sold: ${date.toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+    })}`;
+    let addToCart = gen("button");
+    addToCart.textContent = "Add to Cart";
+    addToCart.addEventListener("click", () => {
+      onAddToCart(data);
     });
-    text_info.appendChild(stock);
-    text_info.appendChild(category);
-    text_info.append(last_sold);
-    text_info.append(add_to_cart);
-    info.append(text_info);
+    textInfo.appendChild(stock);
+    textInfo.appendChild(category);
+    textInfo.append(lastSold);
+    textInfo.append(addToCart);
+    info.append(textInfo);
 
     /* Add close button */
-    let close_button = gen("button");
-    close_button.classList.add("modal-close", "modal-exit");
-    close_button.textContent = "X"; // X works pretty well as a close button
+    let closeButton = gen("button");
+    closeButton.classList.add("modal-close", "modal-exit");
+    closeButton.textContent = "X"; // X works pretty well as a close button
 
     container.appendChild(info);
-    container.appendChild(close_button);
+    container.appendChild(closeButton);
 
     modal.appendChild(bg);
     modal.appendChild(container);
@@ -165,18 +118,24 @@
   /**
    * Create a product card
    * @param {string} title - name of the product
-   * @param {string} img_path - path to image of the product
+   * @param {string} imgPath - path to image of the product
    * @param {string} category - game or platform category
    * @returns {void}
    */
-  function makeCard(title, img_path, category) {
+  async function makeCard(data) {
+    // title, imgPath, category
     let card = gen("div");
     let image = gen("img");
     // All images taken from corresponding platform websites.
-    image.src = "imgs/" + img_path;
-    image.alt = title + " Preview Image";
+    /* NB: I'm using camel case here since it's from my DB and I'm just 
+    following the convention established in setup-oh.sql which was an example
+    file given in lecture. I have removed all other camel case variables in my
+    JS code though.
+    */
+    image.src = "imgs/" + data.image_name;
+    image.alt = data.title + " Preview Image";
     let text = gen("p");
-    text.textContent = title;
+    text.textContent = data.title;
 
     card.classList.add("product-card");
     image.classList.add("card-img");
@@ -186,7 +145,7 @@
 
     id("products").appendChild(card);
 
-    const modal = makeModal(title, img_path, category);
+    const modal = await makeModal(data);
     card.addEventListener("click", () => openCardModal(modal));
   }
 
@@ -195,30 +154,55 @@
    * No parameters.
    * @return {void}
    */
-  function populateProducts() {
+  async function populateProducts() {
     // Remove all products
     const products = id("products");
     while (products.firstChild) {
       products.removeChild(products.lastChild);
     }
 
-    const search_query = id("search-bar").value;
-    const dropdown_query = id("dropdown").value;
+    const searchQuery = id("search-bar").value;
+    const dropdownQuery = id("dropdown").value;
+
+    let allProducts;
+    try {
+      allProducts = await fetch("/products");
+      allProducts = checkStatus(allProducts);
+      allProducts = await allProducts.json();
+    } catch (err) {
+      console.error(err); // TODO: Make real error, also make everything camel case, and add headers to files
+    }
+
+    // Get products that are in the dropdown category selected
+    let productsInSelectedCategory;
+    if (dropdownQuery !== "All" && dropdownQuery !== "") {
+      try {
+        productsInSelectedCategory = await fetch(`/category/${dropdownQuery}`);
+        productsInSelectedCategory = checkStatus(productsInSelectedCategory);
+        productsInSelectedCategory = await productsInSelectedCategory.json();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     // Add all products that pass the filter checks
-    for (let i = 0; i < IMGS.length; i++) {
-      if (!TITLES[i].toLowerCase().includes(search_query.toLowerCase())) {
+    let keys = Object.keys(allProducts);
+    keys.sort((e) => parseInt(e));
+    for (let i = 0; i < keys.length; i++) {
+      let data = allProducts[keys[i]];
+      if (!data.title.toLowerCase().includes(searchQuery.toLowerCase())) {
         continue;
       }
 
+      // Check that this product is in the list of products that satisfy category
       if (
-        dropdown_query !== "All" &&
-        !(dropdown_query === CATEGORIES[i]) &&
-        dropdown_query !== "" // If default option, should make card
+        productsInSelectedCategory &&
+        !(data.pid in productsInSelectedCategory)
       ) {
         continue;
       }
 
-      makeCard(TITLES[i], IMGS[i], CATEGORIES[i]);
+      makeCard(data);
     }
   }
 

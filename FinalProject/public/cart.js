@@ -1,22 +1,5 @@
 (function () {
   "use strict";
-  // Anywhere IMGS is used, we will replace with an API Call
-  const IMGS = [
-    "lol10.jpg",
-    "valorant50.jpg",
-    "crunchyroll25.jpg",
-    "hulu100.jpg",
-    "netflix15.jpg",
-  ];
-
-  // Anywhere TITLES is used, we will replace with an API Call
-  const TITLES = [
-    "League of Legends $10 Gift Card",
-    "Valorant $50 Gift Card",
-    "Crunchyroll $25 Gift Card",
-    "Hulu $100 Gift Card",
-    "Netflix $15 Gift Card",
-  ];
 
   /**
    * Initialize all necessary event listeners and update products in cart.
@@ -42,8 +25,16 @@
    * No parameters. (Will change when we have API calls)
    * @returns {void}
    */
-  function onRemove() {
-    // Will make API Calls to handle removing item
+  async function onRemoveFromCart(pid) {
+    try {
+      let resp = await fetch(`/removeFromCart/?pid=${pid}`);
+      resp = checkStatus(resp);
+      resp = await resp.json();
+      console.log(resp);
+    } catch (err) {
+      console.error(err);
+    }
+    populateCart();
   }
 
   /**
@@ -52,16 +43,16 @@
    * @param {string} imgPath - path to the image
    * @returns {void}
    */
-  function makeCard(title, imgPath) {
+  async function makeCard(info) {
     let cardContainer = gen("div");
     cardContainer.classList.add("card-container");
     /* Create card and add to container */
     let card = gen("div");
     let image = gen("img");
-    image.src = "imgs/" + imgPath;
-    image.alt = title + " Preview Image";
+    image.src = "imgs/" + info.image_name;
+    image.alt = info.title + " Preview Image";
     let text = gen("p");
-    text.textContent = title;
+    text.textContent = info.title;
 
     card.classList.add("product-card");
     image.classList.add("card-img");
@@ -74,7 +65,9 @@
     /* Create remove button and add to container */
     let removeButton = gen("button");
     removeButton.textContent = "Remove from Cart";
-    removeButton.addEventListener("click", onRemove);
+    removeButton.addEventListener("click", () => {
+      onRemoveFromCart(info.pid);
+    });
     cardContainer.appendChild(removeButton);
 
     id("products").appendChild(cardContainer);
@@ -85,9 +78,37 @@
    * No parameters.
    * @returns {void}
    */
-  function populateCart() {
-    for (let i = 0; i < IMGS.length; i++) {
-      makeCard(TITLES[i], IMGS[i]);
+  async function populateCart() {
+    // Remove any other elements first
+    const products = id("products");
+    while (products.firstChild) {
+      products.removeChild(products.lastChild);
+    }
+
+    let data;
+    try {
+      let resp = await fetch("/cart");
+      resp = checkStatus(resp);
+      data = await resp.json();
+    } catch (err) {
+      console.error(err);
+    }
+
+    let keys = Object.keys(data);
+    keys.sort((e) => parseInt(e));
+    for (let i = 0; i < keys.length; i++) {
+      let info;
+      let pid = data[keys[i]].pid;
+      try {
+        let resp = await fetch(`/info?pid=${pid}`);
+        resp = checkStatus(resp);
+        info = await resp.json();
+      } catch (err) {
+        console.error(err);
+      }
+      for (let j = 0; j < data[keys[i]].quantity; j++) {
+        makeCard(info[pid]);
+      }
     }
   }
 
