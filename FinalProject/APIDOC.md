@@ -62,7 +62,7 @@
 **Error Handling:**
 { message: "Error fetching items in cart" } (ERROR: 500)
 
-## *Category Filter*
+## *categoryFilter*
 **Request Format:** */category/:category*
 
 **Request Type:** *GET*
@@ -102,7 +102,7 @@
 **Error Handling:**
 { message: "Error fetching categories" } (ERROR: 500)
 
-## *Add to Cart*
+## *addToCart*
 **Request Format:** */addToCart*
 
 **Request Type:** *POST*
@@ -122,7 +122,7 @@
 **Error Handling:**
 { message: "Error: Invalid PID" } (ERROR: 400)
 
-## *Remove from Cart*
+## *removeFromCart*
 **Request Format:** */removeFromCart*
 
 **Request Type:** *POST*
@@ -142,7 +142,7 @@
 **Error Handling:**
 { message: "Error: Invalid PID" } (ERROR: 400)
 
-## *Reduce Stock*
+## *reduceStock*
 **Request Format:** */reduceStock*
 
 **Request Type:** *POST*
@@ -162,7 +162,7 @@
 **Error Handling:**
 { message: "Error: Invalid PID" } (ERROR: 400)
 
-## *Reduce Stock*
+## *isEnoughStock*
 **Request Format:** */isEnoughStock?pid=value&qty=value*
 
 **Request Type:** *GET*
@@ -181,3 +181,83 @@
 
 **Error Handling:**
 { message: "Error checking availability of item" } (ERROR: 500)
+
+## *updateLastSold*
+**Request Format:** */updateLastSold*
+
+**Request Type:** *POST*
+
+**Returned Data Format**: JSON
+
+**Description:** *Update product to having been last sold at the current timestamp.*
+
+**Example Request:** *localhost:8000/updateLastSold*
+
+**Example Response:**
+
+```json
+{ message: "Successfully updated last sold time. " }
+```
+
+**Error Handling:**
+{ message: "Error while updating last sold time. " } (ERROR: 500)
+
+## *clearCart*
+**Request Format:** */clearCart*
+
+**Request Type:** *POST*
+
+**Returned Data Format**: JSON
+
+**Description:** *Remove all items from the cart table.*
+
+**Example Request:** *localhost:8000/clearCart*
+
+**Example Response:**
+
+```json
+{ message: "Successfully updated last sold time. " }
+```
+
+**Error Handling:**
+{ message: "Error clearing cart." } (ERROR: 500)
+
+## *Faqs*
+**Request Format:** */faqs*
+
+**Request Type:** *GET*
+
+**Returned Data Format**: JSON
+
+**Description:** *Get all FAQs and their answers.*
+
+**Example Request:** *localhost:8000/faqs*
+
+**Example Response:**
+
+```json
+{"faqs":[{"faq_id":1,"question":"How long did it take to make this e-commerce site?","answer":"Though people often like to say Rome wasn't built in a day, this final project proposal was indeed built in a single day. It was quite the grind if I do say so myself."},{"faq_id":2,"question":"It's been 10 days, why haven't my items shipped to me?","answer":"Great observation! So the issue is this e-commerce store doesn't actually handle payment and shipping which means your purchase was actually a phantom transaction and you will never actually receive the goods you ordered. On the bright side, you didn't actually pay any money so I'd say all's well that ends well."},{"faq_id":3,"question":"How long would it take me to make a site as beautiful as this?","answer":"The process is quite simple really- get into Caltech, take CS 132, and in six short weeks, you'll be ready to built sites like this one."},{"faq_id":4,"question":"Are there any other sites I should check out?","answer":"Visit qup.gg and sign up to be among our first batch of beta testers!"},{"faq_id":5,"question":"How did you make these super aesthetic gradients, Ajay?","answer":"Figma magic, baby."},{"faq_id":6,"question":"Any cool life hacks you know?","answer":"When in doubt, drink water."}]}
+```
+
+**Error Handling:**
+{ message: "Error fetching FAQs." } (ERROR: 500)
+
+## *Feedback*
+**Request Format:** */feedback*
+
+**Request Type:** *POST*
+
+**Returned Data Format**: JSON
+
+**Description:** *Send contact form submission to database.*
+
+**Example Request:** *localhost:8000/feedback*
+
+**Example Response:**
+
+```json
+{ message: "Successfully submitted feedback" }
+```
+
+**Error Handling:**
+{ message: "Error submitting feedback. " } (ERROR: 500)
