@@ -1,5 +1,5 @@
 # *GameAnime* API Documentation
-*This API is used to support the Game Anime Shop, an e-commerce site built as my CS 132 Spring 2022 Final Project. It supports the sale of several gift cards to popular anime streaming platforms and online video games.*
+*This API is used to support the Game Anime Shop, an e-commerce site built as my CS 132 Spring 2022 Final Project. It supports the sale of several gift cards to popular anime streaming platforms and online video games. Any errors due to the server return a 500-level error *
 
 ## *Products*
 **Request Format:** */products*
@@ -35,7 +35,11 @@
         "last_sold":"2022-05-31T21:39:07.000Z",
         "stock":8
      },
-     {"pid":3,"title":"League of Legends $50 Gift Card","image_name":"lol50.jpg","category":"League of Legends","last_sold":"2022-05-31T20:48:18.000Z","stock":14},{"pid":4,"title":"League of Legends $100 Gift Card","image_name":"lol100.jpg","category":"League of Legends","last_sold":"2022-05-31T17:13:24.000Z","stock":36},{"pid":5,"title":"Valorant $10 Gift Card","image_name":"valorant10.jpg","category":"Valorant","last_sold":"2022-05-31T04:27:01.000Z","stock":50},{"pid":6,"title":"Valorant $25 Gift Card","image_name":"valorant25.jpg","category":"Valorant","last_sold":"2022-05-31T07:17:15.000Z","stock":57},{"pid":7,"title":"Valorant $50 Gift Card","image_name":"valorant50.jpg","category":"Valorant","last_sold":"2022-05-31T16:44:22.000Z","stock":67},{"pid":8,"title":"Valorant $100 Gift Card","image_name":"valorant100.jpg","category":"Valorant","last_sold":"2022-05-31T17:15:41.000Z","stock":77},{"pid":9,"title":"Crunchyroll $25 Gift Card","image_name":"crunchyroll25.jpg","category":"Crunchyroll","last_sold":"2022-05-31T04:27:01.000Z","stock":90},{"pid":10,"title":"Hulu $25 Gift Card","image_name":"hulu25.jpg","category":"Hulu","last_sold":"2022-05-31T04:27:01.000Z","stock":100},{"pid":11,"title":"Hulu $50 Gift Card","image_name":"hulu50.jpg","category":"Hulu","last_sold":"2022-05-31T08:43:32.000Z","stock":106},{"pid":12,"title":"Hulu $100 Gift Card","image_name":"hulu100.jpg","category":"Hulu","last_sold":"2022-05-31T20:48:18.000Z","stock":113},{"pid":13,"title":"Netflix $15 Gift Card","image_name":"netflix15.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":130},{"pid":14,"title":"Netflix $30 Gift Card","image_name":"netflix30.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":140},{"pid":15,"title":"Netflix $50 Gift Card","image_name":"netflix50.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":150}]}
+     .
+     .
+     .
+   ]
+}
 ```
 
 **Error Handling:**
@@ -55,7 +59,14 @@
 **Example Response:**
 
 ```json
-{"pid":3,"title":"League of Legends $50 Gift Card","image_name":"lol50.jpg","category":"League of Legends","last_sold":"2022-05-31T20:48:18.000Z","stock":14}
+{
+  "pid":3,
+  "title":"League of Legends $50 Gift Card",
+  "image_name":"lol50.jpg",
+  "category":"League of Legends",
+  "last_sold":"2022-05-31T20:48:18.000Z",
+  "stock":14
+}
 ```
 
 **Error Handling:**
@@ -75,7 +86,13 @@
 **Example Response:**
 
 ```json
-{"cart":[{"pid":2,"quantity":2},{"pid":3,"quantity":2}]}
+{
+  "cart":
+    [
+      {"pid":2,"quantity":2},
+      {"pid":3,"quantity":2}
+    ]
+}
 ```
 
 **Error Handling:**
@@ -95,7 +112,33 @@
 **Example Response:**
 
 ```json
-{"13":{"pid":13,"title":"Netflix $15 Gift Card","image_name":"netflix15.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":130},"14":{"pid":14,"title":"Netflix $30 Gift Card","image_name":"netflix30.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":140},"15":{"pid":15,"title":"Netflix $50 Gift Card","image_name":"netflix50.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":150},"products":[]}
+{
+  "13":
+    {
+      "pid":13,
+      "title":"Netflix $15 Gift Card",
+      "image_name":"netflix15.jpg",
+      "category":"Netflix",
+      "last_sold":"2022-05-31T04:27:01.000Z",
+      "stock":130
+    },
+ "14":
+    {
+      "pid":14,
+      "title":"Netflix $30 Gift Card",
+      "image_name":"netflix30.jpg",
+      "category":"Netflix",
+      "last_sold":"2022-05-31T04:27:01.000Z",
+      "stock":140
+    },
+ "15":
+    {
+      "pid":15,
+      "title":"Netflix $50 Gift Card",
+      "image_name":"netflix50.jpg",
+      "category":"Netflix",
+      "last_sold":"2022-05-31T04:27:01.000Z",
+      "stock":150},"products":[]}
 ```
 
 **Error Handling:**
