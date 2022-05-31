@@ -267,9 +267,18 @@ app.get("/faqs", async (req, res) => {
 });
 
 app.post("/feedback", async (req, res) => {
-  const name = req.body.name;
-  console.log(name);
-  res.json({ message: name });
+  let db;
+  try {
+    db = await getDB();
+    const qry = `INSERT INTO feedback(name, email, subject, message) VALUES ('${req.body.name}', '${req.body.email}', '${req.body.subject}', '${req.body.messageBody}')`;
+    await db.query(qry);
+    res.json({ message: "Successfully submitted feedback" });
+  } catch (err) {
+    res.status(400).json({ message: "Error submitting feedback. " });
+  }
+  if (db) {
+    db.end();
+  }
 });
 
 const PORT = process.env.PORT || 8000;
