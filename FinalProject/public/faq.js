@@ -19,7 +19,7 @@
     let faqsResp = await fetch("/faqs");
     faqsResp = checkStatus(faqsResp);
     faqsResp = await faqsResp.json();
-    return faqsResp;
+    return faqsResp.faqs;
   }
 
   /**
@@ -28,10 +28,7 @@
    */
   function populateFaqs(faqsResp) {
     const faqs = id("faqs");
-    let keys = Object.keys(faqsResp);
-    keys.sort();
-    for (let i = 0; i < keys.length; i++) {
-      let data = faqsResp[keys[i]];
+    faqsResp.forEach((data) => {
       let faq = gen("div");
       let question = gen("h3");
       question.textContent = data.question;
@@ -40,7 +37,7 @@
       faq.appendChild(question);
       faq.appendChild(answer);
       faqs.appendChild(faq);
-    }
+    });
   }
 
   /**

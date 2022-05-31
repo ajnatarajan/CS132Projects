@@ -105,7 +105,7 @@ app.get("/category/:category", async (req, res) => {
     db = await getDB();
     let qry = `SELECT * FROM products WHERE category = '${req.params["category"]}'`;
     const rows = await db.query(qry);
-    let products = {};
+    let products = { products: [] };
     for (let i = 0; i < rows.length; i++) {
       products[rows[i].pid] = { ...rows[i] };
     }
@@ -302,9 +302,9 @@ app.get("/faqs", async (req, res) => {
   try {
     db = await getDB();
     const rows = await db.query("SELECT * FROM faqs");
-    let faqs = {};
+    let faqs = { faqs: [] };
     for (let i = 0; i < rows.length; i++) {
-      faqs[rows[i].faq_id] = { ...rows[i] };
+      faqs.faqs.push({ ...rows[i] });
     }
     res.json(faqs);
   } catch (err) {
