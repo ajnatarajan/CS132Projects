@@ -239,5 +239,23 @@ app.get("/clearCart", async (req, res) => {
   }
 });
 
+app.get("/faqs", async (req, res) => {
+  let db;
+  try {
+    db = await getDB();
+    const rows = await db.query("SELECT * FROM faqs");
+    let faqs = {};
+    for (let i = 0; i < rows.length; i++) {
+      faqs[rows[i].faq_id] = { ...rows[i] };
+    }
+    res.json(faqs);
+  } catch (err) {
+    res.status(400).json({ message: "Error fetching FAQs." });
+  }
+  if (db) {
+    db.end();
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log("Listening on port " + PORT));
