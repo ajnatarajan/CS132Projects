@@ -11,7 +11,7 @@
 **Description:** *This endpoint returns all information about all products.*
 
 
-**Example Request:** */products*
+**Example Request:** *localhost:8000/products*
 
 **Example Response:**
 
@@ -20,27 +20,64 @@
 ```
 
 **Error Handling:**
-*Fill in an example of the error handling*
+{ message: "Error fetching products" } (ERROR: 400)
 
-## *Fill in Endpoint 2 Title*
-**Request Format:** *Fill in example request format*
+## *Info*
+**Request Format:** */info?pid=value*
 
-**Request Type:** *Fill in request type*
+**Request Type:** *GET*
 
 **Returned Data Format**: JSON
 
-**Description:** *Fill in description*
+**Description:** *Returns all information about one product given the product id*
 
-**Example Request:** *Fill in example request*
+**Example Request:** *localhost:8000/info?pid=3*
 
 **Example Response:**
-*Fill in example response in the {}*
 
 ```json
-{
-
-}
+{"3":{"pid":3,"title":"League of Legends $50 Gift Card","image_name":"lol50.jpg","category":"League of Legends","last_sold":"2022-05-31T09:26:12.000Z","stock":21}}
 ```
 
 **Error Handling:**
-*Fill in an example of the error handling*
+{ message: "Error fetching product info" } (ERROR: 400)
+
+## *Cart*
+**Request Format:** */cart*
+
+**Request Type:** *GET*
+
+**Returned Data Format**: JSON
+
+**Description:** *Returns all items currently in the user's cart*
+
+**Example Request:** *localhost:8000/cart*
+
+**Example Response:**
+
+```json
+{"2":{"pid":2,"quantity":1},"4":{"pid":4,"quantity":3},"7":{"pid":7,"quantity":1}}
+```
+
+**Error Handling:**
+{ message: "Error fetching items in cart" } (ERROR: 400)
+
+## *Category Filter*
+**Request Format:** */category/:category*
+
+**Request Type:** *GET*
+
+**Returned Data Format**: JSON
+
+**Description:** *Returns all items that are in the given category.*
+
+**Example Request:** *localhost:8000/category/Netflix*
+
+**Example Response:**
+
+```json
+{"13":{"pid":13,"title":"Netflix $15 Gift Card","image_name":"netflix15.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":130},"14":{"pid":14,"title":"Netflix $30 Gift Card","image_name":"netflix30.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":140},"15":{"pid":15,"title":"Netflix $50 Gift Card","image_name":"netflix50.jpg","category":"Netflix","last_sold":"2022-05-31T04:27:01.000Z","stock":150}}
+```
+
+**Error Handling:**
+{ message: "Error filtering by category" } (ERROR: 400)
