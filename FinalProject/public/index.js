@@ -20,6 +20,7 @@
   function init() {
     id("search-bar").addEventListener("input", populateProducts);
     id("dropdown").addEventListener("change", populateProducts);
+    populateCategoryDropdown();
     populateProducts();
   }
 
@@ -161,9 +162,33 @@
   }
 
   /**
+   * Populate dropdown with all categories that appear in the product database.
+   * No parameters.
+   * @returns {void}
+   */
+  async function populateCategoryDropdown() {
+    let categories;
+    try {
+      categories = await fetch("/categories");
+      categories = checkStatus(categories);
+      categories = await categories.json();
+    } catch (err) {
+      console.log(err);
+    }
+
+    categories = categories.categories;
+    for (let i = 0; i < categories.length; i++) {
+      let newOption = gen("option");
+      newOption.setAttribute("value", categories[i]);
+      newOption.textContent = categories[i];
+      id("dropdown").appendChild(newOption);
+    }
+  }
+
+  /**
    * Update product listing based on search and dropdown filter queries
    * No parameters.
-   * @return {void}
+   * @returns {void}
    */
   async function populateProducts() {
     // Remove all products

@@ -107,6 +107,26 @@ app.get("/category/:category", async (req, res) => {
   }
 });
 
+/* Get all unique categories */
+app.get("/categories", async (req, res) => {
+  let db;
+  try {
+    db = await getDB();
+    let qry = "SELECT DISTINCT category FROM products";
+    const rows = await db.query(qry);
+    let categories = { categories: [] };
+    for (let i = 0; i < rows.length; i++) {
+      categories.categories.push(rows[i].category);
+    }
+    res.json(categories);
+  } catch (err) {
+    res.status(400).json({ message: "Error fetching categories" });
+  }
+  if (db) {
+    db.end();
+  }
+});
+
 /* Add item to cart */
 app.get("/addToCart", async (req, res) => {
   if (req.query["pid"]) {
