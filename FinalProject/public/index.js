@@ -91,7 +91,7 @@
 
     /* Make image */
     let image = gen("img");
-    image.src = "imgs/" + data.image_name;
+    image.src = "imgs/" + data.image_name; // See Line 150 in cart.js
     image.alt = data.title + " Image";
     info.appendChild(image);
 
@@ -102,7 +102,7 @@
     let category = gen("p");
     category.textContent = `Category: ${data.category}`;
     let lastSold = gen("p");
-    let date = new Date(data.last_sold);
+    let date = new Date(data.last_sold); // See Line 150 in cart.js
     lastSold.textContent = `Last Sold: ${date.toLocaleString("en-US", {
       timeZone: "America/Los_Angeles",
     })}`;
@@ -143,12 +143,7 @@
     let card = gen("div");
     let image = gen("img");
     // All images taken from corresponding platform websites.
-    /* NB: I'm using camel case here since it's from my DB and I'm just 
-    following the convention established in setup-oh.sql which was an example
-    file given in lecture. I have removed all other camel case variables in my
-    JS code though.
-    */
-    image.src = "imgs/" + data.image_name;
+    image.src = "imgs/" + data.image_name; // See Line 150 in cart.js
     image.alt = data.title + " Preview Image";
     let text = gen("p");
     text.textContent = data.title;

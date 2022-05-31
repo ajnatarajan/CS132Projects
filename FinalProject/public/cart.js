@@ -147,6 +147,11 @@
     /* Create card and add to container */
     let card = gen("div");
     let image = gen("img");
+    /* NB: I'm using camel case here since it's from my DB and I'm just 
+    following the convention established in setup-oh.sql which was an example
+    file given in lecture. I have removed all other camel case variables in my
+    JS code though.
+    */
     image.src = "imgs/" + info.image_name;
     image.alt = info.title + " Preview Image";
     let text = gen("p");
