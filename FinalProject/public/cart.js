@@ -111,7 +111,12 @@
 
     try {
       /* Clear the cart and display message for user indicating purchase */
-      let clearResp = await fetch("/clearCart");
+      let clearResp = await fetch("/clearCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       clearResp = checkStatus(clearResp);
       clearResp = await clearResp.json();
     } catch (err) {

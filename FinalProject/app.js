@@ -265,7 +265,7 @@ app.post("/updateLastSold", async (req, res) => {
 });
 
 /* Clear cart after the user checks out. */
-app.get("/clearCart", async (req, res) => {
+app.post("/clearCart", async (req, res) => {
   let db;
   try {
     db = await getDB();
