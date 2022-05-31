@@ -22,6 +22,114 @@
   }
 
   /**
+   * Get all items in cart. Throws error if API call fails
+   * No parameters.
+   * @returns {JSON} - items in cart
+   */
+  async function getCart() {
+    let resp = await fetch("/cart");
+    resp = checkStatus(resp);
+    resp = await resp.json();
+    return resp;
+  }
+
+  /**
+   * Create the message to be displayed upon checkout
+   * No parameters.
+   * @returns {Element} errormsg - the constructed error message for checkout
+   */
+  function makeCheckoutMsg() {
+    let checkoutMsg = qs(".error-msg");
+    if (checkoutMsg) {
+      checkoutMsg.remove();
+    }
+    checkoutMsg = gen("p");
+    checkoutMsg.classList.add("error-msg");
+    checkoutMsg.textContent = "Error with checking out. Try again later.";
+    return checkoutMsg;
+  }
+
+  /**
+   * Throws error if not enough stock for any product to satisfy order request
+   * @param {JSON} resp - fetched data for the product in question
+   * @returns {void}
+   */
+  async function checkEnoughStock(resp) {
+    for (let i = 0; i < Object.keys(resp).length; i++) {
+      let data = resp[Object.keys(resp)[i]];
+      let enoughStock = await fetch(
+        `/isEnoughStock?pid=${data.pid}&qty=${data.quantity}`
+      );
+      enoughStock = checkStatus(enoughStock);
+      enoughStock = await enoughStock.json();
+      if (!enoughStock.isEnoughStock) {
+        throw Error;
+      }
+    }
+  }
+
+  /**
+   * Reduce stock for all products in cart by proper quantities upon checkout.
+   * @param {JSON} resp - products and quantities in cart
+   * @returns {void}
+   */
+  async function reduceStock(resp) {
+    for (let i = 0; i < Object.keys(resp).length; i++) {
+      let data = resp[Object.keys(resp)[i]];
+      let reduceResp = await fetch("/reduceStock", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pid: data.pid,
+          qty: data.quantity,
+        }),
+      });
+      reduceResp = checkStatus(reduceResp);
+      reduceResp = await reduceResp.json();
+    }
+  }
+
+  /**
+   * Updates the last sold time for all items in cart to now.
+   * @param {JSON} resp - products and quantities in cart
+   * @returns {void}
+   */
+  async function updateLastSold(resp) {
+    for (let i = 0; i < Object.keys(resp).length; i++) {
+      let data = resp[Object.keys(resp)[i]];
+      let lastSoldResp = await fetch("/updateLastSold", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pid: data.pid,
+        }),
+      });
+      lastSoldResp = checkStatus(lastSoldResp);
+      lastSoldResp = await lastSoldResp.json();
+    }
+  }
+
+  /**
+   * Clear cart
+   * No parameters.
+   * @returns {void}
+   */
+  async function clearCart() {
+    let clearResp = await fetch("/clearCart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    clearResp = checkStatus(clearResp);
+    clearResp = await clearResp.json();
+  }
+
+  /**
    * Handle checkout - check that all products have enough stock to satisfy
    * order, reduce the remaining stock appropriately, update last sold times
    * for all products in cart, and clear the cart.
@@ -29,37 +137,28 @@
    * @returns {void}
    */
   async function onCheckout() {
-    /* Format error message */
-    let errorMsg = qs(".error-msg");
-    if (errorMsg) {
-      errorMsg.remove();
-    }
-    errorMsg = gen("p");
-    errorMsg.classList.add("error-msg");
-    errorMsg.textContent = "Error with checking out. Try again later.";
+    // NB: I made helper functions since spec says to break up functions more
+    // than 30 lines long, but I want to return from this function if I ever
+    // end up in a catch clause (since the rest should not execute). As a
+    // result, I keep the try-catch logic for each helper function in here and
+    // thus the body is over 30 lines long but I think it's alright since I've
+    // already factored out as much as I can.
 
+    /* Format error message */
+    let errorMsg = makeCheckoutMsg();
+
+    /* Get items in cart */
     let resp;
     try {
-      resp = await fetch("/cart");
-      resp = checkStatus(resp);
-      resp = await resp.json();
+      resp = await getCart();
     } catch (err) {
       id("checkout").appendChild(errorMsg);
       return;
     }
-    /* Check if we have enough stock */
+
+    /* Check if we have enough stock to satisfy all items in cart */
     try {
-      for (let i = 0; i < Object.keys(resp).length; i++) {
-        let data = resp[Object.keys(resp)[i]];
-        let enoughStock = await fetch(
-          `/isEnoughStock?pid=${data.pid}&qty=${data.quantity}`
-        );
-        enoughStock = checkStatus(enoughStock);
-        enoughStock = await enoughStock.json();
-        if (!enoughStock.isEnoughStock) {
-          throw Error;
-        }
-      }
+      await checkEnoughStock(resp);
     } catch (err) {
       errorMsg.textContent = "Insufficient stock to satisfy your request.";
       id("checkout").appendChild(errorMsg);
@@ -68,21 +167,7 @@
 
     /* Reduce the stock remaining */
     try {
-      for (let i = 0; i < Object.keys(resp).length; i++) {
-        let data = resp[Object.keys(resp)[i]];
-        let reduceResp = await fetch("/reduceStock", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            pid: data.pid,
-            qty: data.quantity,
-          }),
-        });
-        reduceResp = checkStatus(reduceResp);
-        reduceResp = await reduceResp.json();
-      }
+      await reduceStock(resp);
     } catch (err) {
       id("checkout").appendChild(errorMsg);
       return;
@@ -90,35 +175,15 @@
 
     /* Update last sold time */
     try {
-      for (let i = 0; i < Object.keys(resp).length; i++) {
-        let data = resp[Object.keys(resp)[i]];
-        let lastSoldResp = await fetch("/updateLastSold", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            pid: data.pid,
-          }),
-        });
-        lastSoldResp = checkStatus(lastSoldResp);
-        lastSoldResp = await lastSoldResp.json();
-      }
+      await updateLastSold(resp);
     } catch (err) {
       id("checkout").appendChild(errorMsg);
       return;
     }
 
+    /* Clear the cart and display message for user indicating purchase */
     try {
-      /* Clear the cart and display message for user indicating purchase */
-      let clearResp = await fetch("/clearCart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      clearResp = checkStatus(clearResp);
-      clearResp = await clearResp.json();
+      await clearCart();
     } catch (err) {
       id("checkout").appendChild(errorMsg);
       return;
@@ -218,9 +283,7 @@
     // Get all products in cart
     let data;
     try {
-      let resp = await fetch("/cart");
-      resp = checkStatus(resp);
-      data = await resp.json();
+      data = await getCart();
     } catch (err) {
       let errorMsg = gen("p");
       errorMsg.textContent =
