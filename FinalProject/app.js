@@ -105,7 +105,7 @@ app.get("/category/:category", async (req, res) => {
     db = await getDB();
     let qry = `SELECT * FROM products WHERE category = '${req.params["category"]}'`;
     const rows = await db.query(qry);
-    let products = { products: [] };
+    let products = {};
     // Tradeoff: I use this structure instead of just making an array since it
     // makes the front-end easier for filter since I have PID at the top-level.
     for (let i = 0; i < rows.length; i++) {
