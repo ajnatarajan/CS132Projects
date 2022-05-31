@@ -73,6 +73,65 @@
   }
 
   /**
+   * Make text info for product modal
+   * @param {JSON} data - relevant data for this product
+   * @returns {Element} textInfo - the text to be added to the product modal
+   */
+  function makeTextInfo(data) {
+    let textInfo = gen("div");
+    let stock = gen("p");
+    stock.textContent = `Stock Remaining: ${data.stock}`;
+    let category = gen("p");
+    category.textContent = `Category: ${data.category}`;
+    let lastSold = gen("p");
+    let date = new Date(data.last_sold); // See Line 242 in cart.js
+    lastSold.textContent = `Last Sold: ${date.toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+    })}`;
+    let addToCart = gen("button");
+    addToCart.textContent = "Add to Cart";
+    addToCart.addEventListener("click", () => {
+      onAddToCart(data, textInfo);
+    });
+    textInfo.appendChild(stock);
+    textInfo.appendChild(category);
+    textInfo.append(lastSold);
+    textInfo.append(addToCart);
+    return textInfo;
+  }
+
+  /**
+   * Add product cards for all cards that satisfy the search and dropdown filters.
+   * @param {JSON} allProducts - all products returned from the products API response
+   * @param {string} searchQuery - current value entered by user in search bar
+   * @param {JSON} productsInSelectedCategory - products that satisfy chosen category
+   */
+  function addProductsThatSatisfyFilters(
+    allProducts,
+    searchQuery,
+    productsInSelectedCategory
+  ) {
+    let keys = Object.keys(allProducts);
+    keys.sort((e) => parseInt(e));
+    for (let i = 0; i < keys.length; i++) {
+      let data = allProducts[keys[i]];
+      if (!data.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+        continue;
+      }
+
+      // Check that this product is in the list of products that satisfy category
+      if (
+        productsInSelectedCategory &&
+        !(data.pid in productsInSelectedCategory)
+      ) {
+        continue;
+      }
+
+      makeCard(data);
+    }
+  }
+
+  /**
    * Create a modal
    * @param {JSON} data - relevant product data fetched from an API
    * @returns {Element} - the modal that was just created
@@ -100,30 +159,12 @@
 
     /* Make image */
     let image = gen("img");
-    image.src = "imgs/" + data.image_name; // See Line 150 in cart.js
+    image.src = "imgs/" + data.image_name; // See Line 242 in cart.js
     image.alt = data.title + " Image";
     info.appendChild(image);
 
     /* Make text info */
-    let textInfo = gen("div");
-    let stock = gen("p");
-    stock.textContent = `Stock Remaining: ${data.stock}`;
-    let category = gen("p");
-    category.textContent = `Category: ${data.category}`;
-    let lastSold = gen("p");
-    let date = new Date(data.last_sold); // See Line 150 in cart.js
-    lastSold.textContent = `Last Sold: ${date.toLocaleString("en-US", {
-      timeZone: "America/Los_Angeles",
-    })}`;
-    let addToCart = gen("button");
-    addToCart.textContent = "Add to Cart";
-    addToCart.addEventListener("click", () => {
-      onAddToCart(data, textInfo);
-    });
-    textInfo.appendChild(stock);
-    textInfo.appendChild(category);
-    textInfo.append(lastSold);
-    textInfo.append(addToCart);
+    let textInfo = makeTextInfo(data);
     info.append(textInfo);
 
     /* Add close button */
@@ -152,7 +193,7 @@
     let card = gen("div");
     let image = gen("img");
     // All images taken from corresponding platform websites.
-    image.src = "imgs/" + data.image_name; // See Line 150 in cart.js
+    image.src = "imgs/" + data.image_name; // See Line 242 in cart.js
     image.alt = data.title + " Preview Image";
     let text = gen("p");
     text.textContent = data.title;
@@ -213,6 +254,10 @@
     const searchQuery = id("search-bar").value;
     const dropdownQuery = id("dropdown").value;
 
+    // NB: try-catch clauses where I must return from the catch clause can't
+    // really be factored out into helper functions. The best I can do is create
+    // a helper function for the block of code in the try clause but that's only
+    // reducing 3 lines to 1 so it doesn't seem worth.
     let allProducts;
     try {
       allProducts = await fetch("/products");
@@ -243,24 +288,11 @@
     }
 
     // Add all products that pass the filter checks
-    let keys = Object.keys(allProducts);
-    keys.sort((e) => parseInt(e));
-    for (let i = 0; i < keys.length; i++) {
-      let data = allProducts[keys[i]];
-      if (!data.title.toLowerCase().includes(searchQuery.toLowerCase())) {
-        continue;
-      }
-
-      // Check that this product is in the list of products that satisfy category
-      if (
-        productsInSelectedCategory &&
-        !(data.pid in productsInSelectedCategory)
-      ) {
-        continue;
-      }
-
-      makeCard(data);
-    }
+    addProductsThatSatisfyFilters(
+      allProducts,
+      searchQuery,
+      productsInSelectedCategory
+    );
   }
 
   init();
