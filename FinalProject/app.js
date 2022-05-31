@@ -128,30 +128,27 @@ app.get("/categories", async (req, res) => {
 });
 
 /* Add item to cart */
-app.get("/addToCart", async (req, res) => {
-  if (req.query["pid"]) {
+app.post("/addToCart", async (req, res) => {
+  if (req.body.pid) {
     let db;
     try {
       db = await getDB();
       let isValidPID =
-        (
-          await db.query(
-            `SELECT * FROM products WHERE pid = ${req.query["pid"]}`
-          )
-        ).length > 0;
+        (await db.query(`SELECT * FROM products WHERE pid = ${req.body.pid}`))
+          .length > 0;
       let isInCart =
-        (await db.query(`SELECT * FROM cart WHERE pid = ${req.query["pid"]}`))
+        (await db.query(`SELECT * FROM cart WHERE pid = ${req.body.pid}`))
           .length > 0;
       if (!isValidPID) {
         res.status(400).json({ message: "Error: Invalid PID" });
       } else {
         if (isInCart) {
           await db.query(
-            `UPDATE cart SET quantity = (quantity + 1) WHERE pid = ${req.query["pid"]}`
+            `UPDATE cart SET quantity = (quantity + 1) WHERE pid = ${req.body.pid}`
           );
         } else {
           await db.query(
-            `INSERT INTO cart(pid, quantity) VALUES (${req.query["pid"]}, 1)`
+            `INSERT INTO cart(pid, quantity) VALUES (${req.body.pid}, 1)`
           );
         }
         res.json({ message: "Successfully added item to cart!" });
@@ -168,13 +165,13 @@ app.get("/addToCart", async (req, res) => {
 });
 
 /* Delete item from cart. */
-app.get("/removeFromCart", async (req, res) => {
-  if (req.query["pid"]) {
+app.post("/removeFromCart", async (req, res) => {
+  if (req.body.pid) {
     let db;
     try {
       db = await getDB();
       let rows = await db.query(
-        `SELECT * FROM cart WHERE pid = ${req.query["pid"]}`
+        `SELECT * FROM cart WHERE pid = ${req.body.pid}`
       );
       if (rows.length === 0 || rows[0].quantity === 0) {
         res.status(400).json({
@@ -182,7 +179,7 @@ app.get("/removeFromCart", async (req, res) => {
         });
       } else {
         await db.query(
-          `UPDATE cart SET quantity = (quantity - 1) WHERE pid = ${req.query["pid"]}`
+          `UPDATE cart SET quantity = (quantity - 1) WHERE pid = ${req.body.pid}`
         );
         res.json({ message: "Successfully removed item from cart!" });
       }

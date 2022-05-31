@@ -134,7 +134,15 @@
    */
   async function onRemoveFromCart(pid, parent) {
     try {
-      let resp = await fetch(`/removeFromCart/?pid=${pid}`);
+      let resp = await fetch("/removeFromCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pid: pid,
+        }),
+      });
       resp = checkStatus(resp);
       resp = await resp.json();
     } catch (err) {

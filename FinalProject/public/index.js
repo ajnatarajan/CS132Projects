@@ -54,7 +54,15 @@
     msg.classList.add("response-msg");
     msg.textContent = "Added to cart!";
     try {
-      let resp = await fetch(`/addToCart?pid=${data.pid}`);
+      let resp = await fetch("/addToCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pid: data.pid,
+        }),
+      });
       resp = checkStatus(resp);
       resp = await resp.json();
     } catch (err) {
