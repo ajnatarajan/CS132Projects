@@ -266,41 +266,24 @@
    * @param {JSON} data - data about all products in cart
    * @returns {void}
    */
-  function makeProductCards(data) {
-    let infos = [];
-    data.forEach(async (individualData) => {
-      let info;
-      let pid = individualData.pid;
-      try {
-        let resp = await fetch(`/info?pid=${pid}`);
-        resp = checkStatus(resp);
-        info = await resp.json();
-      } catch (err) {
-        let errorMsg = gen("p");
-        errorMsg.textContent =
-          "Store is currently down. Please visit again later";
-        id("products").appendChild(errorMsg);
-        return;
+  async function makeProductCards(data) {
+    let resps = [];
+    for (let i = 0; i < data.length; i++) {
+      resps.push(fetch(`/info?pid=${data[i].pid}`));
+    }
+    resps = await Promise.all(resps);
+    let products = [];
+    for (let i = 0; i < resps.length; i++) {
+      products.push(checkStatus(resps[i]));
+    }
+    for (let i = 0; i < products.length; i++) {
+      products[i] = await products[i].json();
+    }
+    for (let i = 0; i < products.length; i++) {
+      for (let j = 0; j < data[i].quantity; j++) {
+        makeCard(products[i]);
       }
-
-      for (let j = 0; j < individualData.quantity; j++) {
-        makeCard(info);
-      }
-
-      // infos.push({
-      //   pid: individualData.pid,
-      //   quantity: individualData.quantity,
-      //   info: info,
-      // });
-    });
-
-    // infos.sort((data) => data.pid);
-    // console.log(infos);
-    // for (let i = 0; i < infos.length; i++) {
-    //   for (let j = 0; j < infos[i].quantity; j++) {
-    //     makeCard(infos[i].info);
-    //   }
-    // }
+    }
   }
 
   /**
