@@ -100,7 +100,7 @@ app.get("/category/:category", async (req, res) => {
     }
     res.json(products);
   } catch (err) {
-    res.status(400).json({ message: "Error fetching items in cart" });
+    res.status(400).json({ message: "Error filtering by category" });
   }
   if (db) {
     db.end();
