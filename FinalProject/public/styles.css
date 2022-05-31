@@ -1,5 +1,12 @@
-/* Groupings since I have to deal with CSS redundancy as per CS 132 rules */
-/* Not a fan of this though. */
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the styles.css file for my gaming and anime e-commerce site which is
+  serving as my final project for CS 132. It is used across the entire website 
+  to give a gradient and modern feel to everything with some sleek design. 
+*/
+
 body,
 nav > h1,
 nav > ul,

@@ -1,5 +1,12 @@
-/* Groupings since I have to deal with CSS redundancy as per CS 132 rules */
-/* Personally though I would like to say I hate this, it makes the code hard to read */
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the index.css file for my gaming and anime e-commerce site which is
+  serving as my final project for CS 132. It is exclusively used by index.html
+  to style the modal component and the dropdown and search filters.
+*/
+
 #filters > .filter,
 .modal-container > section button {
   border: 1px solid white;

@@ -1,3 +1,12 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the cart.css file for my gaming and anime e-commerce site which is
+  serving as my final project for CS 132. It is exclusively used by cart.html
+  to style product cards, remove buttons, and the checkout section and button.
+*/
+
 #checkout > button {
   font-size: 1.5em;
 }

@@ -1,3 +1,13 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the contact.css file for my gaming and anime e-commerce site which is
+  serving as my final project for CS 132. It is exclusively used by contact.html
+  to add unique styling to the contact form that meshes well with the background
+  theme of the website.
+*/
+
 form {
   display: flex;
   flex-direction: column;
