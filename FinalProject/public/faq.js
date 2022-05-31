@@ -1,3 +1,12 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the faq.js for my gaming and anime e-commerce site which is serving
+  as my final project for CS 132. It fetches the proper FAQs stored in the
+  database and adds them as DOM elements to the faq.html page.
+ */
+
 (function () {
   "use strict";
   /**

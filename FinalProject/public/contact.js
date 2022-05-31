@@ -1,3 +1,12 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the contact.js for my gaming and anime e-commerce site which is serving
+  as my final project for CS 132. It handles and stores form submissions from
+  users who are giving feedback on the site and/or different products.
+ */
+
 (function () {
   "use strict";
 

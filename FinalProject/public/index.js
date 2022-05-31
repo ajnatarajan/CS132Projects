@@ -1,3 +1,14 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the index.js for my gaming and anime e-commerce site which is serving
+  as my final project for CS 132. It aids with updating DOM elements based on 
+  filtering and searching, handles opening a modal with more product information
+  when a product is clicked, and enables users to add items to their cart from
+  the modal.
+ */
+
 (function () {
   "use strict";
 
@@ -29,7 +40,8 @@
 
   /**
    * Handle adding item to cart
-   * No parameters - this will change when we have APIs
+   * @param {JSON} data - relevant product data fetched from an API
+   * @param {Element} parent - parent to add user feedback messages to
    * @returns {void}
    */
   async function onAddToCart(data, parent) {
@@ -53,9 +65,7 @@
 
   /**
    * Create a modal
-   * @param {string} title - name of the product
-   * @param {string} imgPath - path to image of the product
-   * @param {string} categoryName - game or platform category
+   * @param {JSON} data - relevant product data fetched from an API
    * @returns {Element} - the modal that was just created
    */
   async function makeModal(data) {
@@ -124,10 +134,8 @@
   }
 
   /**
-   * Create a product card
-   * @param {string} title - name of the product
-   * @param {string} imgPath - path to image of the product
-   * @param {string} category - game or platform category
+   * Create a product card and attached modal
+   * @param {JSON} data - relevant product data fetched from an API
    * @returns {void}
    */
   async function makeCard(data) {
@@ -169,6 +177,7 @@
       products.removeChild(products.lastChild);
     }
 
+    // Get relevant filter values
     const searchQuery = id("search-bar").value;
     const dropdownQuery = id("dropdown").value;
 

@@ -1,3 +1,13 @@
+/*
+  Name: Ajay Natarajan
+  CS 132 Spring 2022
+  Date: May 31st, 2022
+  This is the cart.js for my gaming and anime e-commerce site which is serving
+  as my final project for CS 132. It handles all things related to the cart - 
+  displaying which products are in the cart, allowing the user to remove items 
+  from the cart, and checking out.
+ */
+
 (function () {
   "use strict";
 
@@ -12,7 +22,9 @@
   }
 
   /**
-   * Handle checkout
+   * Handle checkout - check that all products have enough stock to satisfy
+   * order, reduce the remaining stock appropriately, update last sold times
+   * for all products in cart, and clear the cart.
    * No parameters.
    * @returns {void}
    */
@@ -102,7 +114,8 @@
 
   /**
    * Handle removal of item from cart.
-   * No parameters. (Will change when we have API calls)
+   * @param {int} pid - id of the product being removed
+   * @param {Element} parent - parent to attach potential error messages to
    * @returns {void}
    */
   async function onRemoveFromCart(pid, parent) {
@@ -125,8 +138,7 @@
 
   /**
    * Create a product card in the cart.
-   * @param {string} title - name of the product
-   * @param {string} imgPath - path to the image
+   * @param {JSON} info - relevant product data fetched from an API
    * @returns {void}
    */
   async function makeCard(info) {
@@ -160,17 +172,18 @@
   }
 
   /**
-   * Show the products in the cart
+   * Update what products to show in the cart
    * No parameters.
    * @returns {void}
    */
   async function populateCart() {
-    // Remove any other elements first
+    // Remove any product elements currently on this page
     const products = id("products");
     while (products.firstChild) {
       products.removeChild(products.lastChild);
     }
 
+    // Get all products in cart
     let data;
     try {
       let resp = await fetch("/cart");
@@ -184,6 +197,7 @@
       return;
     }
 
+    // Get more information about each individual product
     let keys = Object.keys(data);
     keys.sort((e) => parseInt(e));
     for (let i = 0; i < keys.length; i++) {
@@ -200,6 +214,8 @@
         id("products").appendChild(errorMsg);
         return;
       }
+
+      // Make product card
       for (let j = 0; j < data[keys[i]].quantity; j++) {
         makeCard(info[pid]);
       }
