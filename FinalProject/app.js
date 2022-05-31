@@ -45,7 +45,7 @@ app.get("/products", async (req, res) => {
     }
     res.json(products);
   } catch (err) {
-    res.status(400).json({ message: "Error fetching products" });
+    res.status(500).json({ message: "Error fetching products" });
   }
   if (db) {
     db.end();
@@ -74,7 +74,7 @@ app.get("/info", async (req, res) => {
       db.end();
     }
   } else {
-    res.status(400).json({ message: "Missing required query parameter: pid" });
+    res.status(500).json({ message: "Missing required query parameter: pid" });
   }
 });
 
@@ -91,7 +91,7 @@ app.get("/cart", async (req, res) => {
     }
     res.json(cart);
   } catch (err) {
-    res.status(400).json({ message: "Error fetching items in cart" });
+    res.status(500).json({ message: "Error fetching items in cart" });
   }
   if (db) {
     db.end();
@@ -113,7 +113,7 @@ app.get("/category/:category", async (req, res) => {
     }
     res.json(products);
   } catch (err) {
-    res.status(400).json({ message: "Error filtering by category" });
+    res.status(500).json({ message: "Error filtering by category" });
   }
   if (db) {
     db.end();
@@ -133,7 +133,7 @@ app.get("/categories", async (req, res) => {
     }
     res.json(categories);
   } catch (err) {
-    res.status(400).json({ message: "Error fetching categories" });
+    res.status(500).json({ message: "Error fetching categories" });
   }
   if (db) {
     db.end();
@@ -167,7 +167,7 @@ app.post("/addToCart", async (req, res) => {
         res.json({ message: "Successfully added item to cart!" });
       }
     } catch (err) {
-      res.status(400).json({ message: "Error adding item to cart" });
+      res.status(500).json({ message: "Error adding item to cart" });
     }
     if (db) {
       db.end();
@@ -197,7 +197,7 @@ app.post("/removeFromCart", async (req, res) => {
         res.json({ message: "Successfully removed item from cart!" });
       }
     } catch (err) {
-      res.status(400).json({ message: "Error removing item from cart" });
+      res.status(500).json({ message: "Error removing item from cart" });
     }
     if (db) {
       db.end();
@@ -229,7 +229,7 @@ app.post("/reduceStock", async (req, res) => {
         res.json({ message: "Successfully reduced stock of item! " });
       }
     } catch (err) {
-      res.status(400).json({ message: "Error reducing stock of item" });
+      res.status(500).json({ message: "Error reducing stock of item" });
     }
     if (db) {
       db.end();
@@ -256,7 +256,7 @@ app.get("/isEnoughStock", async (req, res) => {
         res.json({ isEnoughStock: true });
       }
     } catch (err) {
-      res.status(400).json({ message: "Error reducing stock of item" });
+      res.status(500).json({ message: "Error reducing stock of item" });
     }
     if (db) {
       db.end();
@@ -276,7 +276,7 @@ app.post("/updateLastSold", async (req, res) => {
     );
     res.json({ message: "Successfully updated last sold time. " });
   } catch (err) {
-    res.status(400).json({ message: "Error while updating last sold time. " });
+    res.status(500).json({ message: "Error while updating last sold time. " });
   }
   if (db) {
     db.end();
@@ -291,7 +291,7 @@ app.post("/clearCart", async (req, res) => {
     await db.query("DELETE FROM cart");
     res.json({ message: "Successfully cleared cart. " });
   } catch (err) {
-    res.status(400).json({ message: "Error clearing cart." });
+    res.status(500).json({ message: "Error clearing cart." });
   }
   if (db) {
     db.end();
@@ -310,7 +310,7 @@ app.get("/faqs", async (req, res) => {
     }
     res.json(faqs);
   } catch (err) {
-    res.status(400).json({ message: "Error fetching FAQs." });
+    res.status(500).json({ message: "Error fetching FAQs." });
   }
   if (db) {
     db.end();
@@ -326,7 +326,7 @@ app.post("/feedback", async (req, res) => {
     await db.query(qry);
     res.json({ message: "Successfully submitted feedback" });
   } catch (err) {
-    res.status(400).json({ message: "Error submitting feedback. " });
+    res.status(500).json({ message: "Error submitting feedback. " });
   }
   if (db) {
     db.end();
