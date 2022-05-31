@@ -47,7 +47,6 @@
       id("checkout").appendChild(errorMsg);
       return;
     }
-
     /* Check if we have enough stock */
     try {
       for (let i = 0; i < Object.keys(resp).length; i++) {
@@ -71,9 +70,16 @@
     try {
       for (let i = 0; i < Object.keys(resp).length; i++) {
         let data = resp[Object.keys(resp)[i]];
-        let reduceResp = await fetch(
-          `/reduceStock?pid=${data.pid}&qty=${data.quantity}`
-        );
+        let reduceResp = await fetch("/reduceStock", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pid: data.pid,
+            qty: data.quantity,
+          }),
+        });
         reduceResp = checkStatus(reduceResp);
         reduceResp = await reduceResp.json();
       }
@@ -86,7 +92,15 @@
     try {
       for (let i = 0; i < Object.keys(resp).length; i++) {
         let data = resp[Object.keys(resp)[i]];
-        let lastSoldResp = await fetch(`/updateLastSold?pid=${data.pid}`);
+        let lastSoldResp = await fetch("/updateLastSold", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pid: data.pid,
+          }),
+        });
         lastSoldResp = checkStatus(lastSoldResp);
         lastSoldResp = await lastSoldResp.json();
       }

@@ -198,34 +198,28 @@ app.get("/removeFromCart", async (req, res) => {
 });
 
 /* Reduce stock of a given product by a given quantity. */
-app.get("/reduceStock", async (req, res) => {
-  if (req.query["pid"] && req.query["qty"]) {
-    let db;
-    try {
-      db = await getDB();
-      let row = await db.query(
-        `SELECT * FROM products WHERE pid = ${req.query["pid"]}`
+app.post("/reduceStock", async (req, res) => {
+  let db;
+  try {
+    db = await getDB();
+    let row = await db.query(
+      `SELECT * FROM products WHERE pid = ${req.body.pid}`
+    );
+    if (row.length === 0) {
+      res.status(400).json({ message: "Invalid PID" });
+    } else if (row[0].stock < req.body.qty) {
+      res.status(400).json({ message: "Not enough stock to support order. " });
+    } else {
+      await db.query(
+        `UPDATE products SET stock = (stock - ${req.body.qty}) WHERE pid = ${req.body.pid}`
       );
-      if (row.length === 0) {
-        res.status(400).json({ message: "Invalid PID" });
-      } else if (row[0].stock < req.query["qty"]) {
-        res
-          .status(400)
-          .json({ message: "Not enough stock to support order. " });
-      } else {
-        await db.query(
-          `UPDATE products SET stock = (stock - ${req.query["qty"]}) WHERE pid = ${req.query["pid"]}`
-        );
-        res.json({ message: "Successfully reduced stock of item! " });
-      }
-    } catch (err) {
-      res.status(400).json({ message: "Error reducing stock of item" });
+      res.json({ message: "Successfully reduced stock of item! " });
     }
-    if (db) {
-      db.end();
-    }
-  } else {
-    res.status(400).json({ message: "Missing required parameter, pid or qty" });
+  } catch (err) {
+    res.status(400).json({ message: "Error reducing stock of item" });
+  }
+  if (db) {
+    db.end();
   }
 });
 
@@ -257,27 +251,19 @@ app.get("/isEnoughStock", async (req, res) => {
 });
 
 /* Update a given product that is sold right now. */
-app.get("/updateLastSold", async (req, res) => {
-  if (req.query["pid"]) {
-    let db;
-    try {
-      db = await getDB();
-      await db.query(
-        `UPDATE products SET last_sold = CURRENT_TIMESTAMP WHERE pid = ${req.query["pid"]}`
-      );
-      res.json({ message: "Successfully updated last sold time. " });
-    } catch (err) {
-      res
-        .status(400)
-        .json({ message: "Error while updating last sold time. " });
-    }
-    if (db) {
-      db.end();
-    }
-  } else {
-    res
-      .status(400)
-      .json({ message: "Error: missing required pid query parameter." });
+app.post("/updateLastSold", async (req, res) => {
+  let db;
+  try {
+    db = await getDB();
+    await db.query(
+      `UPDATE products SET last_sold = CURRENT_TIMESTAMP WHERE pid = ${req.body.pid}`
+    );
+    res.json({ message: "Successfully updated last sold time. " });
+  } catch (err) {
+    res.status(400).json({ message: "Error while updating last sold time. " });
+  }
+  if (db) {
+    db.end();
   }
 });
 
