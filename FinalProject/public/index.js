@@ -32,15 +32,23 @@
    * No parameters - this will change when we have APIs
    * @returns {void}
    */
-  async function onAddToCart(data) {
+  async function onAddToCart(data, parent) {
+    let msg = qs(".response-msg");
+    if (msg) {
+      msg.remove();
+    }
+    msg = gen("p");
+    msg.classList.add("response-msg");
+    msg.textContent = "Added to cart!";
     try {
       let resp = await fetch(`/addToCart?pid=${data.pid}`);
       resp = checkStatus(resp);
       resp = await resp.json();
-      console.log(resp);
     } catch (err) {
-      console.error(err);
+      msg.textContent = "Something went wrong.";
+      msg.classList.add("red-text");
     }
+    parent.appendChild(msg);
   }
 
   /**
@@ -91,7 +99,7 @@
     let addToCart = gen("button");
     addToCart.textContent = "Add to Cart";
     addToCart.addEventListener("click", () => {
-      onAddToCart(data);
+      onAddToCart(data, textInfo);
     });
     textInfo.appendChild(stock);
     textInfo.appendChild(category);
@@ -170,7 +178,11 @@
       allProducts = checkStatus(allProducts);
       allProducts = await allProducts.json();
     } catch (err) {
-      console.error(err); // TODO: Make real error, also make everything camel case, and add headers to files
+      let errorMsg = gen("p");
+      errorMsg.textContent =
+        "Store is currently down. Please visit again later";
+      id("products").appendChild(errorMsg);
+      return;
     }
 
     // Get products that are in the dropdown category selected
@@ -181,7 +193,11 @@
         productsInSelectedCategory = checkStatus(productsInSelectedCategory);
         productsInSelectedCategory = await productsInSelectedCategory.json();
       } catch (err) {
-        console.error(err);
+        let errorMsg = gen("p");
+        errorMsg.textContent =
+          "Store is currently down. Please visit again later";
+        id("products").appendChild(errorMsg);
+        return;
       }
     }
 

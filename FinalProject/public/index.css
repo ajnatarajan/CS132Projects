@@ -174,3 +174,7 @@
 .modal-container > section button {
   max-width: 200px;
 }
+
+.red-text {
+  color: #cc3333;
+}

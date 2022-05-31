@@ -17,17 +17,26 @@
    * @returns {void}
    */
   async function onCheckout() {
+    /* Format error message */
+    let errorMsg = qs(".error-msg");
+    if (errorMsg) {
+      errorMsg.remove();
+    }
+    errorMsg = gen("p");
+    errorMsg.classList.add("error-msg");
+    errorMsg.textContent = "Error with checking out. Try again later.";
+
     let resp;
     try {
-      /* Check if we have enough stock */
       resp = await fetch("/cart");
       resp = checkStatus(resp);
       resp = await resp.json();
     } catch (err) {
-      console.error("Error fetching from cart.");
+      id("checkout").appendChild(errorMsg);
       return;
     }
 
+    /* Check if we have enough stock */
     try {
       for (let i = 0; i < Object.keys(resp).length; i++) {
         let data = resp[Object.keys(resp)[i]];
@@ -37,11 +46,12 @@
         enoughStock = checkStatus(enoughStock);
         enoughStock = await enoughStock.json();
         if (!enoughStock.isEnoughStock) {
-          throw Error("Not enough stock to satisfy your request.");
+          throw Error;
         }
       }
     } catch (err) {
-      console.error(err);
+      errorMsg.textContent = "Insufficient stock to satisfy your request.";
+      id("checkout").appendChild(errorMsg);
       return;
     }
 
@@ -56,7 +66,7 @@
         reduceResp = await reduceResp.json();
       }
     } catch (err) {
-      console.error("Error reducing stock.");
+      id("checkout").appendChild(errorMsg);
       return;
     }
 
@@ -69,7 +79,7 @@
         lastSoldResp = await lastSoldResp.json();
       }
     } catch (err) {
-      console.error("Error while updating last sold time");
+      id("checkout").appendChild(errorMsg);
       return;
     }
 
@@ -78,11 +88,13 @@
       let clearResp = await fetch("/clearCart");
       clearResp = checkStatus(clearResp);
       clearResp = await clearResp.json();
-      console.log(clearResp);
     } catch (err) {
-      console.error("Error clearing cart.");
+      id("checkout").appendChild(errorMsg);
       return;
     }
+
+    errorMsg.textContent = "Successfully checked out!";
+    id("checkout").appendChild(errorMsg);
 
     /* Update cart display */
     populateCart();
@@ -93,14 +105,20 @@
    * No parameters. (Will change when we have API calls)
    * @returns {void}
    */
-  async function onRemoveFromCart(pid) {
+  async function onRemoveFromCart(pid, parent) {
     try {
       let resp = await fetch(`/removeFromCart/?pid=${pid}`);
       resp = checkStatus(resp);
       resp = await resp.json();
-      console.log(resp);
     } catch (err) {
-      console.error(err);
+      let errorMsg = qs(".card-container > p");
+      if (errorMsg) {
+        errorMsg.remove();
+      }
+      errorMsg = gen("p");
+      errorMsg.textContent = "Error. Try later.";
+      parent.appendChild(errorMsg);
+      return;
     }
     populateCart();
   }
@@ -134,7 +152,7 @@
     let removeButton = gen("button");
     removeButton.textContent = "Remove from Cart";
     removeButton.addEventListener("click", () => {
-      onRemoveFromCart(info.pid);
+      onRemoveFromCart(info.pid, cardContainer);
     });
     cardContainer.appendChild(removeButton);
 
@@ -159,7 +177,11 @@
       resp = checkStatus(resp);
       data = await resp.json();
     } catch (err) {
-      console.error(err);
+      let errorMsg = gen("p");
+      errorMsg.textContent =
+        "Store is currently down. Please visit again later";
+      id("products").appendChild(errorMsg);
+      return;
     }
 
     let keys = Object.keys(data);
@@ -172,7 +194,11 @@
         resp = checkStatus(resp);
         info = await resp.json();
       } catch (err) {
-        console.error(err);
+        let errorMsg = gen("p");
+        errorMsg.textContent =
+          "Store is currently down. Please visit again later";
+        id("products").appendChild(errorMsg);
+        return;
       }
       for (let j = 0; j < data[keys[i]].quantity; j++) {
         makeCard(info[pid]);

@@ -1,5 +1,3 @@
-/* Grouping to deal with redundancy */
-#checkout > p,
 #checkout > button {
   font-size: 1.5em;
 }
@@ -15,10 +13,6 @@
 #checkout {
   margin-bottom: 50px;
   color: #000;
-}
-
-#checkout > p {
-  margin: 0;
 }
 
 #checkout > button {
@@ -46,4 +40,9 @@
   cursor: pointer;
   transform: scale(1.03);
   transition: 0.5s;
+}
+
+.error-msg {
+  font-size: 1em;
+  margin-top: 20px;
 }
