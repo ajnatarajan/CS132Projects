@@ -25,7 +25,7 @@
         "image_name":"lol10.jpg",
         "category":"League of Legends",
         "last_sold":"2022-05-31T04:27:01.000Z",
-        "stock":0
+        "stock":10
      },
      {
         "pid":2,
@@ -33,7 +33,7 @@
         "image_name":"lol25.jpg",
         "category":"League of Legends",
         "last_sold":"2022-05-31T21:39:07.000Z",
-        "stock":8
+        "stock":20
      },
      .
      .
@@ -65,7 +65,7 @@
   "image_name":"lol50.jpg",
   "category":"League of Legends",
   "last_sold":"2022-05-31T20:48:18.000Z",
-  "stock":14
+  "stock":30
 }
 ```
 
@@ -138,7 +138,7 @@
       "image_name":"netflix50.jpg",
       "category":"Netflix",
       "last_sold":"2022-05-31T04:27:01.000Z",
-      "stock":150}
+      "stock":150
     }
 }
 ```
