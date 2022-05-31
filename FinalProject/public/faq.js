@@ -14,6 +14,13 @@
       faqsResp = await faqsResp.json();
     } catch (err) {
       console.error(err);
+      let errorBox = gen("div");
+      let errorMsg = gen("p");
+      errorMsg.textContent =
+        "Store is currently down. Please visit again later.";
+      errorBox.appendChild(errorMsg);
+      id("faqs").appendChild(errorBox);
+      return;
     }
 
     let keys = Object.keys(faqsResp);

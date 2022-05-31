@@ -177,6 +177,7 @@ app.get("/removeFromCart", async (req, res) => {
   }
 });
 
+/* Reduce stock of a given product by a given quantity. */
 app.get("/reduceStock", async (req, res) => {
   if (req.query["pid"] && req.query["qty"]) {
     let db;
@@ -208,6 +209,7 @@ app.get("/reduceStock", async (req, res) => {
   }
 });
 
+/* Check if there is enough stock for this quantity. */
 app.get("/isEnoughStock", async (req, res) => {
   if (req.query["pid"] && req.query["qty"]) {
     let db;
@@ -234,6 +236,7 @@ app.get("/isEnoughStock", async (req, res) => {
   }
 });
 
+/* Update a given product that is sold right now. */
 app.get("/updateLastSold", async (req, res) => {
   if (req.query["pid"]) {
     let db;
@@ -258,6 +261,7 @@ app.get("/updateLastSold", async (req, res) => {
   }
 });
 
+/* Clear cart after the user checks out. */
 app.get("/clearCart", async (req, res) => {
   let db;
   try {
@@ -272,6 +276,7 @@ app.get("/clearCart", async (req, res) => {
   }
 });
 
+/* List all FAQs */
 app.get("/faqs", async (req, res) => {
   let db;
   try {
@@ -290,6 +295,7 @@ app.get("/faqs", async (req, res) => {
   }
 });
 
+/* Post to feedback form upon user form submission */
 app.post("/feedback", async (req, res) => {
   let db;
   try {

@@ -40,11 +40,10 @@
         });
         resp = checkStatus(resp);
         resp = await resp.json();
-        console.log(resp);
         msg.classList.remove("red-text");
         msg.textContent = "Message successfully sent!";
       } catch (err) {
-        console.error(err);
+        msg.textContent = "Message failed to send. Try again later.";
       }
     }
     qs("form").appendChild(msg);
