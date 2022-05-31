@@ -256,7 +256,7 @@ app.get("/isEnoughStock", async (req, res) => {
         res.json({ isEnoughStock: true });
       }
     } catch (err) {
-      res.status(500).json({ message: "Error reducing stock of item" });
+      res.status(500).json({ message: "Error checking availability of item" });
     }
     if (db) {
       db.end();
