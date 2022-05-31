@@ -1,5 +1,5 @@
-# *FILL IN NAME* API Documentation
-*Fill in a short description here about the API's purpose.*
+# *GameAnime* API Documentation
+*This API is used to support the Game Anime Shop, an e-commerce site built as my CS 132 Spring 2022 Final Project. It supports the sale of several gift cards to popular anime streaming platforms and online video games. *
 
 ## *Fill in Endpoint 1 Title*
 **Request Format:** *Fill in example request format*
