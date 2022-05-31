@@ -84,8 +84,7 @@
           qty: data.quantity,
         }),
       });
-      reduceResp = checkStatus(reduceResp);
-      reduceResp = await reduceResp.json();
+      checkStatus(reduceResp);
     });
   }
 
@@ -105,15 +104,14 @@
           pid: data.pid,
         }),
       });
-      lastSoldResp = checkStatus(lastSoldResp);
-      lastSoldResp = await lastSoldResp.json();
+      checkStatus(lastSoldResp);
     });
   }
 
   /**
    * Clear cart
    * No parameters.
-   * @returns {JSON} - success message, or will throw error if failure
+   * @returns {void}
    */
   async function clearCart() {
     let clearResp = await fetch("/clearCart", {
@@ -122,9 +120,7 @@
         "Content-Type": "application/json",
       },
     });
-    clearResp = checkStatus(clearResp);
-    clearResp = await clearResp.json();
-    return clearResp;
+    checkStatus(clearResp);
   }
 
   /**
@@ -211,8 +207,7 @@
           pid: pid,
         }),
       });
-      resp = checkStatus(resp);
-      resp = await resp.json();
+      checkStatus(resp);
     } catch (err) {
       let errorMsg = qs(".card-container > p");
       if (errorMsg) {

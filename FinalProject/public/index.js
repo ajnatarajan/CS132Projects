@@ -63,8 +63,7 @@
           pid: data.pid,
         }),
       });
-      resp = checkStatus(resp);
-      resp = await resp.json();
+      checkStatus(resp);
     } catch (err) {
       msg.textContent = "Something went wrong.";
       msg.classList.add("red-text");

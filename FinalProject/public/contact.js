@@ -58,8 +58,7 @@
         method: "POST",
         body: params,
       });
-      resp = checkStatus(resp);
-      resp = await resp.json();
+      checkStatus(resp);
       msg.classList.remove("red-text");
       msg.textContent = "Message successfully sent!";
     } catch (err) {
