@@ -55,16 +55,23 @@
    * @returns {void}
    */
   async function checkEnoughStock(resp) {
-    resp.forEach(async (data) => {
-      let enoughStock = await fetch(
-        `/isEnoughStock?pid=${data.pid}&qty=${data.quantity}`
+    let firstResps = [];
+    for (let i = 0; i < resp.length; i++) {
+      let data = resp[i];
+      firstResps.push(
+        fetch(`/isEnoughStock?pid=${data.pid}&qty=${data.quantity}`)
       );
-      enoughStock = checkStatus(enoughStock);
-      enoughStock = await enoughStock.json();
+    }
+    firstResps = await Promise.all(firstResps);
+    for (let i = 0; i < firstResps.length; i++) {
+      firstResps[i] = checkStatus(firstResps[i]);
+    }
+    for (let i = 0; i < firstResps.length; i++) {
+      let enoughStock = await firstResps[i].json();
       if (!enoughStock.isEnoughStock) {
         throw Error;
       }
-    });
+    }
   }
 
   /**
@@ -146,6 +153,13 @@
     try {
       resp = await getCart();
     } catch (err) {
+      id("checkout").appendChild(errorMsg);
+      return;
+    }
+
+    /* Stop if we have no items in cart. */
+    if (resp.length === 0) {
+      errorMsg.textContent = "Cart is empty, cannot checkout.";
       id("checkout").appendChild(errorMsg);
       return;
     }

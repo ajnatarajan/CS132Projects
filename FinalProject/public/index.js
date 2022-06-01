@@ -83,7 +83,7 @@
     let category = gen("p");
     category.textContent = `Category: ${data.category}`;
     let lastSold = gen("p");
-    let date = new Date(data.last_sold); // See Line 242 in cart.js
+    let date = new Date(data.last_sold); // See Line 249 in cart.js
     lastSold.textContent = `Last Sold: ${date.toLocaleString("en-US", {
       timeZone: "America/Los_Angeles",
     })}`;
@@ -155,7 +155,7 @@
 
     /* Make image */
     let image = gen("img");
-    image.src = "imgs/" + data.image_name; // See Line 242 in cart.js
+    image.src = "imgs/" + data.image_name; // See Line 249 in cart.js
     image.alt = data.title + " Image";
     info.appendChild(image);
 
@@ -185,11 +185,10 @@
    * @returns {void}
    */
   async function makeCard(data) {
-    // title, imgPath, category
     let card = gen("div");
     let image = gen("img");
     // All images taken from corresponding platform websites.
-    image.src = "imgs/" + data.image_name; // See Line 242 in cart.js
+    image.src = "imgs/" + data.image_name; // See Line 249 in cart.js
     image.alt = data.title + " Preview Image";
     let text = gen("p");
     text.textContent = data.title;
