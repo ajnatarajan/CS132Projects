@@ -209,7 +209,7 @@ app.post("/removeFromCart", async (req, res) => {
 
 /* Reduce stock of a given product by a given quantity. */
 app.post("/reduceStock", async (req, res) => {
-  if (req.body.pid) {
+  if (req.body.pid && req.body.qty) {
     let db;
     try {
       db = await getDB();
@@ -235,7 +235,9 @@ app.post("/reduceStock", async (req, res) => {
       db.end();
     }
   } else {
-    res.status(400).json({ message: "Missing required parameter: pid" });
+    res
+      .status(400)
+      .json({ message: "Missing required parameter(s): pid or qty" });
   }
 });
 
