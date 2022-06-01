@@ -327,17 +327,31 @@ app.get("/faqs", async (req, res) => {
 
 /* Post to feedback form upon user form submission */
 app.post("/feedback", async (req, res) => {
-  let db;
-  try {
-    db = await getDB();
-    const qry = `INSERT INTO feedback(name, email, subject, message) VALUES ('${req.body.name}', '${req.body.email}', '${req.body.subject}', '${req.body.messageBody}')`;
-    await db.query(qry);
-    res.json({ message: "Successfully submitted feedback" });
-  } catch (err) {
-    res.status(500).json({ message: "Error submitting feedback. " });
-  }
-  if (db) {
-    db.end();
+  if (
+    req.body.name &&
+    req.body.email &&
+    req.body.subject &&
+    req.body.messageBody
+  ) {
+    let db;
+    try {
+      db = await getDB();
+      const qry = `INSERT INTO feedback(name, email, subject, message) VALUES ('${req.body.name}', '${req.body.email}', '${req.body.subject}', '${req.body.messageBody}')`;
+      await db.query(qry);
+      res.json({ message: "Successfully submitted feedback" });
+    } catch (err) {
+      res.status(500).json({ message: "Error submitting feedback. " });
+    }
+    if (db) {
+      db.end();
+    }
+  } else {
+    res
+      .status(400)
+      .json({
+        message:
+          "Missing required form parameter(s): name, email, subject, messageBody",
+      });
   }
 });
 
