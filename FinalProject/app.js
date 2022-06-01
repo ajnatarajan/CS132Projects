@@ -68,13 +68,13 @@ app.get("/info", async (req, res) => {
         res.json(info);
       }
     } catch (err) {
-      res.status(400).json({ message: "Error fetching product info" });
+      res.status(500).json({ message: "Error fetching product info" });
     }
     if (db) {
       db.end();
     }
   } else {
-    res.status(500).json({ message: "Missing required query parameter: pid" });
+    res.status(400).json({ message: "Missing required query parameter: pid" });
   }
 });
 
