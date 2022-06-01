@@ -270,18 +270,24 @@ app.get("/isEnoughStock", async (req, res) => {
 
 /* Update a given product that is sold right now. */
 app.post("/updateLastSold", async (req, res) => {
-  let db;
-  try {
-    db = await getDB();
-    await db.query(
-      `UPDATE products SET last_sold = CURRENT_TIMESTAMP WHERE pid = ${req.body.pid}`
-    );
-    res.json({ message: "Successfully updated last sold time. " });
-  } catch (err) {
-    res.status(500).json({ message: "Error while updating last sold time. " });
-  }
-  if (db) {
-    db.end();
+  if (req.body.pid) {
+    let db;
+    try {
+      db = await getDB();
+      await db.query(
+        `UPDATE products SET last_sold = CURRENT_TIMESTAMP WHERE pid = ${req.body.pid}`
+      );
+      res.json({ message: "Successfully updated last sold time. " });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Error while updating last sold time. " });
+    }
+    if (db) {
+      db.end();
+    }
+  } else {
+    res.status(400).json({ message: "Missing required parameter: pid" });
   }
 });
 
